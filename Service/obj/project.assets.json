@@ -1,0 +1,147 @@
+{
+  "version": 3,
+  "targets": {
+    "net7.0": {
+      "Contract/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "Entity": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Contract.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Contract.dll": {}
+        }
+      },
+      "Contract.Service/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "compile": {
+          "bin/placeholder/Contract.Service.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Contract.Service.dll": {}
+        }
+      },
+      "Entity/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "compile": {
+          "bin/placeholder/Entity.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Entity.dll": {}
+        }
+      },
+      "Shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "compile": {
+          "bin/placeholder/Shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Shared.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Contract/1.0.0": {
+      "type": "project",
+      "path": "../Contract/Contract.csproj",
+      "msbuildProject": "../Contract/Contract.csproj"
+    },
+    "Contract.Service/1.0.0": {
+      "type": "project",
+      "path": "../Contract.Service/Contract.Service.csproj",
+      "msbuildProject": "../Contract.Service/Contract.Service.csproj"
+    },
+    "Entity/1.0.0": {
+      "type": "project",
+      "path": "../Entity/Entity.csproj",
+      "msbuildProject": "../Entity/Entity.csproj"
+    },
+    "Shared/1.0.0": {
+      "type": "project",
+      "path": "../Shared/Shared.csproj",
+      "msbuildProject": "../Shared/Shared.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net7.0": [
+      "Contract >= 1.0.0",
+      "Contract.Service >= 1.0.0",
+      "Shared >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\duong\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\duong\\OneDrive\\Máy tính\\Project_practice\\PosSystem\\Service\\Service.csproj",
+      "projectName": "Service",
+      "projectPath": "C:\\Users\\duong\\OneDrive\\Máy tính\\Project_practice\\PosSystem\\Service\\Service.csproj",
+      "packagesPath": "C:\\Users\\duong\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\duong\\OneDrive\\Máy tính\\Project_practice\\PosSystem\\Service\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\duong\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net7.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "projectReferences": {
+            "C:\\Users\\duong\\OneDrive\\Máy tính\\Project_practice\\PosSystem\\Contract.Service\\Contract.Service.csproj": {
+              "projectPath": "C:\\Users\\duong\\OneDrive\\Máy tính\\Project_practice\\PosSystem\\Contract.Service\\Contract.Service.csproj"
+            },
+            "C:\\Users\\duong\\OneDrive\\Máy tính\\Project_practice\\PosSystem\\Contract\\Contract.csproj": {
+              "projectPath": "C:\\Users\\duong\\OneDrive\\Máy tính\\Project_practice\\PosSystem\\Contract\\Contract.csproj"
+            },
+            "C:\\Users\\duong\\OneDrive\\Máy tính\\Project_practice\\PosSystem\\Shared\\Shared.csproj": {
+              "projectPath": "C:\\Users\\duong\\OneDrive\\Máy tính\\Project_practice\\PosSystem\\Shared\\Shared.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net7.0": {
+        "targetAlias": "net7.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
