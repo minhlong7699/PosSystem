@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entity.Models
 {
-    public class User : AuditableEntity
+    public partial class User : AuditableEntity
     {
 
         [Key]
@@ -32,12 +32,12 @@ namespace Entity.Models
 
         public string? Image { get; set; }
 
-        public ICollection<UserAuthentication>? UserAuthentications { get; set; } = new List<UserAuthentication>();
-        public ICollection<Order>? Orders { get; set; } = new List<Order>();
+        public virtual ICollection<UserAuthentication>? UserAuthentications { get; set; } = new List<UserAuthentication>();
+        public virtual ICollection<Order>? Orders { get; set; } = new List<Order>();
 
 
         [ForeignKey(nameof(UserRole))]
         public Guid RoleId { get; set; }
-        public UserRole? UserRole { get; set; }
+        public virtual UserRole? UserRole { get; set; }
     }
 }

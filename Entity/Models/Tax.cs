@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Entity.Models
 {
-    public class Tax : AuditableEntity
+    public partial class Tax : AuditableEntity
     {
 
         [Key]
@@ -19,5 +19,7 @@ namespace Entity.Models
         public string? TaxName { get; set;}
 
         public float? TaxRate { get; set; }
+
+        public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
     }
 }
