@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Entity.Models
 {
-    public class UserAuthentication
+    public partial class UserAuthentication
     {
 
         [Key]
@@ -27,7 +27,7 @@ namespace Entity.Models
 
         [ForeignKey(nameof(User))]
         public Guid UserId { get; set; }
-        public User? User { get; set; }
+        public virtual User? User { get; set; }
 
     }
 }

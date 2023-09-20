@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace Entity.Models
 {
-    public class Payment : AuditableEntity
+    public partial class Payment : AuditableEntity
     {
 
         [Key]
         [Column("PaymentId")]
         public Guid PaymentId { get; set; }
 
-        public float? PaymentAmount { get; set; }
+        public decimal? PaymentAmount { get; set; }
 
-        public ICollection<Order>? Orders { get; set; } = new List<Order>();
+        public virtual ICollection<Order>? Orders { get; set; } = new List<Order>();
     }
 }

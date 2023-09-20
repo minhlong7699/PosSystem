@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Entity.Models
 {
-    public class Table : AuditableEntity
+    public partial class Table : AuditableEntity
     {
 
         [Key]
@@ -23,6 +23,6 @@ namespace Entity.Models
 
         public bool? IsOccupied { get; set; }
 
-        public ICollection<Order>? Orders { get; set; } = new List<Order>();
+        public virtual ICollection<Order>? Orders { get; set; } = new List<Order>();
     }
 }

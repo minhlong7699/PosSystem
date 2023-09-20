@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Entity.Models
 {
-    public class Supplier : AuditableEntity
+    public partial class Supplier : AuditableEntity
     {
 
         [Key]
@@ -27,6 +27,8 @@ namespace Entity.Models
 
         [Required(ErrorMessage = "Address  is a required field.")]
         public string? Address { get; set; }
+
+        public virtual ICollection<Product>? Products { get; set; } = new List<Product>();
 
 
     }
