@@ -1,0 +1,15 @@
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Presentation\bin\Debug\net7.0\Presentation.deps.json
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Presentation\bin\Debug\net7.0\Presentation.dll
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Presentation\bin\Debug\net7.0\Presentation.pdb
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Presentation\bin\Debug\net7.0\Contract.Service.dll
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Presentation\bin\Debug\net7.0\Contract.Service.pdb
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Presentation\obj\Debug\net7.0\Presentation.csproj.AssemblyReference.cache
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Presentation\obj\Debug\net7.0\Presentation.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Presentation\obj\Debug\net7.0\Presentation.AssemblyInfoInputs.cache
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Presentation\obj\Debug\net7.0\Presentation.AssemblyInfo.cs
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Presentation\obj\Debug\net7.0\Presentation.csproj.CoreCompileInputs.cache
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Presentation\obj\Debug\net7.0\Presentation.csproj.CopyComplete
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Presentation\obj\Debug\net7.0\Presentation.dll
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Presentation\obj\Debug\net7.0\refint\Presentation.dll
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Presentation\obj\Debug\net7.0\Presentation.pdb
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Presentation\obj\Debug\net7.0\ref\Presentation.dll
