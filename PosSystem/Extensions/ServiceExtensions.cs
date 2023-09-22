@@ -1,4 +1,7 @@
-﻿namespace PosSystem.Extensions
+﻿using Contract;
+using Repository;
+
+namespace PosSystem.Extensions
 {
     public static class ServiceExtensions
     {
@@ -19,6 +22,9 @@
             {
             });
 
+        // RepositoryManager Configuration
+        public static void ConfigureRepositoryManager(this IServiceCollection services) =>
+             services.AddScoped<IRepositoryManager, RepositoryManager>();
 
     }
 }
