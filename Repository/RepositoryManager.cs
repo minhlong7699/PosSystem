@@ -52,7 +52,7 @@ namespace Repository
 
         public IOrderRepository OrderRepository => _orderRepository.Value;
 
-        public IPaymentRepository paymentRepository => _paymentRepository.Value;
+        public IPaymentRepository PaymentRepository => _paymentRepository.Value;
 
         public IProductRepository ProductRepository => _productRepository.Value;
 
@@ -68,7 +68,7 @@ namespace Repository
 
         public IUserRepository UserRepository => _userRepository.Value;
 
-        public IUserRoleRepository userRoleRepository => _userRoleRepository.Value;
+        public IUserRoleRepository UserRoleRepository => _userRoleRepository.Value;
 
 
         public void Save() => _repositoryContext.SaveChanges();

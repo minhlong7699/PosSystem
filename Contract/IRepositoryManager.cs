@@ -12,7 +12,7 @@ namespace Contract
         IInvoiceRepository InvoiceRepository { get; }
         IOrderItemRepository OrderItemRepository { get; }
         IOrderRepository OrderRepository { get; }
-        IPaymentRepository paymentRepository { get; }
+        IPaymentRepository PaymentRepository { get; }
         IProductRepository ProductRepository { get; }
         IPromotionRepository PromotionRepository { get; }
         ISupplierRepository SupplierRepository { get; }
@@ -20,7 +20,7 @@ namespace Contract
         ITaxRepository TaxRepository { get; }
         IUserAuthenticationRepository UserAuthenticationRepository { get; }
         IUserRepository UserRepository { get; }
-        IUserRoleRepository userRoleRepository { get; }
+        IUserRoleRepository UserRoleRepository { get; }
 
     }
 }
