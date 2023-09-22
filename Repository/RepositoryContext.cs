@@ -10,17 +10,17 @@ namespace Repository
         }
 
         DbSet<Category>? Categories { get; set; }
-        DbSet<Invoice>? Invoice { get; set; }
-        DbSet<Order>? Order { get; set; }
-        DbSet<OrderItem>? OrderItem { get; set; }
-        DbSet<Payment>? Payment { get; set; }
-        DbSet<Product>? Product { get; set; }
-        DbSet<Promotion>? Promotion { get; set; }
-        DbSet<Supplier>? Supplier { get; set; }
-        DbSet<Table>? Table { get; set; }
-        DbSet<Tax>? Tax { get; set; }
-        DbSet<User>? User { get; set; }
-        DbSet<UserAuthentication>? UserAuthentication { get; set; }
-        DbSet<UserRole>? UserRole { get; set; }
+        DbSet<Invoice>? Invoices { get; set; }
+        DbSet<Order>? Orders { get; set; }
+        DbSet<OrderItem>? OrderItems { get; set; }
+        DbSet<Payment>? Payments { get; set; }
+        DbSet<Product>? Products { get; set; }
+        DbSet<Promotion>? Promotions { get; set; }
+        DbSet<Supplier>? Suppliers { get; set; }
+        DbSet<Table>? Tables { get; set; }
+        DbSet<Tax>? Taxs { get; set; }
+        DbSet<User>? Users { get; set; }
+        DbSet<UserAuthentication>? UserAuthentications { get; set; }
+        DbSet<UserRole>? UserRoles { get; set; }
     }
 }
