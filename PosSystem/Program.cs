@@ -12,6 +12,7 @@ builder.Host.UseSerilog((context, configuration) =>
 builder.Services.ConfigureCors();
 builder.Services.ConfigureIISIntegration();
 builder.Services.ConfigureRepositoryManager(); // Repository DI
+builder.Services.ConfigureServiceManager(); // Repository DI
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
