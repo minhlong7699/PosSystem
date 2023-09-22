@@ -1,0 +1,12 @@
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract.Service\bin\Debug\net7.0\Contract.Service.deps.json
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract.Service\bin\Debug\net7.0\Contract.Service.dll
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract.Service\bin\Debug\net7.0\Contract.Service.pdb
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract.Service\obj\Debug\net7.0\Contract.Service.csproj.AssemblyReference.cache
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract.Service\obj\Debug\net7.0\Contract.Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract.Service\obj\Debug\net7.0\Contract.Service.AssemblyInfoInputs.cache
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract.Service\obj\Debug\net7.0\Contract.Service.AssemblyInfo.cs
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract.Service\obj\Debug\net7.0\Contract.Service.csproj.CoreCompileInputs.cache
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract.Service\obj\Debug\net7.0\Contract.Service.dll
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract.Service\obj\Debug\net7.0\refint\Contract.Service.dll
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract.Service\obj\Debug\net7.0\Contract.Service.pdb
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract.Service\obj\Debug\net7.0\ref\Contract.Service.dll
