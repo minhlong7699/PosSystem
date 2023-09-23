@@ -49,7 +49,7 @@ namespace Service
 
         public IOrderService OrderService => _orderService.Value;
 
-        public IPaymentService paymentService => _paymentService.Value;
+        public IPaymentService PaymentService => _paymentService.Value;
 
         public IProductService ProductService => _productService.Value;
 
@@ -65,6 +65,6 @@ namespace Service
 
         public IUserService UserService => _userService.Value;
 
-        public IUserRoleService userRoleService => _userRoleService.Value;
+        public IUserRoleService UserRoleService => _userRoleService.Value;
     }
 }
