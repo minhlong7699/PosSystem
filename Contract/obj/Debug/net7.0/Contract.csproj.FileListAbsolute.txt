@@ -1,0 +1,15 @@
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract\bin\Debug\net7.0\Contract.deps.json
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract\bin\Debug\net7.0\Contract.dll
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract\bin\Debug\net7.0\Contract.pdb
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract\bin\Debug\net7.0\Entity.dll
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract\bin\Debug\net7.0\Entity.pdb
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract\obj\Debug\net7.0\Contract.csproj.AssemblyReference.cache
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract\obj\Debug\net7.0\Contract.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract\obj\Debug\net7.0\Contract.AssemblyInfoInputs.cache
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract\obj\Debug\net7.0\Contract.AssemblyInfo.cs
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract\obj\Debug\net7.0\Contract.csproj.CoreCompileInputs.cache
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract\obj\Debug\net7.0\Contract.csproj.CopyComplete
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract\obj\Debug\net7.0\Contract.dll
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract\obj\Debug\net7.0\refint\Contract.dll
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract\obj\Debug\net7.0\Contract.pdb
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract\obj\Debug\net7.0\ref\Contract.dll
