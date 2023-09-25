@@ -13,3 +13,7 @@ C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Presentation\obj\D
 C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Presentation\obj\Debug\net7.0\refint\Presentation.dll
 C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Presentation\obj\Debug\net7.0\Presentation.pdb
 C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Presentation\obj\Debug\net7.0\ref\Presentation.dll
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Presentation\bin\Debug\net7.0\Entity.dll
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Presentation\bin\Debug\net7.0\Entity.pdb
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Presentation\bin\Debug\net7.0\Shared.dll
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Presentation\bin\Debug\net7.0\Shared.pdb

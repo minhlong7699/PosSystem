@@ -1,4 +1,5 @@
-﻿using Contract;
+﻿using AutoMapper;
+using Contract;
 using Contract.Service;
 using Serilog;
 using System;
@@ -13,11 +14,13 @@ namespace Service
     {
         private readonly IRepositoryManager _repository;
         private readonly ILogger _logger;
+        private readonly IMapper _mapper;
 
-        public PaymentService(IRepositoryManager repository, ILogger logger)
+        public PaymentService(IRepositoryManager repository, ILogger logger, AutoMapper.IMapper mapper)
         {
             _repository = repository;
             _logger = logger;
+            _mapper = mapper;
         }
     }
 }

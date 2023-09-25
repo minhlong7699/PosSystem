@@ -7,14 +7,38 @@
   "targets": {
     ".NETCoreApp,Version=v7.0": {
       "Contract.Service/1.0.0": {
+        "dependencies": {
+          "Entity": "1.0.0",
+          "Shared": "1.0.0"
+        },
         "runtime": {
           "Contract.Service.dll": {}
+        }
+      },
+      "Entity/1.0.0": {
+        "runtime": {
+          "Entity.dll": {}
+        }
+      },
+      "Shared/1.0.0": {
+        "runtime": {
+          "Shared.dll": {}
         }
       }
     }
   },
   "libraries": {
     "Contract.Service/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Entity/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Shared/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

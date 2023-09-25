@@ -1,5 +1,6 @@
 ﻿using Contract;
 using Contract.Service;
+using Microsoft.EntityFrameworkCore;
 using Repository;
 using Service;
 
@@ -32,5 +33,10 @@ namespace PosSystem.Extensions
         public static void ConfigureServiceManager(this IServiceCollection services) =>
              services.AddScoped<IServiceManager, ServiceManager>();
 
+        // DbContext Configuration
+        public static void ConfigureSqlContext(this IServiceCollection services,
+            IConfiguration configuration) =>
+            services.AddDbContext<RepositoryContext>(opts =>
+            opts.UseSqlServer(configuration.GetConnectionString("Db")));
     }
 }

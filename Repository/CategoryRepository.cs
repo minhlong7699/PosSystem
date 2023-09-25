@@ -13,5 +13,17 @@ namespace Repository
         public CategoryRepository(RepositoryContext repositoryContext) : base(repositoryContext)
         {
         }
+
+        public IEnumerable<Category> GetAllCategories(bool trackChanges)
+        {
+            return FindAll(trackChanges)
+                .OrderBy(c => c.CategoryName)
+                .ToList();
+        }
+
+        public Category GetCategory(Guid categoryId, bool trackChanges)
+        {
+            return FindByConditon(c => c.CategoryId.Equals(categoryId), trackChanges).SingleOrDefault();
+        }
     }
 }

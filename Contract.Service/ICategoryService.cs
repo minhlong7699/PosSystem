@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Entity.Models;
+using Shared.DataTransferObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +10,9 @@ namespace Contract.Service
 {
     public interface ICategoryService
     {
+        IEnumerable<CategoryDto> GetAllCategories(bool trackChanges);
+
+        CategoryDto GetCategory(Guid categoryId, bool trackChanges);
+
     }
 }

@@ -54,6 +54,19 @@ namespace PosSystem.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = new Guid("c9d4c053-49b6-410c-bc78-2d54a9991870"),
+                            CategoryDescription = "Description",
+                            CategoryName = "Gà Rán",
+                            CreatedAt = new DateTime(2023, 9, 25, 13, 19, 41, 845, DateTimeKind.Local).AddTicks(2988),
+                            CreatedBy = "Admin",
+                            IsActive = true,
+                            UpdatedAt = new DateTime(2023, 9, 25, 13, 19, 41, 845, DateTimeKind.Local).AddTicks(3010),
+                            UpdatedBy = "Admin"
+                        });
                 });
 
             modelBuilder.Entity("Entity.Models.Invoice", b =>
@@ -97,7 +110,7 @@ namespace PosSystem.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("Invoice");
+                    b.ToTable("Invoices");
                 });
 
             modelBuilder.Entity("Entity.Models.Order", b =>
@@ -158,7 +171,7 @@ namespace PosSystem.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Order");
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("Entity.Models.OrderItem", b =>
@@ -201,7 +214,7 @@ namespace PosSystem.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderItem");
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("Entity.Models.Payment", b =>
@@ -231,7 +244,7 @@ namespace PosSystem.Migrations
 
                     b.HasKey("PaymentId");
 
-                    b.ToTable("Payment");
+                    b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("Entity.Models.Product", b =>
@@ -296,7 +309,7 @@ namespace PosSystem.Migrations
 
                     b.HasIndex("SupplierId");
 
-                    b.ToTable("Product");
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("Entity.Models.Promotion", b =>
@@ -340,7 +353,7 @@ namespace PosSystem.Migrations
 
                     b.HasKey("PromotionId");
 
-                    b.ToTable("Promotion");
+                    b.ToTable("Promotions");
                 });
 
             modelBuilder.Entity("Entity.Models.Supplier", b =>
@@ -383,7 +396,7 @@ namespace PosSystem.Migrations
 
                     b.HasKey("SupplierId");
 
-                    b.ToTable("Supplier");
+                    b.ToTable("Suppliers");
                 });
 
             modelBuilder.Entity("Entity.Models.Table", b =>
@@ -420,7 +433,7 @@ namespace PosSystem.Migrations
 
                     b.HasKey("TableID");
 
-                    b.ToTable("Table");
+                    b.ToTable("Tables");
                 });
 
             modelBuilder.Entity("Entity.Models.Tax", b =>
@@ -453,7 +466,7 @@ namespace PosSystem.Migrations
 
                     b.HasKey("TaxId");
 
-                    b.ToTable("Tax");
+                    b.ToTable("Taxs");
                 });
 
             modelBuilder.Entity("Entity.Models.User", b =>
@@ -515,7 +528,7 @@ namespace PosSystem.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Entity.Models.UserAuthentication", b =>
@@ -544,7 +557,7 @@ namespace PosSystem.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserAuthentication");
+                    b.ToTable("UserAuthentications");
                 });
 
             modelBuilder.Entity("Entity.Models.UserRole", b =>
@@ -574,7 +587,7 @@ namespace PosSystem.Migrations
 
                     b.HasKey("RoleId");
 
-                    b.ToTable("UserRole");
+                    b.ToTable("UserRoles");
                 });
 
             modelBuilder.Entity("Entity.Models.Invoice", b =>

@@ -1,5 +1,6 @@
 ﻿using Entity.Models;
 using Microsoft.EntityFrameworkCore;
+using Repository.Configuration;
 
 namespace Repository
 {
@@ -9,6 +10,10 @@ namespace Repository
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+        }
         DbSet<Category>? Categories { get; set; }
         DbSet<Invoice>? Invoices { get; set; }
         DbSet<Order>? Orders { get; set; }
