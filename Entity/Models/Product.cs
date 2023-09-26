@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entity.Models
 {
+    [Table("Product")]
     public partial class Product : AuditableEntity
     {
 

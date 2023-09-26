@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Entity.Models
 {
+    [Table("Order")]
     public partial class Order : AuditableEntity
     {
 

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Entity.Models
 {
+    [Table("Payment")]
     public partial class Payment : AuditableEntity
     {
 

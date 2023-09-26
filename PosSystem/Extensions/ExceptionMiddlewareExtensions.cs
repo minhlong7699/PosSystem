@@ -13,8 +13,12 @@ namespace PosSystem.Extensions
             {
                 appError.Run(async context =>
                 {
+
+                    // Default StatusCode
                     context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                    // Json Type Response
                     context.Response.ContentType = "application/json";
+                    // Access the specific Exception
                     var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
                     if (contextFeature != null)
                     {

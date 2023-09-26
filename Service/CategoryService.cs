@@ -32,7 +32,7 @@ namespace Service
         public CategoryDto GetCategory(Guid categoryId, bool trackChanges)
         {
             var category = _repository.CategoryRepository.GetCategory(categoryId, trackChanges);
-            if(category is null)
+            if (category is null)
             {
                 throw new CategoryNotFoundException(categoryId);
             }

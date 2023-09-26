@@ -9,6 +9,7 @@ namespace PosSystem
         public MappingProfile()
         {
             CreateMap<Category, CategoryDto>();
+            CreateMap<Product, ProductDto>();
         }
     }
 }

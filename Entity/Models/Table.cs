@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Entity.Models
 {
+    [Table("Table")]
     public partial class Table : AuditableEntity
     {
 

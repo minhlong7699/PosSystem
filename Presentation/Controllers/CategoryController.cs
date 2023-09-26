@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Presentation.Controllers
 {
-    [Route("api/Categories")]
+    [Route("api/categories")]
     [ApiController]
     public class CategoryController : ControllerBase
     {

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Entity.Models
 {
+    [Table("UserRole")]
     public partial class UserRole : AuditableEntity
     {
 
