@@ -13,5 +13,15 @@ namespace Repository
         public PromotionRepository(RepositoryContext repositoryContext) : base(repositoryContext)
         {
         }
+
+        public IEnumerable<Promotion> GetAllPromotions(bool trackChanges)
+        {
+            return FindAll(trackChanges).OrderBy(c => c.PromotionName).ToList();
+        }
+
+        public Promotion GetPromotion(Guid promotionId, bool trackChanges)
+        {
+            return FindByConditon(e => e.PromotionId.Equals(promotionId), trackChanges).SingleOrDefault();
+        }
     }
 }

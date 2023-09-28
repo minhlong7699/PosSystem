@@ -43,7 +43,7 @@ namespace Entity.Models
         public virtual Tax? Tax { get; set; }
 
         [ForeignKey(nameof(Promotion))]
-        public Guid PromotionId { get; set; }
+        public Guid? PromotionId { get; set; }
         public virtual Promotion? Promotion { get; set; }
     }
 }

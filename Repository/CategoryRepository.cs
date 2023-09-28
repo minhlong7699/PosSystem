@@ -14,6 +14,7 @@ namespace Repository
         {
         }
 
+
         public IEnumerable<Category> GetAllCategories(bool trackChanges)
         {
             return FindAll(trackChanges)
@@ -25,5 +26,11 @@ namespace Repository
         {
             return FindByConditon(c => c.CategoryId.Equals(categoryId), trackChanges).SingleOrDefault();
         }
+
+        public void CreateCategory(Category category)
+        {
+            Create(category);
+        }
+
     }
 }

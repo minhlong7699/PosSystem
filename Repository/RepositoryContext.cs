@@ -13,6 +13,8 @@ namespace Repository
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductConfiguration());
+            modelBuilder.ApplyConfiguration(new SupplierConfiguration());
         }
         DbSet<Category>? Categories { get; set; }
         DbSet<Invoice>? Invoices { get; set; }

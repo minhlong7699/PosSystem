@@ -30,7 +30,7 @@ namespace Entity.Models
         public string? Image { get; set; }
 
         [ForeignKey(nameof(Promotion))]
-        public Guid PromotionId { get; set;}
+        public Guid? PromotionId { get; set; } = null;
         public virtual Promotion? Promotion { get; set;}
 
         [ForeignKey(nameof(Supplier))]

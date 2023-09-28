@@ -10,5 +10,9 @@ namespace Contract.Service
     public interface IProductService
     {
         IEnumerable<ProductDto> GetAllProducts(Guid categoryId, bool trackChanges);
+
+        ProductDto GetProduct(Guid categoryId, Guid productId, bool trackChanges);
+
+        ProductDto CreateProduct(Guid categoryId, ProductUpdateCreateDto productCreate, bool trackChanges);
     }
 }

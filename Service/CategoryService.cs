@@ -2,6 +2,7 @@
 using Contract;
 using Contract.Service;
 using Entity.Exceptions;
+using Entity.Models;
 using Serilog;
 using Shared.DataTransferObjects;
 
@@ -21,6 +22,7 @@ namespace Service
         }
 
 
+
         public IEnumerable<CategoryDto> GetAllCategories(bool trackChanges)
         {
 
@@ -38,6 +40,22 @@ namespace Service
             }
             var categoryDto = _mapper.Map<CategoryDto>(category);
             return categoryDto;
+        }
+
+
+        public CategoryDto CreateCategory(CategoryUpdateCreateDto category)
+        {
+            var categoryEntity = _mapper.Map<Category>(category);
+            categoryEntity.CreatedAt = DateTime.Now;
+            categoryEntity.CreatedBy = "Admin";
+            categoryEntity.UpdatedAt = DateTime.Now;
+            categoryEntity.UpdatedBy = "Admin";
+            _repository.CategoryRepository.CreateCategory(categoryEntity);
+            _repository.Save();
+
+            var CategoryToReturn = _mapper.Map<CategoryDto>(categoryEntity);
+            return CategoryToReturn;
+            
         }
     }
 }

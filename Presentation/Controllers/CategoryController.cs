@@ -1,5 +1,6 @@
 ﻿using Contract.Service;
 using Microsoft.AspNetCore.Mvc;
+using Shared.DataTransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace Presentation.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private IServiceManager _service;
+        private readonly IServiceManager _service;
         public CategoryController(IServiceManager service)
         {
             _service = service;
@@ -25,11 +26,23 @@ namespace Presentation.Controllers
             return Ok(categories);
         }
 
-        [HttpGet("{id:guid}")]
+        [HttpGet("{id:guid}" , Name = "CategoryById")]
         public IActionResult GetCategory(Guid id)
         {
             var category = _service.CategoryService.GetCategory(id, trackChanges: false);
             return Ok(category);
+        }
+
+        [HttpPost]
+        public IActionResult CreateCategory([FromBody]CategoryUpdateCreateDto categorydto)
+        {
+            if(categorydto is null)
+            {
+                return BadRequest("CategoryUpdateCreateDto object is null");
+            }
+
+            var createdCategory = _service.CategoryService.CreateCategory(categorydto);
+            return CreatedAtRoute("CategoryById", new { id = createdCategory.CategoryId }, createdCategory);
         }
     }
 }

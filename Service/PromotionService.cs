@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Contract;
 using Contract.Service;
+using Entity.Exceptions;
 using Serilog;
+using Shared.DataTransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +23,24 @@ namespace Service
             _repository = repository;
             _logger = logger;
             _mapper = mapper;
+        }
 
+        public IEnumerable<PromotionDto> GetAllPromotions(bool trackChanges)
+        {
+            var promotions = _repository.PromotionRepository.GetAllPromotions(trackChanges);
+            var promotionDto = _mapper.Map<IEnumerable<PromotionDto>>(promotions);
+            return promotionDto;
+        }
+
+        public PromotionDto GetPromotion(Guid promotionId, bool trackChanges)
+        {
+            var promotion = _repository.PromotionRepository.GetPromotion(promotionId, trackChanges);
+            if (promotion is null)
+            {
+                throw new PromotionNotFoundException(promotionId);
+            }
+            var promotionDto = _mapper.Map<PromotionDto>(promotion);
+            return promotionDto;
         }
     }
 }

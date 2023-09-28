@@ -1,5 +1,6 @@
 ﻿using Contract.Service;
 using Microsoft.AspNetCore.Mvc;
+using Shared.DataTransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,20 @@ namespace Presentation.Controllers
         {
             var products =_service.ProductService.GetAllProducts(categoryId, trackChanges: false);
             return Ok(products);
+        }
+
+        [HttpGet("{productId:guid}" , Name = "GetProduct")]
+        public IActionResult GetProduct(Guid categoryId, Guid productId)
+        {
+            var product = _service.ProductService.GetProduct(categoryId, productId, trackChanges: false);
+            return Ok(product);
+        }
+
+        [HttpPost]
+        public IActionResult CreateProduct(Guid categoryId,  [FromBody]ProductUpdateCreateDto productDto)
+        {
+            var product = _service.ProductService.CreateProduct(categoryId, productDto, trackChanges: false);
+            return CreatedAtRoute("GetProduct" , new {categoryId, product.ProductId }, product);
         }
     }
 }

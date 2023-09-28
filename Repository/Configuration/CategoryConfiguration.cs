@@ -20,6 +20,17 @@ namespace Repository.Configuration
                     IsActive = true,
                     UpdatedAt = DateTime.Now,
                     UpdatedBy = "Admin"
+                },
+                new Category
+                {
+                    CategoryId = new Guid("c9d4c053-49b6-410c-bc78-2d54a9991871"),
+                    CategoryName = "Hambuger",
+                    CategoryDescription = "Description",
+                    CreatedAt = DateTime.Now,
+                    CreatedBy = "Admin",
+                    IsActive = true,
+                    UpdatedAt = DateTime.Now,
+                    UpdatedBy = "Admin"
                 }
                 );
         }

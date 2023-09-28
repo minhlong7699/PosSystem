@@ -14,5 +14,7 @@ namespace Contract.Service
 
         CategoryDto GetCategory(Guid categoryId, bool trackChanges);
 
+        CategoryDto CreateCategory(CategoryUpdateCreateDto category);
+
     }
 }
