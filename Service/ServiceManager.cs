@@ -26,14 +26,14 @@ namespace Service
         private readonly Lazy<IUserService> _userService;
         private readonly Lazy<IUserRoleService> _userRoleService;
 
-        public ServiceManager(IRepositoryManager repositoryManager, ILogger logger, IMapper mapper)
+        public ServiceManager(IRepositoryManager repositoryManager, ILogger logger, IMapper mapper , IUploadImageService uploadImageService)
         {
             _categoryService = new Lazy<ICategoryService>(() => new CategoryService(repositoryManager, logger , mapper));
             _invoiceService = new Lazy<IInvoiceService>(() => new InvoiceService(repositoryManager, logger , mapper));
             _orderItemService = new Lazy<IOrderItemService>(() => new OrderItemService(repositoryManager, logger , mapper));
             _orderService = new Lazy<IOrderService>(() => new OrderService(repositoryManager, logger , mapper));
             _paymentService = new Lazy<IPaymentService>(() => new PaymentService(repositoryManager, logger , mapper));
-            _productService = new Lazy<IProductService>(() => new ProductService(repositoryManager, logger , mapper));
+            _productService = new Lazy<IProductService>(() => new ProductService(repositoryManager, logger , mapper, uploadImageService));
             _promotionService = new Lazy<IPromotionService>(() => new PromotionService(repositoryManager, logger , mapper));
             _supplierService = new Lazy<ISupplierService>(() => new SupplierService(repositoryManager, logger , mapper));
             _tableService = new Lazy<ITableService>(() => new TableService(repositoryManager, logger , mapper));

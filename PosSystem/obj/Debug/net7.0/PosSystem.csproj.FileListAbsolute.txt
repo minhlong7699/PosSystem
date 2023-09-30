@@ -99,3 +99,4 @@ C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\PosSystem\bin\Debu
 C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\PosSystem\bin\Debug\net7.0\System.CodeDom.dll
 C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\PosSystem\bin\Debug\net7.0\AutoMapper.dll
 C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\PosSystem\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\PosSystem\bin\Debug\net7.0\PosSystem.staticwebassets.runtime.json

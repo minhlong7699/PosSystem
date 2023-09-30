@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "ImJmGbqmyqTt7yFkZdrDo8bgmPnWQIi04X125F2id0rJ2sCn8z/67O759dMlduxgmPiVqd4KcAflzn5QX5Z3oQ==",
+  "dgSpecHash": "s++La4Yo6/aSFM3Ondh9hvmqyr2RcHlXWm5ccSS3Y6XJ+aerahhtnwsK2Asp5TCE/QffjGnb0/mHpsCjMmc+lA==",
   "success": true,
   "projectFilePath": "C:\\Users\\duong\\OneDrive\\Máy tính\\Project_practice\\PosSystem\\Service\\Service.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\duong\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\duong\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
+    "C:\\Users\\duong\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.2.0\\microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",
     "C:\\Users\\duong\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\duong\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\duong\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",

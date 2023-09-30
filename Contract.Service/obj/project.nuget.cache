@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "vCVYBk2GyzXpYMa4IrW9NvmRSEnGKg7zfciz0Qp7BIHvSekvf+tf7gFR+IJKS0kIJRav2EKXmVtcFq1fXrPOpg==",
+  "dgSpecHash": "4lXGWxJMSj6KyljOfOVkWqwKxRBRI9rmo+54oAdsDN/gUyRUtJLY+lVl0Vk2Z4adfj5GheYq9cfGtX1Sae74dw==",
   "success": true,
   "projectFilePath": "C:\\Users\\duong\\OneDrive\\Máy tính\\Project_practice\\PosSystem\\Contract.Service\\Contract.Service.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\duong\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.2.0\\microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",
+    "C:\\Users\\duong\\.nuget\\packages\\microsoft.extensions.primitives\\2.2.0\\microsoft.extensions.primitives.2.2.0.nupkg.sha512",
+    "C:\\Users\\duong\\.nuget\\packages\\system.memory\\4.5.1\\system.memory.4.5.1.nupkg.sha512",
+    "C:\\Users\\duong\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.5.1\\system.runtime.compilerservices.unsafe.4.5.1.nupkg.sha512"
+  ],
   "logs": []
 }

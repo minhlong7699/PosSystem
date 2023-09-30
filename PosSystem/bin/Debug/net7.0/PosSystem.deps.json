@@ -898,7 +898,8 @@
       },
       "Contract/1.0.0": {
         "dependencies": {
-          "Entity": "1.0.0"
+          "Entity": "1.0.0",
+          "Microsoft.AspNetCore.Http.Features": "2.2.0"
         },
         "runtime": {
           "Contract.dll": {}
@@ -930,7 +931,6 @@
       "Repository/1.0.0": {
         "dependencies": {
           "Contract": "1.0.0",
-          "Entity": "1.0.0",
           "Microsoft.EntityFrameworkCore": "7.0.11",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.11"
         },
@@ -951,6 +951,10 @@
         }
       },
       "Shared/1.0.0": {
+        "dependencies": {
+          "Contract": "1.0.0",
+          "Microsoft.AspNetCore.Http.Features": "2.2.0"
+        },
         "runtime": {
           "Shared.dll": {}
         }

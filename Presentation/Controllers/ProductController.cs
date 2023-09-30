@@ -21,7 +21,7 @@ namespace Presentation.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllProducts(Guid categoryId)
+        public IActionResult GetProducts(Guid categoryId)
         {
             var products =_service.ProductService.GetAllProducts(categoryId, trackChanges: false);
             return Ok(products);
@@ -35,7 +35,7 @@ namespace Presentation.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateProduct(Guid categoryId,  [FromBody]ProductUpdateCreateDto productDto)
+        public IActionResult CreateProduct(Guid categoryId,  [FromForm]ProductUpdateCreateDto productDto)
         {
             var product = _service.ProductService.CreateProduct(categoryId, productDto, trackChanges: false);
             return CreatedAtRoute("GetProduct" , new {categoryId, product.ProductId }, product);

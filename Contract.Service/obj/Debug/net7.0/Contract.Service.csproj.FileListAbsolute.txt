@@ -15,3 +15,5 @@ C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract.Service\b
 C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract.Service\obj\Debug\net7.0\Contract.Service.csproj.CopyComplete
 C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract.Service\bin\Debug\net7.0\Shared.dll
 C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract.Service\bin\Debug\net7.0\Shared.pdb
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract.Service\bin\Debug\net7.0\Contract.dll
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract.Service\bin\Debug\net7.0\Contract.pdb

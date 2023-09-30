@@ -13,5 +13,18 @@ namespace Repository
         public SupplierRepository(RepositoryContext repositoryContext) : base(repositoryContext)
         {
         }
+
+        public IEnumerable<Supplier> GetAllSuppliers(bool trackChanges)
+        {
+            return FindAll(trackChanges)
+                .OrderBy(x => x.SupplierName)
+                .ToList();
+        }
+
+        public Supplier GetSupplier(Guid? supplierId, bool trackChanges)
+        {
+            return FindByConditon(x => x.SupplierId.Equals(supplierId), trackChanges)
+                .SingleOrDefault();
+        }
     }
 }

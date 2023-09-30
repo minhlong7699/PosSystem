@@ -3,6 +3,7 @@ using Contract.Service;
 using Microsoft.EntityFrameworkCore;
 using Repository;
 using Service;
+using Shared.ExtensionServices;
 
 namespace PosSystem.Extensions
 {
@@ -38,5 +39,13 @@ namespace PosSystem.Extensions
             IConfiguration configuration) =>
             services.AddDbContext<RepositoryContext>(opts =>
             opts.UseSqlServer(configuration.GetConnectionString("Db")));
+
+        // WebRootProvider Configuration
+        public static void ConfigureWebRootPath(this IServiceCollection services) =>
+            services.AddScoped<IWebRootPathProvider, WebRootPathProvider>();
+
+        // UploadImage Configuration
+        public static void ConfigureUploadImageService(this IServiceCollection services) =>
+            services.AddScoped<IUploadImageService, UploadImageService>();
     }
 }

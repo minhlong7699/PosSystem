@@ -1,6 +1,6 @@
-using Serilog;
-using PosSystem.Extensions;
 using Microsoft.AspNetCore.HttpOverrides;
+using PosSystem.Extensions;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +14,9 @@ builder.Services.ConfigureIISIntegration();
 builder.Services.ConfigureRepositoryManager(); // Repository DI
 builder.Services.ConfigureServiceManager(); // Service DI
 builder.Services.ConfigureSqlContext(builder.Configuration); // DbContext
+builder.Services.ConfigureWebRootPath(); // WebRootProvider
+builder.Services.ConfigureUploadImageService(); // ImageUpload
+
 builder.Services.AddControllers()
 .AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly); // Config Controller Assembly
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -43,7 +46,6 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
     ForwardedHeaders = ForwardedHeaders.All
 });
 app.UseCors("CorsPolicy");
-
 
 app.UseSerilogRequestLogging();
 

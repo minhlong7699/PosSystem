@@ -1,11 +1,19 @@
 {
   "Version": 1,
-  "Hash": "riKtU/u67Q3/eOcmktannKp+6wUb6JcD0pp2Me51nS0=",
+  "Hash": "DuAhjDywPX9l0ix0ZjxwQXbr8Uvl1RxCLqJWNIcJ3Yo=",
   "Source": "PosSystem",
   "BasePath": "_content/PosSystem",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "PosSystem\\wwwroot",
+      "Source": "PosSystem",
+      "ContentRoot": "C:\\Users\\duong\\OneDrive\\Máy tính\\Project_practice\\PosSystem\\PosSystem\\wwwroot\\",
+      "BasePath": "_content/PosSystem",
+      "Pattern": "**"
+    }
+  ],
   "Assets": []
 }

@@ -18,27 +18,38 @@ namespace Service
         private readonly IRepositoryManager _repository;
         private readonly ILogger _logger;
         private readonly IMapper _mapper;
+        private readonly IUploadImageService _uploadImageService;
 
-        public ProductService(IRepositoryManager repository, ILogger logger, AutoMapper.IMapper mapper)
+        public ProductService(IRepositoryManager repository, ILogger logger, AutoMapper.IMapper mapper , IUploadImageService uploadImageService)
         {
             _repository = repository;
             _logger = logger;
             _mapper = mapper;
+            _uploadImageService = uploadImageService;
         }
 
         // Create
         public ProductDto CreateProduct(Guid categoryId, ProductUpdateCreateDto productCreate, bool trackChanges)
         {
-            // Check category
+            // Check category is exist
             var category = _repository.CategoryRepository.GetCategory(categoryId, trackChanges);
             if (category is null)
             {
                 throw new CategoryNotFoundException(categoryId);
             }
-
+            // check suppiler is exist
+            var supplier = _repository.SupplierRepository.GetSupplier(productCreate.SupplierId, trackChanges);
+            if (supplier is null)
+            {
+                throw new SupplierNotFoundException(productCreate.SupplierId);
+            }
+            // mapping from Dto to Product Entity
             var productEntity = _mapper.Map<Product>(productCreate);
+            // Save Img to Server and get String to return
+            productEntity.Image = _uploadImageService.GetImageUrl(productCreate.Image, "ProductImages");
+            // get value of Promotionid from Dto if existed
             Guid actualPromotionId = productCreate.PromotionId ?? Guid.Empty;
-            // Check promotion of product
+            // Check promotion of product is exist
             var promotionOfProduct = _repository.PromotionRepository.GetPromotion(actualPromotionId, trackChanges: false);
             if(promotionOfProduct is null)
             {
@@ -48,6 +59,7 @@ namespace Service
             {
                 productEntity.ProductPriceAfterDiscount = productEntity.ProductPrice * (decimal)promotionOfProduct.DisCountPercent / 100;
             }
+
             // Add value to some private field
             productEntity.CreatedAt = DateTime.Now;
             productEntity.CreatedBy = "Admin";

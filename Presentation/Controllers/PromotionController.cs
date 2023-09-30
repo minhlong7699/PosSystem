@@ -19,7 +19,7 @@ namespace Presentation.Controllers
             _services = services;
         }
         [HttpGet]
-        public IActionResult GetAllPromotions()
+        public IActionResult GetPromotions()
         {
             var promotions = _services.PromotionService.GetAllPromotions(trackChanges: false);
             return Ok(promotions);

@@ -19,6 +19,8 @@ namespace PosSystem
             CreateMap<CategoryUpdateCreateDto, Category>();
             // ProductUpdateCreateDto -> Product
             CreateMap<ProductUpdateCreateDto, Product>();
+            // Supplier -> SupplierDto
+            CreateMap<Supplier, SupllierDto>();
         }
     }
 }
