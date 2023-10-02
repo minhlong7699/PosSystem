@@ -40,5 +40,12 @@ namespace Presentation.Controllers
             var product = _service.ProductService.CreateProduct(categoryId, productDto, trackChanges: false);
             return CreatedAtRoute("GetProduct" , new {categoryId, product.ProductId }, product);
         }
+
+        [HttpPut("{productId:guid}")]
+        public IActionResult UpdateProduct(Guid categoryId, Guid productId, [FromForm]ProductUpdateCreateDto updateDto)   
+        {
+            _service.ProductService.UpdateProduct(categoryId, productId, updateDto, categoryTrachkChanges: false, productTrachChages: true);
+            return NoContent();
+        }
     }
 }

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "DuAhjDywPX9l0ix0ZjxwQXbr8Uvl1RxCLqJWNIcJ3Yo=",
+  "Hash": "Q22V27XBiW6bKQekITJk2zuAkKWCs4kj0VF9/YEmcsw=",
   "Source": "PosSystem",
   "BasePath": "_content/PosSystem",
   "Mode": "Default",
@@ -15,5 +15,23 @@
       "Pattern": "**"
     }
   ],
-  "Assets": []
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\duong\\OneDrive\\Máy tính\\Project_practice\\PosSystem\\PosSystem\\wwwroot\\Images\\ProductImages\\ebb2d7bd-fca3-4d86-a594-ec2e78ddd1e2-img.jpg",
+      "SourceId": "PosSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\duong\\OneDrive\\Máy tính\\Project_practice\\PosSystem\\PosSystem\\wwwroot\\",
+      "BasePath": "_content/PosSystem",
+      "RelativePath": "Images/ProductImages/ebb2d7bd-fca3-4d86-a594-ec2e78ddd1e2-img.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\ProductImages\\ebb2d7bd-fca3-4d86-a594-ec2e78ddd1e2-img.jpg"
+    }
+  ]
 }

@@ -103,5 +103,35 @@ namespace Service
             var productDto = _mapper.Map<ProductDto>(product);
             return productDto;
         }
+
+        public void UpdateProduct(Guid categoryId, Guid productId, ProductUpdateCreateDto productUpdate, bool categoryTrachkChanges, bool productTrachChages)
+        {
+            var category = _repository.CategoryRepository.GetCategory(categoryId, categoryTrachkChanges);
+            if (category is null)
+            {
+                throw new CategoryNotFoundException(categoryId);
+            }
+            var productEntity = _repository.ProductRepository.GetProduct(categoryId, productId, productTrachChages);
+
+            var image = productEntity.Image;
+
+            if (productEntity is null)
+            {
+                throw new ProductNotFoundException(productId);
+            }
+            // Set the values for private fields
+            if (productUpdate.Image is not null)
+            {
+                productEntity.Image = _uploadImageService.GetImageUrl(productUpdate.Image, "ProductImages");
+            }
+            else
+            {
+                productEntity.Image = image;
+            }    
+            productEntity.UpdatedAt = DateTime.Now;
+            productEntity.UpdatedBy = "Admin";
+            _mapper.Map(productUpdate, productEntity);
+            _repository.Save();
+        }
     }
 }

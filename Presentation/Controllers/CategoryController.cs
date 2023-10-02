@@ -1,11 +1,6 @@
 ﻿using Contract.Service;
 using Microsoft.AspNetCore.Mvc;
 using Shared.DataTransferObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Presentation.Controllers
 {
@@ -26,7 +21,7 @@ namespace Presentation.Controllers
             return Ok(categories);
         }
 
-        [HttpGet("{id:guid}" , Name = "CategoryById")]
+        [HttpGet("{id:guid}", Name = "CategoryById")]
         public IActionResult GetCategory(Guid id)
         {
             var category = _service.CategoryService.GetCategory(id, trackChanges: false);
@@ -34,15 +29,22 @@ namespace Presentation.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateCategory([FromBody]CategoryUpdateCreateDto categorydto)
+        public IActionResult CreateCategory([FromBody] CategoryUpdateCreateDto categorydto)
         {
-            if(categorydto is null)
+            if (categorydto is null)
             {
                 return BadRequest("CategoryUpdateCreateDto object is null");
             }
 
             var createdCategory = _service.CategoryService.CreateCategory(categorydto);
             return CreatedAtRoute("CategoryById", new { id = createdCategory.CategoryId }, createdCategory);
+        }
+
+        [HttpPut("{categoryId:guid}")]
+        public IActionResult UpdateCategory(Guid categoryId, [FromForm]CategoryUpdateCreateDto categoryUpdate)
+        {
+            _service.CategoryService.UpdateCategory(categoryId, categoryUpdate, trackChanges: true);
+            return NoContent();
         }
     }
 }

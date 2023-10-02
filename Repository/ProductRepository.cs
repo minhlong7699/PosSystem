@@ -14,9 +14,9 @@ namespace Repository
         {
         }
 
-        public void CreateProduct(Guid CategoryId, Product product)
+        public void CreateProduct(Guid categoryId, Product product)
         {
-            product.CategoryId = CategoryId;
+            product.CategoryId = categoryId;
             Create(product);
         }
 

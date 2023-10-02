@@ -14,5 +14,7 @@ namespace Contract.Service
         ProductDto GetProduct(Guid categoryId, Guid productId, bool trackChanges);
 
         ProductDto CreateProduct(Guid categoryId, ProductUpdateCreateDto productCreate, bool trackChanges);
+
+        void UpdateProduct(Guid categoryId, Guid productId, ProductUpdateCreateDto productUpdate, bool categoryTrachkChanges, bool productTrachChages);
     }
 }
