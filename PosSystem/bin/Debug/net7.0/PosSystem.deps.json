@@ -899,7 +899,8 @@
       "Contract/1.0.0": {
         "dependencies": {
           "Entity": "1.0.0",
-          "Microsoft.AspNetCore.Http.Features": "2.2.0"
+          "Microsoft.AspNetCore.Http.Features": "2.2.0",
+          "Shared": "1.0.0"
         },
         "runtime": {
           "Contract.dll": {}
@@ -952,7 +953,6 @@
       },
       "Shared/1.0.0": {
         "dependencies": {
-          "Contract": "1.0.0",
           "Microsoft.AspNetCore.Http.Features": "2.2.0"
         },
         "runtime": {

@@ -1075,7 +1075,8 @@
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
           "Entity": "1.0.0",
-          "Microsoft.AspNetCore.Http.Features": "2.2.0"
+          "Microsoft.AspNetCore.Http.Features": "2.2.0",
+          "Shared": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Contract.dll": {}
@@ -1092,6 +1093,19 @@
         },
         "runtime": {
           "bin/placeholder/Entity.dll": {}
+        }
+      },
+      "Shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "Microsoft.AspNetCore.Http.Features": "2.2.0"
+        },
+        "compile": {
+          "bin/placeholder/Shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Shared.dll": {}
         }
       }
     }
@@ -2938,6 +2952,11 @@
       "type": "project",
       "path": "../Entity/Entity.csproj",
       "msbuildProject": "../Entity/Entity.csproj"
+    },
+    "Shared/1.0.0": {
+      "type": "project",
+      "path": "../Shared/Shared.csproj",
+      "msbuildProject": "../Shared/Shared.csproj"
     }
   },
   "projectFileDependencyGroups": {

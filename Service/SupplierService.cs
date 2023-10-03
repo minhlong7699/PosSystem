@@ -24,16 +24,16 @@ namespace Service
             _mapper = mapper;
         }
 
-        public IEnumerable<SupllierDto> GetAllSuppliers(bool trackChanges)
+        public async Task<IEnumerable<SupllierDto>> GetAllSuppliersAsync(bool trackChanges)
         {
-            var suppilers = _repository.SupplierRepository.GetAllSuppliers(trackChanges);
+            var suppilers = await _repository.SupplierRepository.GetAllSuppliersAsync(trackChanges);
             var supplierDto = _mapper.Map<IEnumerable<SupllierDto>>(suppilers);
             return supplierDto;
         }
 
-        public SupllierDto GetSupplier(Guid supplierId, bool trackChanges)
+        public async Task<SupllierDto> GetSupplierAsync(Guid supplierId, bool trackChanges)
         {
-            var supplier = _repository.SupplierRepository.GetSupplier(supplierId, trackChanges);
+            var supplier = await _repository.SupplierRepository.GetSupplierAsync(supplierId, trackChanges);
             var supplerDto = _mapper.Map<SupllierDto>(supplier);
             return supplerDto;
         }

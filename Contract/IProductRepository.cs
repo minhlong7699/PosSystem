@@ -1,4 +1,5 @@
 ﻿using Entity.Models;
+using Shared.RequestFeatures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,8 @@ namespace Contract
 {
     public interface IProductRepository
     {
-        IEnumerable<Product> GetAllProducts(Guid categoryId , bool trackChanges);
-        Product GetProduct( Guid categoryId ,Guid productId, bool trackChanges);
+        Task<IEnumerable<Product>> GetAllProductsAsync(Guid categoryId, ProductParameters productParameters , bool trackChanges);
+        Task<Product> GetProductAsync( Guid categoryId ,Guid productId, bool trackChanges);
         void CreateProduct(Guid categoryId, Product product);
     }
 }

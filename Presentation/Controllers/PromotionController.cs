@@ -19,17 +19,17 @@ namespace Presentation.Controllers
             _services = services;
         }
         [HttpGet]
-        public IActionResult GetPromotions()
+        public async Task<IActionResult> GetPromotions()
         {
-            var promotions = _services.PromotionService.GetAllPromotions(trackChanges: false);
+            var promotions = await _services.PromotionService.GetAllPromotionsAsync(trackChanges: false);
             return Ok(promotions);
         }
 
 
         [HttpGet("{promotionId:guid}")]
-        public IActionResult GetPromotion(Guid promotionId)
+        public async Task<IActionResult> GetPromotion(Guid promotionId)
         {
-            var promotion = _services.PromotionService.GetPromotion(promotionId, trackChanges: false);
+            var promotion = await _services.PromotionService.GetPromotionAsync(promotionId, trackChanges: false);
             return Ok(promotion);
         }
     }

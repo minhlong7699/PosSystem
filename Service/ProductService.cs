@@ -5,6 +5,7 @@ using Entity.Exceptions;
 using Entity.Models;
 using Serilog;
 using Shared.DataTransferObjects;
+using Shared.RequestFeatures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,16 +30,16 @@ namespace Service
         }
 
         // Create
-        public ProductDto CreateProduct(Guid categoryId, ProductUpdateCreateDto productCreate, bool trackChanges)
+        public async Task<ProductDto> CreateProductAsync(Guid categoryId, ProductUpdateCreateDto productCreate, bool trackChanges)
         {
             // Check category is exist
-            var category = _repository.CategoryRepository.GetCategory(categoryId, trackChanges);
+            var category = await _repository.CategoryRepository.GetCategoryAsync(categoryId, trackChanges);
             if (category is null)
             {
                 throw new CategoryNotFoundException(categoryId);
             }
             // check suppiler is exist
-            var supplier = _repository.SupplierRepository.GetSupplier(productCreate.SupplierId, trackChanges);
+            var supplier = await _repository.SupplierRepository.GetSupplierAsync(productCreate.SupplierId, trackChanges);
             if (supplier is null)
             {
                 throw new SupplierNotFoundException(productCreate.SupplierId);
@@ -50,7 +51,7 @@ namespace Service
             // get value of Promotionid from Dto if existed
             Guid actualPromotionId = productCreate.PromotionId ?? Guid.Empty;
             // Check promotion of product is exist
-            var promotionOfProduct = _repository.PromotionRepository.GetPromotion(actualPromotionId, trackChanges: false);
+            var promotionOfProduct = await _repository.PromotionRepository.GetPromotionAsync(actualPromotionId, trackChanges: false);
             if(promotionOfProduct is null)
             {
                 productEntity.ProductPriceAfterDiscount = productEntity.ProductPrice;
@@ -66,7 +67,7 @@ namespace Service
             productEntity.UpdatedAt = DateTime.Now;
             productEntity.UpdatedBy = "Admin";
             _repository.ProductRepository.CreateProduct(categoryId, productEntity);
-            _repository.Save();
+            await _repository.SaveAsync();
 
             var ProductToReturn = _mapper.Map<ProductDto>(productEntity);
 
@@ -74,28 +75,28 @@ namespace Service
         }
 
         // Get All 
-        public IEnumerable<ProductDto> GetAllProducts(Guid categoryId, bool trackChanges)
+        public async Task<IEnumerable<ProductDto>> GetAllProductsAsync(Guid categoryId, ProductParameters productParameters, bool trackChanges)
         {
-            var category = _repository.CategoryRepository.GetCategory(categoryId, trackChanges);
+            var category = await _repository.CategoryRepository.GetCategoryAsync(categoryId, trackChanges);
             if (category is null)
             {
                 throw new CategoryNotFoundException(categoryId);
             }
 
-            var products = _repository.ProductRepository.GetAllProducts(categoryId, trackChanges);
+            var products = await _repository.ProductRepository.GetAllProductsAsync(categoryId, productParameters, trackChanges);
             var productsDto = _mapper.Map<IEnumerable<ProductDto>>(products);
             return productsDto;
         }
 
         // Get By Id
-        public ProductDto GetProduct(Guid categoryId, Guid productId, bool trackChanges)
+        public async Task<ProductDto> GetProductAsync(Guid categoryId, Guid productId, bool trackChanges)
         {
-            var category = _repository.CategoryRepository.GetCategory(categoryId, trackChanges);
+            var category = await _repository.CategoryRepository.GetCategoryAsync(categoryId, trackChanges);
             if (category is null)
             {
                 throw new CategoryNotFoundException(categoryId);
             }
-            var product = _repository.ProductRepository.GetProduct(categoryId, productId, trackChanges);
+            var product = await _repository.ProductRepository.GetProductAsync(categoryId, productId, trackChanges);
             if (product is null)
             {
                 throw new ProductNotFoundException(productId);
@@ -104,14 +105,14 @@ namespace Service
             return productDto;
         }
 
-        public void UpdateProduct(Guid categoryId, Guid productId, ProductUpdateCreateDto productUpdate, bool categoryTrachkChanges, bool productTrachChages)
+        public async Task UpdateProductAsync(Guid categoryId, Guid productId, ProductUpdateCreateDto productUpdate, bool categoryTrachkChanges, bool productTrachChages)
         {
-            var category = _repository.CategoryRepository.GetCategory(categoryId, categoryTrachkChanges);
+            var category = await _repository.CategoryRepository.GetCategoryAsync(categoryId, categoryTrachkChanges);
             if (category is null)
             {
                 throw new CategoryNotFoundException(categoryId);
             }
-            var productEntity = _repository.ProductRepository.GetProduct(categoryId, productId, productTrachChages);
+            var productEntity = await _repository.ProductRepository.GetProductAsync(categoryId, productId, productTrachChages);
 
             var image = productEntity.Image;
 
@@ -131,7 +132,7 @@ namespace Service
             productEntity.UpdatedAt = DateTime.Now;
             productEntity.UpdatedBy = "Admin";
             _mapper.Map(productUpdate, productEntity);
-            _repository.Save();
+            await _repository.SaveAsync();
         }
     }
 }

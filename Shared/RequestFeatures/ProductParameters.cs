@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Contract
+namespace Shared.RequestFeatures
 {
-    public interface IWebRootPathProvider
+    public class ProductParameters : RequestParameters
     {
-        string GetRootPath();
+
     }
 }

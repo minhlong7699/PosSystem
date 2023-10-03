@@ -71,7 +71,10 @@ namespace Repository
         public IUserRoleRepository UserRoleRepository => _userRoleRepository.Value;
 
 
-        public void Save() => _repositoryContext.SaveChanges();
 
+        public async Task SaveAsync()
+        {
+            await _repositoryContext.SaveChangesAsync();
+        }
     }
 }

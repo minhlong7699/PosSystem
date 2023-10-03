@@ -25,16 +25,16 @@ namespace Service
             _mapper = mapper;
         }
 
-        public IEnumerable<PromotionDto> GetAllPromotions(bool trackChanges)
+        public async Task<IEnumerable<PromotionDto>> GetAllPromotionsAsync(bool trackChanges)
         {
-            var promotions = _repository.PromotionRepository.GetAllPromotions(trackChanges);
+            var promotions = await _repository.PromotionRepository.GetAllPromotionsAsync(trackChanges);
             var promotionDto = _mapper.Map<IEnumerable<PromotionDto>>(promotions);
             return promotionDto;
         }
 
-        public PromotionDto GetPromotion(Guid promotionId, bool trackChanges)
+        public async Task<PromotionDto> GetPromotionAsync(Guid promotionId, bool trackChanges)
         {
-            var promotion = _repository.PromotionRepository.GetPromotion(promotionId, trackChanges);
+            var promotion = await _repository.PromotionRepository.GetPromotionAsync(promotionId, trackChanges);
             if (promotion is null)
             {
                 throw new PromotionNotFoundException(promotionId);

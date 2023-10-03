@@ -23,17 +23,17 @@ namespace Service
 
 
 
-        public IEnumerable<CategoryDto> GetAllCategories(bool trackChanges)
+        public async Task<IEnumerable<CategoryDto>> GetAllCategoriesAsync(bool trackChanges)
         {
 
-            var categories = _repository.CategoryRepository.GetAllCategories(trackChanges);
+            var categories = await _repository.CategoryRepository.GetAllCategoriesAsync(trackChanges);
             var categoriesDto = _mapper.Map<IEnumerable<CategoryDto>>(categories);
             return categoriesDto;
         }
 
-        public CategoryDto GetCategory(Guid categoryId, bool trackChanges)
+        public async Task<CategoryDto> GetCategoryAsync(Guid categoryId, bool trackChanges)
         {
-            var category = _repository.CategoryRepository.GetCategory(categoryId, trackChanges);
+            var category = await _repository.CategoryRepository.GetCategoryAsync(categoryId, trackChanges);
             if (category is null)
             {
                 throw new CategoryNotFoundException(categoryId);
@@ -43,7 +43,7 @@ namespace Service
         }
 
 
-        public CategoryDto CreateCategory(CategoryUpdateCreateDto category)
+        public async Task<CategoryDto> CreateCategoryAsync(CategoryUpdateCreateDto category)
         {
             var categoryEntity = _mapper.Map<Category>(category);
             categoryEntity.CreatedAt = DateTime.Now;
@@ -51,23 +51,23 @@ namespace Service
             categoryEntity.UpdatedAt = DateTime.Now;
             categoryEntity.UpdatedBy = "Admin";
             _repository.CategoryRepository.CreateCategory(categoryEntity);
-            _repository.Save();
+            await _repository.SaveAsync();
 
             var CategoryToReturn = _mapper.Map<CategoryDto>(categoryEntity);
             return CategoryToReturn;
             
         }
 
-        public void UpdateCategory(Guid categoryId, CategoryUpdateCreateDto categoryUpdate, bool trackChanges)
+        public async Task UpdateCategoryAsync(Guid categoryId, CategoryUpdateCreateDto categoryUpdate, bool trackChanges)
         {
-            var categoryEntity = _repository.CategoryRepository.GetCategory(categoryId, trackChanges);
+            var categoryEntity = await _repository.CategoryRepository.GetCategoryAsync(categoryId, trackChanges);
             if(categoryEntity is null)
             {
                 throw new CategoryNotFoundException(categoryId);
             }
 
             _mapper.Map(categoryUpdate, categoryEntity);
-            _repository.Save();
+            await _repository.SaveAsync();
         }
     }
 }

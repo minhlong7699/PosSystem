@@ -1,5 +1,6 @@
 ﻿using Contract;
 using Entity.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,17 +15,17 @@ namespace Repository
         {
         }
 
-        public IEnumerable<Supplier> GetAllSuppliers(bool trackChanges)
+        public async Task<IEnumerable<Supplier>> GetAllSuppliersAsync(bool trackChanges)
         {
-            return FindAll(trackChanges)
+            return await FindAll(trackChanges)
                 .OrderBy(x => x.SupplierName)
-                .ToList();
+                .ToListAsync();
         }
 
-        public Supplier GetSupplier(Guid? supplierId, bool trackChanges)
+        public async Task<Supplier> GetSupplierAsync(Guid? supplierId, bool trackChanges)
         {
-            return FindByConditon(x => x.SupplierId.Equals(supplierId), trackChanges)
-                .SingleOrDefault();
+            return await FindByConditon(x => x.SupplierId.Equals(supplierId), trackChanges)
+                .SingleOrDefaultAsync();
         }
     }
 }

@@ -9,8 +9,8 @@ namespace Contract
 {
     public interface ISupplierRepository
     {
-        IEnumerable<Supplier> GetAllSuppliers(bool trackChanges);
+        Task<IEnumerable<Supplier>> GetAllSuppliersAsync(bool trackChanges);
 
-        Supplier GetSupplier(Guid? supplierId, bool trackChanges);
+        Task<Supplier> GetSupplierAsync(Guid? supplierId, bool trackChanges);
     }
 }

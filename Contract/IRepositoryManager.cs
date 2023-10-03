@@ -21,6 +21,6 @@ namespace Contract
         IUserAuthenticationRepository UserAuthenticationRepository { get; }
         IUserRepository UserRepository { get; }
         IUserRoleRepository UserRoleRepository { get; }
-        void Save();
+        Task SaveAsync();
     }
 }

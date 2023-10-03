@@ -10,13 +10,13 @@ namespace Contract.Service
 {
     public interface ICategoryService
     {
-        IEnumerable<CategoryDto> GetAllCategories(bool trackChanges);
+        Task<IEnumerable<CategoryDto>> GetAllCategoriesAsync(bool trackChanges);
 
-        CategoryDto GetCategory(Guid categoryId, bool trackChanges);
+        Task<CategoryDto> GetCategoryAsync(Guid categoryId, bool trackChanges);
 
-        CategoryDto CreateCategory(CategoryUpdateCreateDto category);
+        Task<CategoryDto> CreateCategoryAsync(CategoryUpdateCreateDto category);
 
-        void UpdateCategory(Guid categoryId, CategoryUpdateCreateDto categoryUpdate, bool trackChanges);
+        Task UpdateCategoryAsync(Guid categoryId, CategoryUpdateCreateDto categoryUpdate, bool trackChanges);
 
     }
 }

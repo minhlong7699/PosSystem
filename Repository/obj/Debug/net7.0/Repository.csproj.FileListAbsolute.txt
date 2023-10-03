@@ -17,3 +17,5 @@ C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Repository\obj\Deb
 C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Repository\obj\Debug\net7.0\Repository.pdb
 C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Repository\obj\Debug\net7.0\Repository.genruntimeconfig.cache
 C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Repository\obj\Debug\net7.0\ref\Repository.dll
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Repository\bin\Debug\net7.0\Shared.dll
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Repository\bin\Debug\net7.0\Shared.pdb

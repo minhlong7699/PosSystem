@@ -1,5 +1,7 @@
 ﻿using Contract;
 using Entity.Models;
+using Microsoft.EntityFrameworkCore;
+using Shared.RequestFeatures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,14 +22,20 @@ namespace Repository
             Create(product);
         }
 
-        public IEnumerable<Product> GetAllProducts(Guid categoryId, bool trackChanges)
+        public async Task<IEnumerable<Product>> GetAllProductsAsync(Guid categoryId, ProductParameters productParameters, bool trackChanges)
         {
-            return FindByConditon(e => e.CategoryId.Equals(categoryId), trackChanges).OrderBy(e => e.ProductName).ToList();
+            return await FindByConditon(
+                e => e.CategoryId.Equals(categoryId),
+                trackChanges).OrderBy(e => e.ProductName)
+                .Skip((productParameters.pageNumber - 1) * productParameters.pageSize)
+                .Take(productParameters.pageSize)
+                .ToListAsync();
         }
 
-        public Product GetProduct(Guid categoryId, Guid productId, bool trackChanges)
+
+        public async Task<Product> GetProductAsync(Guid categoryId, Guid productId, bool trackChanges)
         {
-            return FindByConditon(e => e.CategoryId.Equals(categoryId) && e.ProductId.Equals(productId), trackChanges).SingleOrDefault();
+            return await FindByConditon(e => e.CategoryId.Equals(categoryId) && e.ProductId.Equals(productId), trackChanges).SingleOrDefaultAsync();
         }
 
     }

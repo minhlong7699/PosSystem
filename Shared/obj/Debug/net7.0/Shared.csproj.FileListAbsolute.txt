@@ -10,8 +10,3 @@ C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Shared\obj\Debug\n
 C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Shared\obj\Debug\net7.0\refint\Shared.dll
 C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Shared\obj\Debug\net7.0\Shared.pdb
 C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Shared\obj\Debug\net7.0\ref\Shared.dll
-C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Shared\bin\Debug\net7.0\Contract.dll
-C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Shared\bin\Debug\net7.0\Entity.dll
-C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Shared\bin\Debug\net7.0\Contract.pdb
-C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Shared\bin\Debug\net7.0\Entity.pdb
-C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Shared\obj\Debug\net7.0\Shared.csproj.CopyComplete

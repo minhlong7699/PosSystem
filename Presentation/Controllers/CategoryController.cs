@@ -15,35 +15,33 @@ namespace Presentation.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetCategories()
+        public async Task<IActionResult> GetCategories()
         {
-            var categories = _service.CategoryService.GetAllCategories(trackChanges: false);
+            var categories = await _service.CategoryService.GetAllCategoriesAsync(trackChanges: false);
             return Ok(categories);
         }
 
         [HttpGet("{id:guid}", Name = "CategoryById")]
-        public IActionResult GetCategory(Guid id)
+        public async Task<IActionResult> GetCategory(Guid id)
         {
-            var category = _service.CategoryService.GetCategory(id, trackChanges: false);
+            var category = await _service.CategoryService.GetCategoryAsync(id, trackChanges: false);
             return Ok(category);
         }
 
         [HttpPost]
-        public IActionResult CreateCategory([FromBody] CategoryUpdateCreateDto categorydto)
+        public async Task<IActionResult> CreateCategory([FromBody] CategoryUpdateCreateDto categorydto)
         {
-            if (categorydto is null)
-            {
+            if (categorydto is null)         
                 return BadRequest("CategoryUpdateCreateDto object is null");
-            }
 
-            var createdCategory = _service.CategoryService.CreateCategory(categorydto);
+            var createdCategory = await _service.CategoryService.CreateCategoryAsync(categorydto);
             return CreatedAtRoute("CategoryById", new { id = createdCategory.CategoryId }, createdCategory);
         }
 
         [HttpPut("{categoryId:guid}")]
-        public IActionResult UpdateCategory(Guid categoryId, [FromForm]CategoryUpdateCreateDto categoryUpdate)
+        public async Task<IActionResult> UpdateCategory(Guid categoryId, [FromBody]CategoryUpdateCreateDto categoryUpdate)
         {
-            _service.CategoryService.UpdateCategory(categoryId, categoryUpdate, trackChanges: true);
+            await _service.CategoryService.UpdateCategoryAsync(categoryId, categoryUpdate, trackChanges: true);
             return NoContent();
         }
     }

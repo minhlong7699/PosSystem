@@ -10,11 +10,11 @@ namespace Shared.ExtensionServices
 {
     public class UploadImageService : IUploadImageService
     {
-        private readonly IWebRootPathProvider _webRootPathProvider;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public UploadImageService(IWebRootPathProvider webRootPathProvider)
+        public UploadImageService(IWebHostEnvironment webHostEnvironment)
         {
-            _webRootPathProvider = webRootPathProvider;
+            _webHostEnvironment = webHostEnvironment;
         }
         public string GetImageUrl(IFormFile file, string folder)
         {
@@ -23,7 +23,7 @@ namespace Shared.ExtensionServices
                 var uniqueName = CreateUniqueFileName(file.FileName);
                 // create Url Path
 
-                var folderPath = Path.Combine(_webRootPathProvider.GetRootPath(),"Images", folder);
+                var folderPath = Path.Combine(_webHostEnvironment.WebRootPath,"Images", folder);
 
                 if (!Directory.Exists(folderPath))
                 {

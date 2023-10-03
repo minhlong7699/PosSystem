@@ -20,16 +20,16 @@ namespace Presentation.Controllers
 
 
         [HttpGet]
-        public IActionResult GetSuppliers()
+        public async Task<IActionResult> GetSuppliers()
         {
-            var suppliers = _service.SupplierService.GetAllSuppliers(trackChanges: false);
+            var suppliers = await _service.SupplierService.GetAllSuppliersAsync(trackChanges: false);
             return Ok(suppliers);
         }
 
         [HttpGet("{supplierId:guid}")]
-        public IActionResult GetSupplier(Guid supplierId)
+        public async Task<IActionResult> GetSupplier(Guid supplierId)
         {
-            var supplier = _service.SupplierService.GetSupplier(supplierId ,trackChanges: false);
+            var supplier = await _service.SupplierService.GetSupplierAsync(supplierId ,trackChanges: false);
             return Ok(supplier);
         }
     }

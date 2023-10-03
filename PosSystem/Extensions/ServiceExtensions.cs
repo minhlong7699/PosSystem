@@ -40,9 +40,6 @@ namespace PosSystem.Extensions
             services.AddDbContext<RepositoryContext>(opts =>
             opts.UseSqlServer(configuration.GetConnectionString("Db")));
 
-        // WebRootProvider Configuration
-        public static void ConfigureWebRootPath(this IServiceCollection services) =>
-            services.AddScoped<IWebRootPathProvider, WebRootPathProvider>();
 
         // UploadImage Configuration
         public static void ConfigureUploadImageService(this IServiceCollection services) =>

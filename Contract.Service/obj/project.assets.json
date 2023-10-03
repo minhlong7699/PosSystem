@@ -57,20 +57,6 @@
           }
         }
       },
-      "Contract/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v7.0",
-        "dependencies": {
-          "Entity": "1.0.0",
-          "Microsoft.AspNetCore.Http.Features": "2.2.0"
-        },
-        "compile": {
-          "bin/placeholder/Contract.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Contract.dll": {}
-        }
-      },
       "Entity/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
@@ -85,7 +71,6 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
-          "Contract": "1.0.0",
           "Microsoft.AspNetCore.Http.Features": "2.2.0"
         },
         "compile": {
@@ -173,11 +158,6 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
-    },
-    "Contract/1.0.0": {
-      "type": "project",
-      "path": "../Contract/Contract.csproj",
-      "msbuildProject": "../Contract/Contract.csproj"
     },
     "Entity/1.0.0": {
       "type": "project",

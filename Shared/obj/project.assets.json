@@ -56,30 +56,6 @@
             "related": ".xml"
           }
         }
-      },
-      "Contract/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v7.0",
-        "dependencies": {
-          "Entity": "1.0.0",
-          "Microsoft.AspNetCore.Http.Features": "2.2.0"
-        },
-        "compile": {
-          "bin/placeholder/Contract.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Contract.dll": {}
-        }
-      },
-      "Entity/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v7.0",
-        "compile": {
-          "bin/placeholder/Entity.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Entity.dll": {}
-        }
       }
     }
   },
@@ -159,21 +135,10 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
-    },
-    "Contract/1.0.0": {
-      "type": "project",
-      "path": "../Contract/Contract.csproj",
-      "msbuildProject": "../Contract/Contract.csproj"
-    },
-    "Entity/1.0.0": {
-      "type": "project",
-      "path": "../Entity/Entity.csproj",
-      "msbuildProject": "../Entity/Entity.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net7.0": [
-      "Contract >= 1.0.0",
       "Microsoft.AspNetCore.Http.Features >= 2.2.0"
     ]
   },
@@ -203,11 +168,7 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "projectReferences": {
-            "C:\\Users\\duong\\OneDrive\\Máy tính\\Project_practice\\PosSystem\\Contract\\Contract.csproj": {
-              "projectPath": "C:\\Users\\duong\\OneDrive\\Máy tính\\Project_practice\\PosSystem\\Contract\\Contract.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {

@@ -1,4 +1,5 @@
 ﻿using Shared.DataTransferObjects;
+using Shared.RequestFeatures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,12 @@ namespace Contract.Service
 {
     public interface IProductService
     {
-        IEnumerable<ProductDto> GetAllProducts(Guid categoryId, bool trackChanges);
+        Task<IEnumerable<ProductDto>> GetAllProductsAsync(Guid categoryId, ProductParameters productParameters, bool trackChanges);
 
-        ProductDto GetProduct(Guid categoryId, Guid productId, bool trackChanges);
+        Task<ProductDto> GetProductAsync(Guid categoryId, Guid productId, bool trackChanges);
 
-        ProductDto CreateProduct(Guid categoryId, ProductUpdateCreateDto productCreate, bool trackChanges);
+        Task<ProductDto> CreateProductAsync(Guid categoryId, ProductUpdateCreateDto productCreate, bool trackChanges);
 
-        void UpdateProduct(Guid categoryId, Guid productId, ProductUpdateCreateDto productUpdate, bool categoryTrachkChanges, bool productTrachChages);
+        Task UpdateProductAsync(Guid categoryId, Guid productId, ProductUpdateCreateDto productUpdate, bool categoryTrachkChanges, bool productTrachChages);
     }
 }

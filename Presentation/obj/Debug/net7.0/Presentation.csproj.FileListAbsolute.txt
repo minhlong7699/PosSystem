@@ -17,5 +17,3 @@ C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Presentation\bin\D
 C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Presentation\bin\Debug\net7.0\Entity.pdb
 C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Presentation\bin\Debug\net7.0\Shared.dll
 C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Presentation\bin\Debug\net7.0\Shared.pdb
-C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Presentation\bin\Debug\net7.0\Contract.dll
-C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Presentation\bin\Debug\net7.0\Contract.pdb

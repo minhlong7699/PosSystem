@@ -92,6 +92,9 @@
             "projectReferences": {
               "C:\\Users\\duong\\OneDrive\\Máy tính\\Project_practice\\PosSystem\\Entity\\Entity.csproj": {
                 "projectPath": "C:\\Users\\duong\\OneDrive\\Máy tính\\Project_practice\\PosSystem\\Entity\\Entity.csproj"
+              },
+              "C:\\Users\\duong\\OneDrive\\Máy tính\\Project_practice\\PosSystem\\Shared\\Shared.csproj": {
+                "projectPath": "C:\\Users\\duong\\OneDrive\\Máy tính\\Project_practice\\PosSystem\\Shared\\Shared.csproj"
               }
             }
           }
@@ -284,11 +287,7 @@
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
-            "projectReferences": {
-              "C:\\Users\\duong\\OneDrive\\Máy tính\\Project_practice\\PosSystem\\Contract\\Contract.csproj": {
-                "projectPath": "C:\\Users\\duong\\OneDrive\\Máy tính\\Project_practice\\PosSystem\\Contract\\Contract.csproj"
-              }
-            }
+            "projectReferences": {}
           }
         },
         "warningProperties": {

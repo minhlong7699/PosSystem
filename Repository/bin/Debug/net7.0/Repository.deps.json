@@ -626,7 +626,8 @@
       "Contract/1.0.0": {
         "dependencies": {
           "Entity": "1.0.0",
-          "Microsoft.AspNetCore.Http.Features": "2.2.0"
+          "Microsoft.AspNetCore.Http.Features": "2.2.0",
+          "Shared": "1.0.0"
         },
         "runtime": {
           "Contract.dll": {}
@@ -635,6 +636,14 @@
       "Entity/1.0.0": {
         "runtime": {
           "Entity.dll": {}
+        }
+      },
+      "Shared/1.0.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Http.Features": "2.2.0"
+        },
+        "runtime": {
+          "Shared.dll": {}
         }
       }
     }
@@ -1078,6 +1087,11 @@
       "sha512": ""
     },
     "Entity/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Shared/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -1,5 +1,6 @@
 ﻿using Contract;
 using Entity.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,16 +16,16 @@ namespace Repository
         }
 
 
-        public IEnumerable<Category> GetAllCategories(bool trackChanges)
+        public async Task<IEnumerable<Category>> GetAllCategoriesAsync(bool trackChanges)
         {
-            return FindAll(trackChanges)
+            return await FindAll(trackChanges)
                 .OrderBy(c => c.CategoryName)
-                .ToList();
+                .ToListAsync();
         }
 
-        public Category GetCategory(Guid categoryId, bool trackChanges)
+        public async Task<Category> GetCategoryAsync(Guid categoryId, bool trackChanges)
         {
-            return FindByConditon(c => c.CategoryId.Equals(categoryId), trackChanges).SingleOrDefault();
+            return await FindByConditon(c => c.CategoryId.Equals(categoryId), trackChanges).SingleOrDefaultAsync();
         }
 
         public void CreateCategory(Category category)

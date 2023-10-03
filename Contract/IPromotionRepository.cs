@@ -9,7 +9,7 @@ namespace Contract
 {
     public interface IPromotionRepository
     {
-        IEnumerable<Promotion> GetAllPromotions(bool trackChanges);
-        Promotion GetPromotion(Guid promotionId ,bool trackChanges);
+        Task<IEnumerable<Promotion>> GetAllPromotionsAsync(bool trackChanges);
+        Task<Promotion> GetPromotionAsync(Guid promotionId ,bool trackChanges);
     }
 }

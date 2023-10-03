@@ -13,3 +13,5 @@ C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract\obj\Debug
 C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract\obj\Debug\net7.0\refint\Contract.dll
 C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract\obj\Debug\net7.0\Contract.pdb
 C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract\obj\Debug\net7.0\ref\Contract.dll
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract\bin\Debug\net7.0\Shared.dll
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\Contract\bin\Debug\net7.0\Shared.pdb

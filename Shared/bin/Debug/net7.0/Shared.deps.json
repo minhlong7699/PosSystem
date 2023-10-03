@@ -8,7 +8,6 @@
     ".NETCoreApp,Version=v7.0": {
       "Shared/1.0.0": {
         "dependencies": {
-          "Contract": "1.0.0",
           "Microsoft.AspNetCore.Http.Features": "2.2.0"
         },
         "runtime": {
@@ -39,21 +38,7 @@
         }
       },
       "System.Memory/4.5.1": {},
-      "System.Runtime.CompilerServices.Unsafe/4.5.1": {},
-      "Contract/1.0.0": {
-        "dependencies": {
-          "Entity": "1.0.0",
-          "Microsoft.AspNetCore.Http.Features": "2.2.0"
-        },
-        "runtime": {
-          "Contract.dll": {}
-        }
-      },
-      "Entity/1.0.0": {
-        "runtime": {
-          "Entity.dll": {}
-        }
-      }
+      "System.Runtime.CompilerServices.Unsafe/4.5.1": {}
     }
   },
   "libraries": {
@@ -89,16 +74,6 @@
       "sha512": "sha512-Zh8t8oqolRaFa9vmOZfdQm/qKejdqz0J9kr7o2Fu0vPeoH3BL1EOXipKWwkWtLT1JPzjByrF19fGuFlNbmPpiw==",
       "path": "system.runtime.compilerservices.unsafe/4.5.1",
       "hashPath": "system.runtime.compilerservices.unsafe.4.5.1.nupkg.sha512"
-    },
-    "Contract/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Entity/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
     }
   }
 }

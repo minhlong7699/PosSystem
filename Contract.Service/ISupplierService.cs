@@ -9,8 +9,8 @@ namespace Contract.Service
 {
     public interface ISupplierService
     {
-        IEnumerable<SupllierDto> GetAllSuppliers(bool trackChanges);
+        Task<IEnumerable<SupllierDto>> GetAllSuppliersAsync(bool trackChanges);
 
-        SupllierDto GetSupplier(Guid supplierId, bool trackChanges);
+        Task<SupllierDto> GetSupplierAsync(Guid supplierId, bool trackChanges);
     }
 }
