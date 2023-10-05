@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Repository
 {
-    public sealed class RepositoryManager : IRepositoryManager
+    public sealed class RepositoryManager : IRepositoryManager, IDisposable
     {
         private readonly RepositoryContext _repositoryContext;
 
@@ -71,10 +71,14 @@ namespace Repository
         public IUserRoleRepository UserRoleRepository => _userRoleRepository.Value;
 
 
-
         public async Task SaveAsync()
         {
             await _repositoryContext.SaveChangesAsync();
+        }
+
+        public void Dispose()
+        {
+            _repositoryContext.Dispose();
         }
     }
 }

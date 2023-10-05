@@ -24,6 +24,8 @@ namespace PosSystem.Extensions
                     {
                         context.Response.StatusCode = contextFeature.Error switch
                         {
+                            ConflictExeception => StatusCodes.Status409Conflict,
+                            BadRequestException => StatusCodes.Status400BadRequest, 
                             NotFoundException => StatusCodes.Status404NotFound,
                             _ => StatusCodes.Status500InternalServerError
                         };

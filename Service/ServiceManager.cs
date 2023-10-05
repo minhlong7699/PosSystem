@@ -39,7 +39,7 @@ namespace Service
             _tableService = new Lazy<ITableService>(() => new TableService(repositoryManager, logger , mapper));
             _taxService = new Lazy<ITaxService>(() => new TaxService(repositoryManager, logger , mapper));
             _userAuthenticationService = new Lazy<IUserAuthenticationService>(() => new UserAuthenticationService(repositoryManager, logger , mapper));
-            _userService = new Lazy<IUserService>(() => new UserService(repositoryManager, logger , mapper));
+            _userService = new Lazy<IUserService>(() => new UserService(repositoryManager, logger , mapper, uploadImageService));
             _userRoleService = new Lazy<IUserRoleService>(() => new UserRoleService(repositoryManager, logger , mapper));
         }
         public ICategoryService CategoryService => _categoryService.Value;

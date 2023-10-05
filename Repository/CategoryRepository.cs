@@ -1,6 +1,7 @@
 ﻿using Contract;
 using Entity.Models;
 using Microsoft.EntityFrameworkCore;
+using Shared.RequestFeatures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,11 +17,13 @@ namespace Repository
         }
 
 
-        public async Task<IEnumerable<Category>> GetAllCategoriesAsync(bool trackChanges)
+        public async Task<PagedList<Category>> GetAllCategoriesAsync(CategoryParamaters categoryParamaters, bool trackChanges)
         {
-            return await FindAll(trackChanges)
+            var category = await FindAll(trackChanges)
                 .OrderBy(c => c.CategoryName)
                 .ToListAsync();
+
+            return PagedList<Category>.ToPagedList(category, categoryParamaters.pageNumber, categoryParamaters.pageSize);
         }
 
         public async Task<Category> GetCategoryAsync(Guid categoryId, bool trackChanges)
@@ -32,6 +35,5 @@ namespace Repository
         {
             Create(category);
         }
-
     }
 }

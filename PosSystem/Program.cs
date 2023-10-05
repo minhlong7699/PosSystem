@@ -1,4 +1,7 @@
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using PosSystem.Extensions;
 using Serilog;
 
@@ -7,6 +10,12 @@ var builder = WebApplication.CreateBuilder(args);
 // SeriLogging Service
 builder.Host.UseSerilog((context, configuration) =>
     configuration.ReadFrom.Configuration(context.Configuration));
+NewtonsoftJsonPatchInputFormatter GetJsonPatchInputFormatter() =>
+new ServiceCollection().AddLogging().AddMvc().AddNewtonsoftJson()
+.Services.BuildServiceProvider()
+.GetRequiredService<IOptions<MvcOptions>>().Value.InputFormatters
+.OfType<NewtonsoftJsonPatchInputFormatter>().First();
+
 
 // Add services to the container.
 builder.Services.ConfigureCors();
@@ -16,7 +25,12 @@ builder.Services.ConfigureServiceManager(); // Service DI
 builder.Services.ConfigureSqlContext(builder.Configuration); // DbContext
 builder.Services.ConfigureUploadImageService(); // ImageUpload
 
-builder.Services.AddControllers()
+builder.Services.AddControllers(config => {
+    config.RespectBrowserAcceptHeader = true;
+    config.ReturnHttpNotAcceptable = true;
+    config.InputFormatters.Insert(0, GetJsonPatchInputFormatter());
+}).AddXmlDataContractSerializerFormatters()
+
 .AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly); // Config Controller Assembly
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

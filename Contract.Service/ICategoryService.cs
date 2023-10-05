@@ -1,5 +1,6 @@
 ﻿using Entity.Models;
 using Shared.DataTransferObjects;
+using Shared.RequestFeatures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace Contract.Service
 {
     public interface ICategoryService
     {
-        Task<IEnumerable<CategoryDto>> GetAllCategoriesAsync(bool trackChanges);
+        Task<(IEnumerable<CategoryDto> categories , MetaData metaData)> GetAllCategoriesAsync(CategoryParamaters categoryParamaters ,bool trackChanges);
 
         Task<CategoryDto> GetCategoryAsync(Guid categoryId, bool trackChanges);
 

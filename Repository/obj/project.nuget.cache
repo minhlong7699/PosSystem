@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "bm8VuiUmvTjLfH6cC+kWzM82DiVwFc3KjPTvtwlhT4XCaKhg08CX1wxWjzeZyzW2/o8iGR6Out4IP6ktFNOBUA==",
+  "dgSpecHash": "Guki0yG9Xo5A/wgUdf/xRXNPmvqFSlrE+/vTUEHV3SI4ZvQO6NK+/4eMK3R9SwrF7zSaep9Oo3MDMwM9f9upRQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\duong\\OneDrive\\Máy tính\\Project_practice\\PosSystem\\Repository\\Repository.csproj",
   "expectedPackageFiles": [
@@ -48,6 +48,7 @@
     "C:\\Users\\duong\\.nuget\\packages\\system.drawing.common\\6.0.0\\system.drawing.common.6.0.0.nupkg.sha512",
     "C:\\Users\\duong\\.nuget\\packages\\system.formats.asn1\\5.0.0\\system.formats.asn1.5.0.0.nupkg.sha512",
     "C:\\Users\\duong\\.nuget\\packages\\system.identitymodel.tokens.jwt\\6.24.0\\system.identitymodel.tokens.jwt.6.24.0.nupkg.sha512",
+    "C:\\Users\\duong\\.nuget\\packages\\system.linq.dynamic.core\\1.3.5\\system.linq.dynamic.core.1.3.5.nupkg.sha512",
     "C:\\Users\\duong\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",
     "C:\\Users\\duong\\.nuget\\packages\\system.memory.data\\1.0.2\\system.memory.data.1.0.2.nupkg.sha512",
     "C:\\Users\\duong\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",

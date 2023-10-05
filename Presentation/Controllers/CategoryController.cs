@@ -1,6 +1,7 @@
 ﻿using Contract.Service;
 using Microsoft.AspNetCore.Mvc;
 using Shared.DataTransferObjects;
+using Shared.RequestFeatures;
 
 namespace Presentation.Controllers
 {
@@ -15,10 +16,11 @@ namespace Presentation.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetCategories()
+        public async Task<IActionResult> GetCategories([FromQuery]CategoryParamaters categoryParamaters)
         {
-            var categories = await _service.CategoryService.GetAllCategoriesAsync(trackChanges: false);
-            return Ok(categories);
+            var pagedResult = await _service.CategoryService.GetAllCategoriesAsync(categoryParamaters ,trackChanges: false);
+            Response.Headers.Add("X-Pagination", System.Text.Json.JsonSerializer.Serialize(pagedResult.metaData));
+            return Ok(pagedResult.categories);
         }
 
         [HttpGet("{id:guid}", Name = "CategoryById")]

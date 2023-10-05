@@ -13,5 +13,7 @@ namespace Shared.RequestFeatures
         private int _pageSize = 10;
 
         public int pageSize { get { return _pageSize; } set { _pageSize = (value > maxPage) ? maxPage : value; } }
+
+        public string? orderBy { get; set; }
     }
 }

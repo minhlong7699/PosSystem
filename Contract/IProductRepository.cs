@@ -10,7 +10,7 @@ namespace Contract
 {
     public interface IProductRepository
     {
-        Task<IEnumerable<Product>> GetAllProductsAsync(Guid categoryId, ProductParameters productParameters , bool trackChanges);
+        Task<PagedList<Product>> GetAllProductsAsync(Guid categoryId, ProductParameters productParameters , bool trackChanges);
         Task<Product> GetProductAsync( Guid categoryId ,Guid productId, bool trackChanges);
         void CreateProduct(Guid categoryId, Product product);
     }

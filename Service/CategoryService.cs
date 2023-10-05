@@ -5,6 +5,7 @@ using Entity.Exceptions;
 using Entity.Models;
 using Serilog;
 using Shared.DataTransferObjects;
+using Shared.RequestFeatures;
 
 namespace Service
 {
@@ -22,15 +23,17 @@ namespace Service
         }
 
 
-
-        public async Task<IEnumerable<CategoryDto>> GetAllCategoriesAsync(bool trackChanges)
+        // Get All Categories
+        public async Task<(IEnumerable<CategoryDto> categories , MetaData metaData)> GetAllCategoriesAsync(CategoryParamaters categoryParamaters, bool trackChanges)
         {
-
-            var categories = await _repository.CategoryRepository.GetAllCategoriesAsync(trackChanges);
-            var categoriesDto = _mapper.Map<IEnumerable<CategoryDto>>(categories);
-            return categoriesDto;
+            var categoryMetadata = await _repository.CategoryRepository.GetAllCategoriesAsync(categoryParamaters,trackChanges);
+            var categoriesDto = _mapper.Map<IEnumerable<CategoryDto>>(categoryMetadata);
+            return (categories : categoriesDto, metaData: categoryMetadata.MetaData);
         }
 
+
+
+        // Get category by Id
         public async Task<CategoryDto> GetCategoryAsync(Guid categoryId, bool trackChanges)
         {
             var category = await _repository.CategoryRepository.GetCategoryAsync(categoryId, trackChanges);
@@ -43,6 +46,7 @@ namespace Service
         }
 
 
+        // Create new category
         public async Task<CategoryDto> CreateCategoryAsync(CategoryUpdateCreateDto category)
         {
             var categoryEntity = _mapper.Map<Category>(category);
@@ -58,6 +62,8 @@ namespace Service
             
         }
 
+
+        // Update category
         public async Task UpdateCategoryAsync(Guid categoryId, CategoryUpdateCreateDto categoryUpdate, bool trackChanges)
         {
             var categoryEntity = await _repository.CategoryRepository.GetCategoryAsync(categoryId, trackChanges);
