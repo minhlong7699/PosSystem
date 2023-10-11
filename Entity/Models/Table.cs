@@ -22,7 +22,7 @@ namespace Entity.Models
 
         public string? TableDescription { get; set; }
 
-        public bool? IsOccupied { get; set; }
+        public bool? IsOccupied { get; set; } = false;
 
         public virtual ICollection<Order>? Orders { get; set; } = new List<Order>();
     }

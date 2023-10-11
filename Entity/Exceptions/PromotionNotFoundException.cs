@@ -9,7 +9,7 @@ namespace Entity.Exceptions
 {
     public class PromotionNotFoundException : NotFoundException
     {
-        public PromotionNotFoundException(Guid promotionId) : base($"Promotion with id: {promotionId} doesn't exist in the database.")
+        public PromotionNotFoundException(Guid? promotionId) : base($"Promotion with id: {promotionId} doesn't exist in the database.")
         {
         }
     }

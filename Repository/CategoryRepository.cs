@@ -17,7 +17,7 @@ namespace Repository
         }
 
 
-        public async Task<PagedList<Category>> GetAllCategoriesAsync(CategoryParamaters categoryParamaters, bool trackChanges)
+        public async Task<PagedList<Category>> GetAllCategoriesAsync(CategoryParameters categoryParamaters, bool trackChanges)
         {
             var category = await FindAll(trackChanges)
                 .OrderBy(c => c.CategoryName)

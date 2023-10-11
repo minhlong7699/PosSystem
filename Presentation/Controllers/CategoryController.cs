@@ -16,7 +16,7 @@ namespace Presentation.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetCategories([FromQuery]CategoryParamaters categoryParamaters)
+        public async Task<IActionResult> GetCategories([FromQuery]CategoryParameters categoryParamaters)
         {
             var pagedResult = await _service.CategoryService.GetAllCategoriesAsync(categoryParamaters ,trackChanges: false);
             Response.Headers.Add("X-Pagination", System.Text.Json.JsonSerializer.Serialize(pagedResult.metaData));

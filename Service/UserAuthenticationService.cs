@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Contract;
 using Contract.Service;
+using Entity.Models;
 using Serilog;
+using Shared.DataTransferObjects.Authentication;
 using System;
 using System.Collections.Generic;
 using System.Linq;

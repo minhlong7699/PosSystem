@@ -32,16 +32,19 @@ namespace Service
         // create New User
         public async Task<UserDto> CreateUserAsync(UserUpdateCreateDto userCreate, bool trackChanges)
         {
-            var userNameIsExisted = _repository.UserRepository.IsUserExistAsync(userCreate.UserName, trackChanges);
+            var userNameIsExisted = await _repository.UserRepository.GetUserByName(userCreate.UserName);
             // Check UserName existed
-            if (userNameIsExisted is not null)
+            if (userNameIsExisted != null)
             {
                 throw new UserNameConflictException(userCreate.UserName);
             }
 
-            /* Check RoleId existed
-                Chưa làm bổ sung sau
-            */
+            // Check userRole existed
+            var userRole = _repository.UserRoleRepository.GetUserRoleAsync(userCreate.RoleId, trackChanges);
+            if (userRole is null)
+            {
+                throw new UserRoleNotFoundException(userCreate.RoleId);
+            }
 
             var userEntity = _mapper.Map<User>(userCreate);
             if(userCreate.Image is not null)
@@ -61,7 +64,7 @@ namespace Service
         }
 
         // Get All User
-        public async Task<(IEnumerable<UserDto> users, MetaData metaData)> GetAllUsersAsync(UserParamters userParamters, bool trackChanges)
+        public async Task<(IEnumerable<UserDto> users, MetaData metaData)> GetAllUsersAsync(UserParameters userParamters, bool trackChanges)
         {
             var usersMetaData = await _repository.UserRepository.GetAllUsersAsync(userParamters, trackChanges);
             var usersDto = _mapper.Map<IEnumerable<UserDto>>(usersMetaData);

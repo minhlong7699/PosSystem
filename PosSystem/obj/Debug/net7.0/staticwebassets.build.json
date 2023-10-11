@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Q22V27XBiW6bKQekITJk2zuAkKWCs4kj0VF9/YEmcsw=",
+  "Hash": "KhBtAnpVfmB3bJopMduhYSz8Cm+AKrmRrbBg13puADk=",
   "Source": "PosSystem",
   "BasePath": "_content/PosSystem",
   "Mode": "Default",
@@ -32,6 +32,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Images\\ProductImages\\ebb2d7bd-fca3-4d86-a594-ec2e78ddd1e2-img.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\duong\\OneDrive\\Máy tính\\Project_practice\\PosSystem\\PosSystem\\wwwroot\\Images\\UserImages\\e736685b-7c0e-429c-8582-9ce3be44fec6-Screenshot 2023-08-07 163045.png",
+      "SourceId": "PosSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\duong\\OneDrive\\Máy tính\\Project_practice\\PosSystem\\PosSystem\\wwwroot\\",
+      "BasePath": "_content/PosSystem",
+      "RelativePath": "Images/UserImages/e736685b-7c0e-429c-8582-9ce3be44fec6-Screenshot 2023-08-07 163045.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\UserImages\\e736685b-7c0e-429c-8582-9ce3be44fec6-Screenshot 2023-08-07 163045.png"
     }
   ]
 }

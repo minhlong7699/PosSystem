@@ -21,5 +21,7 @@ namespace Contract.Service
         IUserAuthenticationService UserAuthenticationService { get; }
         IUserService UserService { get; }
         IUserRoleService UserRoleService { get; }
+        IAuthenticationService AuthenticationService { get; }
+
     }
 }

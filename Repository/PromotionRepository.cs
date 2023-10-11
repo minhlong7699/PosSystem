@@ -20,7 +20,7 @@ namespace Repository
             return await FindAll(trackChanges).OrderBy(c => c.PromotionName).ToListAsync();
         }
 
-        public async Task<Promotion> GetPromotionAsync(Guid promotionId, bool trackChanges)
+        public async Task<Promotion> GetPromotionAsync(Guid? promotionId, bool trackChanges)
         {
             return await FindByConditon(e => e.PromotionId.Equals(promotionId), trackChanges).SingleOrDefaultAsync();
         }

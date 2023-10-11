@@ -24,6 +24,7 @@ builder.Services.ConfigureRepositoryManager(); // Repository DI
 builder.Services.ConfigureServiceManager(); // Service DI
 builder.Services.ConfigureSqlContext(builder.Configuration); // DbContext
 builder.Services.ConfigureUploadImageService(); // ImageUpload
+builder.Services.ConfigureJWT(builder.Configuration); // JWT
 
 builder.Services.AddControllers(config => {
     config.RespectBrowserAcceptHeader = true;
@@ -52,6 +53,7 @@ else
     app.UseHsts();
 }
 
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseForwardedHeaders(new ForwardedHeadersOptions
@@ -63,6 +65,8 @@ app.UseCors("CorsPolicy");
 app.UseSerilogRequestLogging();
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

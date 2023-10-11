@@ -10,7 +10,7 @@ namespace Contract.Service
 {
     public interface IUserService
     {
-        Task<(IEnumerable<UserDto> users, MetaData metaData)> GetAllUsersAsync(UserParamters userParamters, bool trackChanges);
+        Task<(IEnumerable<UserDto> users, MetaData metaData)> GetAllUsersAsync(UserParameters userParamters, bool trackChanges);
 
         Task<UserDto> GetUserAsync(Guid userId, bool trackChanges);
 

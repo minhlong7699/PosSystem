@@ -10,7 +10,7 @@ namespace Contract
 {
     public interface ICategoryRepository
     {
-        Task<PagedList<Category>> GetAllCategoriesAsync(CategoryParamaters categoryParamaters ,bool trackChanges);
+        Task<PagedList<Category>> GetAllCategoriesAsync(CategoryParameters categoryParamaters ,bool trackChanges);
         Task<Category> GetCategoryAsync(Guid categoryId, bool trackChanges);
         void CreateCategory(Category category);
     }

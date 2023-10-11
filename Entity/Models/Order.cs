@@ -17,8 +17,6 @@ namespace Entity.Models
         [Column("OrderId")]
         public Guid OrderId { get; set; }
 
-        public decimal? TotalAmount { get; set; }
-
         public string? OrderType { get; set; }
 
         public string? Status { get; set; }
@@ -35,7 +33,7 @@ namespace Entity.Models
         public virtual Payment? Payment { get; set; }
 
         [ForeignKey(nameof(Table))]
-        public Guid TableId { get; set; }
+        public Guid? TableId { get; set; }
         public virtual Table? Table { get; set; }
 
         [ForeignKey(nameof(Tax))]

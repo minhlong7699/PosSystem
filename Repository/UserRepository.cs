@@ -11,12 +11,18 @@ namespace Repository
         {
         }
 
+        public async Task<bool> CheckPasswordAsync( Guid userId ,string? password)
+        {
+            var user = await FindByConditon(x => x.UserId.Equals(userId) && x.UserPassword.Equals(password), false).SingleOrDefaultAsync();
+            return user is null ? false : true;
+        }
+
         public void CreateUser(User user)
         {
             Create(user);
         }
 
-        public async Task<PagedList<User>> GetAllUsersAsync(UserParamters userParamters, bool trackChanges)
+        public async Task<PagedList<User>> GetAllUsersAsync(UserParameters userParamters, bool trackChanges)
         {
             var users = await FindAll(trackChanges).ToListAsync();
 
@@ -30,12 +36,11 @@ namespace Repository
             return user;
         }
 
-        public async Task<bool> IsUserExistAsync(string userName, bool trackChanges)
+        public async Task<User> GetUserByName(string userName)
         {
-            var user = await FindByConditon(x => x.UserName.Equals(userName), trackChanges).SingleOrDefaultAsync();
-            if(user is null)
-                return false;
-            return true;
+            var user = await FindByConditon(x => x.UserName.Equals(userName), false).SingleOrDefaultAsync();
+            if(user is null) return null;
+            return user;
         }
     }
 }

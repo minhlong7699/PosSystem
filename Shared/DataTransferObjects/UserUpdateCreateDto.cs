@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 
 namespace Shared.DataTransferObjects
 {
-    public record UserUpdateCreateDto(Guid UserId, string UserName, string UserPassword, string FirstName, string LastName, DateTime DateOfBirth, int PhoneNumber, IFormFile Image,  string EmailAddress, Guid RoleId, bool Isactive);
+    public record UserUpdateCreateDto(string UserName, string UserPassword, string FirstName, string LastName, DateTime DateOfBirth, int PhoneNumber, IFormFile Image,  string EmailAddress, string Address, Guid RoleId, bool Isactive);
 }

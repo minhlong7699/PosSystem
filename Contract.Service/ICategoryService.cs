@@ -11,7 +11,7 @@ namespace Contract.Service
 {
     public interface ICategoryService
     {
-        Task<(IEnumerable<CategoryDto> categories , MetaData metaData)> GetAllCategoriesAsync(CategoryParamaters categoryParamaters ,bool trackChanges);
+        Task<(IEnumerable<CategoryDto> categories , MetaData metaData)> GetAllCategoriesAsync(CategoryParameters categoryParamaters ,bool trackChanges);
 
         Task<CategoryDto> GetCategoryAsync(Guid categoryId, bool trackChanges);
 

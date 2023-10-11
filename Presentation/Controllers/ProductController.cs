@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Presentation.Controllers
 {
@@ -24,6 +25,7 @@ namespace Presentation.Controllers
         {
             _service = service;
         }
+
 
         [HttpGet]
         public async Task<IActionResult> GetProducts(Guid categoryId, [FromQuery]ProductParameters productParameters)

@@ -11,11 +11,13 @@ namespace Contract
 {
     public interface IUserRepository
     {
-        Task<PagedList<User>> GetAllUsersAsync(UserParamters userParamters,bool trackChanges);
+        Task<PagedList<User>> GetAllUsersAsync(UserParameters userParamters,bool trackChanges);
         Task<User> GetUserAsync(Guid userId, bool trackChanges);
 
         void CreateUser(User user);
 
-        Task<bool> IsUserExistAsync(string userName, bool trackChanges);
+        Task<User> GetUserByName(string userName);
+
+        Task<bool> CheckPasswordAsync(Guid userId ,string? password);
     }
 }

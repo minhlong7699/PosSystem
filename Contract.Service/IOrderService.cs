@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Shared.DataTransferObjects;
+using Shared.RequestFeatures;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +10,10 @@ namespace Contract.Service
 {
     public interface IOrderService
     {
+        Task<(IEnumerable<OrderDto> orders , MetaData metaData)> GetAllOrderAsync(OrderParameters orderParameters, bool trackChanges);
+
+        Task<OrderDto> GetOrderAsync(Guid orderId, bool trackChanges);
+
+        Task<OrderDto> CreateOrderAsync(OrderCreateUpdateDto orderCreate, bool trackChanges);
     }
 }

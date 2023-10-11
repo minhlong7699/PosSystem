@@ -24,7 +24,7 @@ namespace Service
 
 
         // Get All Categories
-        public async Task<(IEnumerable<CategoryDto> categories , MetaData metaData)> GetAllCategoriesAsync(CategoryParamaters categoryParamaters, bool trackChanges)
+        public async Task<(IEnumerable<CategoryDto> categories , MetaData metaData)> GetAllCategoriesAsync(CategoryParameters categoryParamaters, bool trackChanges)
         {
             var categoryMetadata = await _repository.CategoryRepository.GetAllCategoriesAsync(categoryParamaters,trackChanges);
             var categoriesDto = _mapper.Map<IEnumerable<CategoryDto>>(categoryMetadata);

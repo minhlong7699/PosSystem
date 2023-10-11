@@ -17,7 +17,7 @@ namespace Entity.Models
         [Column("PaymentId")]
         public Guid PaymentId { get; set; }
 
-        public decimal? PaymentAmount { get; set; }
+        public string PaymentType { get; set; }
 
         public virtual ICollection<Order>? Orders { get; set; } = new List<Order>();
     }

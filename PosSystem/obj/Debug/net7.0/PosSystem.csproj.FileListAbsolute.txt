@@ -105,3 +105,4 @@ C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\PosSystem\bin\Debu
 C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\PosSystem\bin\Debug\net7.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\PosSystem\bin\Debug\net7.0\Newtonsoft.Json.dll
 C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\PosSystem\bin\Debug\net7.0\Newtonsoft.Json.Bson.dll
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\PosSystem\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

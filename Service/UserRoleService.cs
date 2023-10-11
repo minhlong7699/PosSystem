@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Contract;
 using Contract.Service;
+using Entity.Exceptions;
 using Serilog;
+using Shared.DataTransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +23,24 @@ namespace Service
             _repository = repository;
             _logger = logger;
             _mapper = mapper;
+        }
+
+        public async Task<IEnumerable<UserRoleDto>> GetAllUserRoleAsync(bool trackChanges)
+        {
+            var roleEntity = await _repository.UserRoleRepository.GetAllUserRolesAsync(trackChanges);
+            var roleDto = _mapper.Map<IEnumerable<UserRoleDto>>(roleEntity);
+            return roleDto;
+        }
+
+        public async Task<UserRoleDto> GetUserRoleAsync(Guid userRoleId, bool trackChanges)
+        {
+            var roleEntity = await _repository.UserRoleRepository.GetUserRoleAsync(userRoleId, trackChanges);
+            if(roleEntity is null)
+            {
+                throw new UserRoleNotFoundException(userRoleId);
+            }
+            var roleDto = _mapper.Map<UserRoleDto>(roleEntity);
+            return roleDto;
         }
     }
 }
