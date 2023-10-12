@@ -16,6 +16,5 @@ namespace Shared.RequestFeatures
         public bool IsActive { get; set; } = true;
 
         public string? SearchTerm { get; set; }
-
     }
 }

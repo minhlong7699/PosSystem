@@ -37,5 +37,13 @@ namespace Presentation.Controllers
             var orderItem = await _service.OrderItemService.CreateOrderItemAsync(orderId, orderItemCreate, trackChanges: true);
             return CreatedAtRoute("getOrderItem", new { orderId, orderItemId = orderItem.OrderItemsId }, orderItem);
         }
+
+        [HttpPut("{orderItemId:guid}")]
+        public async Task<IActionResult> UpdateOrderItem(Guid orderId, Guid orderItemId, OrderItemUpdateDto orderItemUpdate)
+        {
+            await _service.OrderItemService.UpdateOrderItemAsync(orderId, orderItemId, orderItemUpdate, trackChanges: true);
+            return NoContent();
+        }
+
     }
 }

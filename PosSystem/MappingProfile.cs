@@ -47,6 +47,8 @@ namespace PosSystem
             CreateMap<TaxCreateUpdateDto, Tax>();
             // OrderItemUpdateCreateDto -> Order
             CreateMap<OrderItemCreateUpdateDto, OrderItem>();
+            // orderItemUpdate -> OrderItems
+            CreateMap<OrderItemUpdateDto, OrderItem>();
             // Supplier -> SupplierDto
             CreateMap<Supplier, SupllierDto>();
             

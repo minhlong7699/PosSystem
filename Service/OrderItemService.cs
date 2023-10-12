@@ -83,14 +83,16 @@ namespace Service
             return orderItemDto;
         }
 
-
-        public async Task UpdateOrderItemAsync(Guid orderId, OrderItemCreateUpdateDto orderItemupdate, bool trackChanges)
+        public async Task UpdateOrderItemAsync(Guid orderId, Guid orderItemId, OrderItemUpdateDto orderItemUpdate, bool trackChanges)
         {
             var orderEntity = await _repository.OrderRepository.GetOrderAsync(orderId, trackChanges);
             if (orderEntity is null) throw new OrderNotFoundException(orderId);
-
+            var orderItemsEntity = await _repository.OrderItemRepository.GetOrderItemAsync(orderId, orderItemId, trackChanges);
+            orderItemsEntity.UpdatedAt = DateTime.Now;
+            orderItemsEntity.UpdatedBy = "Admin";
+            _mapper.Map(orderItemUpdate, orderItemsEntity);
+            await _repository.SaveAsync();
         }
-
 
 
         private OrderItem OrderitemsExisted(Order orderEntity, OrderItemCreateUpdateDto orderItemCreate)

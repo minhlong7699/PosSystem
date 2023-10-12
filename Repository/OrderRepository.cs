@@ -1,6 +1,7 @@
 ﻿using Contract;
 using Entity.Models;
 using Microsoft.EntityFrameworkCore;
+using Repository.Extensions;
 using Shared.RequestFeatures;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,10 @@ namespace Repository
         // Get All Order
         public async Task<PagedList<Order>> GetAllOrderAsync(OrderParameters orderParameters, bool trackChanges)
         {
-            var order = await FindAll(trackChanges).ToListAsync();
+            var order = await FindAll(trackChanges)
+                .FilterOrder(orderParameters.OrderType, orderParameters.Status, orderParameters.IsActive, orderParameters.TableId)
+                .SortOrder(orderParameters.orderBy)
+                .ToListAsync();
             return PagedList<Order>.ToPagedList(order, orderParameters.pageNumber, orderParameters.pageSize);
         } 
 

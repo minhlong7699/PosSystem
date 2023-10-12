@@ -25,7 +25,7 @@ namespace Repository.Extensions
                 return products;
 
             var lowerCaseSearchTerm = searchTerm.Trim().ToLower();
-            return products.Where(x => x.ProductName.ToLower().Contains(searchTerm));
+            return products.Where(x => x.ProductName.ToLower().Contains(lowerCaseSearchTerm));
         }
 
         // Product Sorting (OrderBy)

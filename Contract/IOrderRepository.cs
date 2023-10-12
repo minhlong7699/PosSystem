@@ -15,5 +15,6 @@ namespace Contract
         Task<Order> GetOrderAsync(Guid orderId, bool trackChanges);
 
         void CreateOrder(Order order);
+
     }
 }

@@ -8,5 +8,11 @@ namespace Shared.RequestFeatures
 {
     public class OrderParameters : RequestParameters
     {
+        public string? OrderType { get; set; }
+
+        public string? Status { get; set; }
+
+        public bool IsActive { get; set; } = true;          
+        public string? TableId { get; set; }
     }
 }
