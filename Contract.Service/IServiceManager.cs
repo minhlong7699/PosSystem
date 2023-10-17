@@ -18,9 +18,6 @@ namespace Contract.Service
         ISupplierService SupplierService { get; }
         ITableService TablesService { get; }
         ITaxService TaxService { get; }
-        IUserAuthenticationService UserAuthenticationService { get; }
-        IUserService UserService { get; }
-        IUserRoleService UserRoleService { get; }
         IAuthenticationService AuthenticationService { get; }
 
     }

@@ -61,10 +61,10 @@ namespace PosSystem.Migrations
                             CategoryId = new Guid("c9d4c053-49b6-410c-bc78-2d54a9991870"),
                             CategoryDescription = "Description",
                             CategoryName = "Gà Rán",
-                            CreatedAt = new DateTime(2023, 9, 27, 19, 21, 30, 500, DateTimeKind.Local).AddTicks(1273),
+                            CreatedAt = new DateTime(2023, 10, 16, 10, 43, 4, 271, DateTimeKind.Local).AddTicks(2574),
                             CreatedBy = "Admin",
                             IsActive = true,
-                            UpdatedAt = new DateTime(2023, 9, 27, 19, 21, 30, 500, DateTimeKind.Local).AddTicks(1292),
+                            UpdatedAt = new DateTime(2023, 10, 16, 10, 43, 4, 271, DateTimeKind.Local).AddTicks(2740),
                             UpdatedBy = "Admin"
                         },
                         new
@@ -72,10 +72,10 @@ namespace PosSystem.Migrations
                             CategoryId = new Guid("c9d4c053-49b6-410c-bc78-2d54a9991871"),
                             CategoryDescription = "Description",
                             CategoryName = "Hambuger",
-                            CreatedAt = new DateTime(2023, 9, 27, 19, 21, 30, 500, DateTimeKind.Local).AddTicks(1297),
+                            CreatedAt = new DateTime(2023, 10, 16, 10, 43, 4, 271, DateTimeKind.Local).AddTicks(2745),
                             CreatedBy = "Admin",
                             IsActive = true,
-                            UpdatedAt = new DateTime(2023, 9, 27, 19, 21, 30, 500, DateTimeKind.Local).AddTicks(1298),
+                            UpdatedAt = new DateTime(2023, 10, 16, 10, 43, 4, 271, DateTimeKind.Local).AddTicks(2747),
                             UpdatedBy = "Admin"
                         });
                 });
@@ -91,6 +91,9 @@ namespace PosSystem.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CustomerName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("InvoiceDate")
@@ -152,14 +155,11 @@ namespace PosSystem.Migrations
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("TableId")
+                    b.Property<Guid?>("TableId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("TaxId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal?>("TotalAmount")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -179,8 +179,6 @@ namespace PosSystem.Migrations
                     b.HasIndex("TableId");
 
                     b.HasIndex("TaxId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Order");
                 });
@@ -244,8 +242,9 @@ namespace PosSystem.Migrations
                     b.Property<bool?>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<decimal?>("PaymentAmount")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<string>("PaymentType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -327,7 +326,7 @@ namespace PosSystem.Migrations
                         {
                             ProductId = new Guid("00000000-0000-0000-0000-000000000001"),
                             CategoryId = new Guid("c9d4c053-49b6-410c-bc78-2d54a9991871"),
-                            CreatedAt = new DateTime(2023, 9, 27, 19, 21, 30, 500, DateTimeKind.Local).AddTicks(1730),
+                            CreatedAt = new DateTime(2023, 10, 16, 10, 43, 4, 271, DateTimeKind.Local).AddTicks(3204),
                             CreatedBy = "Admin",
                             Image = "test",
                             IsActive = true,
@@ -338,7 +337,7 @@ namespace PosSystem.Migrations
                             ProductPriceAfterDiscount = 25000m,
                             StockQuantity = 1,
                             SupplierId = new Guid("c9d4c053-49b6-410c-bc78-2d54a9991855"),
-                            UpdatedAt = new DateTime(2023, 9, 27, 19, 21, 30, 500, DateTimeKind.Local).AddTicks(1732),
+                            UpdatedAt = new DateTime(2023, 10, 16, 10, 43, 4, 271, DateTimeKind.Local).AddTicks(3206),
                             UpdatedBy = "Admin"
                         });
                 });
@@ -434,13 +433,13 @@ namespace PosSystem.Migrations
                         {
                             SupplierId = new Guid("c9d4c053-49b6-410c-bc78-2d54a9991855"),
                             Address = "Tphcm",
-                            CreatedAt = new DateTime(2023, 9, 27, 19, 21, 30, 500, DateTimeKind.Local).AddTicks(1935),
+                            CreatedAt = new DateTime(2023, 10, 16, 10, 43, 4, 271, DateTimeKind.Local).AddTicks(3493),
                             CreatedBy = "Admin",
                             Email = "cp@gmail.com",
                             IsActive = true,
                             PhoneNumber = 90123456,
                             SupplierName = "Công ty CP",
-                            UpdatedAt = new DateTime(2023, 9, 27, 19, 21, 30, 500, DateTimeKind.Local).AddTicks(1937),
+                            UpdatedAt = new DateTime(2023, 10, 16, 10, 43, 4, 271, DateTimeKind.Local).AddTicks(3495),
                             UpdatedBy = "Admin"
                         });
                 });
@@ -517,123 +516,222 @@ namespace PosSystem.Migrations
 
             modelBuilder.Entity("Entity.Models.User", b =>
                 {
-                    b.Property<Guid>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("UserId");
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("DateOfBirth")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("EmailAddress")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool?>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("PhoneNumber")
+                    b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("RoleId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UpdatedBy")
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
 
                     b.Property<string>("UserName")
-                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserPassword")
-                        .IsRequired()
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "401a0755-c4e1-4cd2-93c2-29f00cc1ebce",
+                            Name = "Manager",
+                            NormalizedName = "MANAGER"
+                        },
+                        new
+                        {
+                            Id = "3efc10c3-7c29-4251-a0ad-3e8f11b9c629",
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
+                        });
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("UserId");
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("User");
+                    b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Entity.Models.UserAuthentication", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.Property<Guid>("UserAuthenticationId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("UserAuthenticationId");
+                        .HasColumnType("int");
 
-                    b.Property<string>("AuthenticationCode")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("ExpiryDate")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<bool>("IsUsed")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("UserAuthenticationId");
+                    b.HasKey("Id");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserAuthentication");
+                    b.ToTable("AspNetUserClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Entity.Models.UserRole", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.Property<Guid>("RoleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("RoleId");
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("CreatedBy")
+                    b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("IsActive")
-                        .HasColumnType("bit");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("RoleName")
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                    b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("RoleId");
-
-                    b.ToTable("UserRole");
+                    b.ToTable("AspNetUserTokens", (string)null);
                 });
 
             modelBuilder.Entity("Entity.Models.Invoice", b =>
@@ -661,19 +759,11 @@ namespace PosSystem.Migrations
 
                     b.HasOne("Entity.Models.Table", "Table")
                         .WithMany("Orders")
-                        .HasForeignKey("TableId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TableId");
 
                     b.HasOne("Entity.Models.Tax", "Tax")
                         .WithMany("Orders")
                         .HasForeignKey("TaxId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Entity.Models.User", "User")
-                        .WithMany("Orders")
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -684,8 +774,6 @@ namespace PosSystem.Migrations
                     b.Navigation("Table");
 
                     b.Navigation("Tax");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Entity.Models.OrderItem", b =>
@@ -732,26 +820,55 @@ namespace PosSystem.Migrations
                     b.Navigation("Supplier");
                 });
 
-            modelBuilder.Entity("Entity.Models.User", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("Entity.Models.UserRole", "UserRole")
-                        .WithMany("Users")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("Entity.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("Entity.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("UserRole");
-                });
-
-            modelBuilder.Entity("Entity.Models.UserAuthentication", b =>
-                {
-                    b.HasOne("Entity.Models.User", "User")
-                        .WithMany("UserAuthentications")
+                    b.HasOne("Entity.Models.User", null)
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
 
-                    b.Navigation("User");
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("Entity.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Entity.Models.Category", b =>
@@ -796,18 +913,6 @@ namespace PosSystem.Migrations
             modelBuilder.Entity("Entity.Models.Tax", b =>
                 {
                     b.Navigation("Orders");
-                });
-
-            modelBuilder.Entity("Entity.Models.User", b =>
-                {
-                    b.Navigation("Orders");
-
-                    b.Navigation("UserAuthentications");
-                });
-
-            modelBuilder.Entity("Entity.Models.UserRole", b =>
-                {
-                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

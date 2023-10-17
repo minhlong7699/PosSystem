@@ -2,6 +2,7 @@
 using Contract;
 using Contract.Service;
 using Entity.Exceptions;
+using Entity.Models;
 using Serilog;
 using Shared.DataTransferObjects;
 using System;
@@ -23,6 +24,19 @@ namespace Service
             _repository = repository;
             _logger = logger;
             _mapper = mapper;
+        }
+
+        public async Task<PromotionDto> CreatepromotionAsync(PromotionUpdateCreateDto promotionCreate)
+        {
+            var promotionEntity = _mapper.Map<Promotion>(promotionCreate);
+            promotionEntity.CreatedAt = DateTime.Now;
+            promotionEntity.CreatedBy = "Admin";
+            promotionEntity.UpdatedAt = DateTime.Now;
+            promotionEntity.UpdatedBy = "Admin";
+            _repository.PromotionRepository.CreatePromotion(promotionEntity);
+            await _repository.SaveAsync();
+            var promotionDto = _mapper.Map<PromotionDto>(promotionEntity);
+            return promotionDto;
         }
 
         public async Task<IEnumerable<PromotionDto>> GetAllPromotionsAsync(bool trackChanges)

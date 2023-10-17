@@ -1,19 +1,16 @@
 ﻿using AutoMapper;
-using Contract;
 using Contract.Service;
 using Entity.Models;
-using Serilog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using Serilog;
 using Shared.DataTransferObjects.Authentication;
-using System.Xml.Linq;
-using System.Security.Claims;
-using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using System.Security.Claims;
+using System.Data;
+
 
 namespace Service
 {
@@ -21,23 +18,34 @@ namespace Service
     {
         private readonly ILogger _logger;
         private readonly IMapper _mapper;
-        private readonly IRepositoryManager _repository;
+        private readonly UserManager<User> _userManager;
         private readonly IConfiguration _configuration;
-        private User _user;
 
-        public AuthenticationService(IRepositoryManager repository ,ILogger logger, IMapper mapper, IConfiguration configuration)
+        private User? _user;
+        public AuthenticationService(ILogger logger, IMapper mapper, UserManager<User> userManager, IConfiguration configuration)
         {
-            _repository = repository;
+            _userManager = userManager;
             _configuration = configuration;
             _logger = logger;
             _mapper = mapper;
         }
+
+
+        public async Task<IdentityResult> RegisterUser(UserForRegistrationDto userForRegistration)
+        {
+            var user = _mapper.Map<User>(userForRegistration);
+            var result = await _userManager.CreateAsync(user, userForRegistration.Password);
+            if (result.Succeeded)
+                await _userManager.AddToRolesAsync(user, userForRegistration.Roles);
+            return result;
+        }
+
         public async Task<bool> ValidateUser(UserForAuthenticationDto userForAuth)
         {
 
             // Check user IsExisted in Db
-            _user = await _repository.UserRepository.GetUserByName(userForAuth.UserName);
-            var result = (_user != null && await _repository.UserRepository.CheckPasswordAsync(_user.UserId, userForAuth.UserPassword));
+            _user = await _userManager.FindByNameAsync(userForAuth.UserName);
+            var result = (_user != null && await _userManager.CheckPasswordAsync(_user, userForAuth.Password));
             if (!result)
                 _logger.Warning($"{nameof(ValidateUser)}: Authentication failed. Wrong user name or password.");
             return result;
@@ -57,9 +65,11 @@ namespace Service
             {
                 new Claim(ClaimTypes.Name, _user.UserName)
             };
-            var rolesEntity = await _repository.UserRoleRepository.GetUserRoleAsync(_user.RoleId, trackChanges: false);
-            claims.Add(new Claim(ClaimTypes.Role, rolesEntity.RoleName));
-            
+            var roles = await _userManager.GetRolesAsync(_user);
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
             return claims;
         }
 

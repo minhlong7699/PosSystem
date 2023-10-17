@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Contract
+namespace Shared.RequestFeatures
 {
-    public interface IUserAuthenticationRepository
+    public class InvoiceParameter : RequestParameters
     {
+
     }
 }

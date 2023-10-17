@@ -69,6 +69,22 @@ namespace Service
             return ProductToReturn;
         }
 
+        public async Task DeleteProductAsync(Guid categoryId, Guid productId, bool trackChanges)
+        {
+            var category = await _repository.CategoryRepository.GetCategoryAsync(categoryId, trackChanges);
+            if (category is null)
+            {
+                throw new CategoryNotFoundException(categoryId);
+            }
+            var product = await _repository.ProductRepository.GetProductAsync(categoryId, productId, trackChanges);
+            if (product is null)
+            {
+                throw new ProductNotFoundException(productId);
+            }
+            _repository.ProductRepository.DeleteProduct(product);
+            await _repository.SaveAsync();
+        }
+
         // Get All 
         public async Task<(IEnumerable<ProductDto> products, MetaData metaData)> GetAllProductsAsync(Guid categoryId, ProductParameters productParameters, bool trackChanges)
         {

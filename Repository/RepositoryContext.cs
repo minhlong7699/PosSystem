@@ -1,10 +1,11 @@
 ﻿using Entity.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Repository.Configuration;
 
 namespace Repository
 {
-    public class RepositoryContext : DbContext
+    public class RepositoryContext : IdentityDbContext<User>
     {
         public RepositoryContext(DbContextOptions options) : base(options)
         {
@@ -12,9 +13,13 @@ namespace Repository
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
             modelBuilder.ApplyConfiguration(new SupplierConfiguration());
+            modelBuilder.ApplyConfiguration(new RoleConfiguration());
+
         }
         DbSet<Category>? Categories { get; set; }
         DbSet<Invoice>? Invoices { get; set; }
@@ -27,7 +32,5 @@ namespace Repository
         DbSet<Table>? Tables { get; set; }
         DbSet<Tax>? Taxs { get; set; }
         DbSet<User>? Users { get; set; }
-        DbSet<UserAuthentication>? UserAuthentications { get; set; }
-        DbSet<UserRole>? UserRoles { get; set; }
     }
 }

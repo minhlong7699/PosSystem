@@ -46,5 +46,12 @@ namespace Presentation.Controllers
             await _service.CategoryService.UpdateCategoryAsync(categoryId, categoryUpdate, trackChanges: true);
             return NoContent();
         }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteCategoy(Guid categoryId)
+        {
+            await _service.CategoryService.DeleteCategoryAsync(categoryId, trackChanges: false);
+            return NoContent();
+        }
     }
 }

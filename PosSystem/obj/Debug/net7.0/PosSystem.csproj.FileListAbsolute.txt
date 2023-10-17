@@ -106,3 +106,9 @@ C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\PosSystem\bin\Debu
 C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\PosSystem\bin\Debug\net7.0\Newtonsoft.Json.dll
 C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\PosSystem\bin\Debug\net7.0\Newtonsoft.Json.Bson.dll
 C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\PosSystem\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\PosSystem\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\PosSystem\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\PosSystem\bin\Debug\net7.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\PosSystem\bin\Debug\net7.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\PosSystem\bin\Debug\net7.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\PosSystem\bin\Debug\net7.0\Microsoft.Extensions.Options.dll

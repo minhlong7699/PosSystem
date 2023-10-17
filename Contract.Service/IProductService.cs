@@ -22,5 +22,7 @@ namespace Contract.Service
         Task<(ProductUpdateCreateDto productToPatch, Product productEntity)> GetProductForPatchAsync(Guid categoryId, Guid productId, bool categoryTrackChanges, bool productTrackChages);
 
         Task SaveChangesForPatchAsync(ProductUpdateCreateDto productToPatch, Product productEntity);
+
+        Task DeleteProductAsync(Guid categoryId, Guid productId, bool trackChanges);
     }
 }

@@ -26,11 +26,18 @@ namespace Presentation.Controllers
         }
 
 
-        [HttpGet("{promotionId:guid}")]
+        [HttpGet("{promotionId:guid}", Name = "getPromotion")]
         public async Task<IActionResult> GetPromotion(Guid promotionId)
         {
             var promotion = await _services.PromotionService.GetPromotionAsync(promotionId, trackChanges: false);
             return Ok(promotion);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreatePromotion(PromotionUpdateCreateDto updateCreateDto)
+        {
+            var promotion = await _services.PromotionService.CreatepromotionAsync(updateCreateDto);
+            return CreatedAtRoute("getPromotion", new { promotion.PromotionId }, promotion);
         }
     }
 }

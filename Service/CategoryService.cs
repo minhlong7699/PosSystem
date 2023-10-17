@@ -75,5 +75,16 @@ namespace Service
             _mapper.Map(categoryUpdate, categoryEntity);
             await _repository.SaveAsync();
         }
+
+        public async Task DeleteCategoryAsync(Guid categoryId, bool trackChanges)
+        {
+            var categoryEntity = await _repository.CategoryRepository.GetCategoryAsync(categoryId, trackChanges);
+            if (categoryEntity is null)
+            {
+                throw new CategoryNotFoundException(categoryId);
+            }
+            _repository.CategoryRepository.DeleteCategory(categoryEntity);
+            await _repository.SaveAsync();
+        }
     }
 }

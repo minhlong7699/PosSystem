@@ -22,9 +22,6 @@ namespace Repository
         private readonly Lazy<ISupplierRepository> _supplierRepository;
         private readonly Lazy<ITableRepository> _tableRepository;
         private readonly Lazy<ITaxRepository> _taxRepository;
-        private readonly Lazy<IUserAuthenticationRepository> _userAuthenticationRepository;
-        private readonly Lazy<IUserRepository> _userRepository;
-        private readonly Lazy<IUserRoleRepository> _userRoleRepository;
 
         public RepositoryManager(RepositoryContext repositoryContext)
         {
@@ -40,9 +37,6 @@ namespace Repository
             _supplierRepository = new Lazy<ISupplierRepository>(() => new SupplierRepository(repositoryContext));
             _tableRepository = new Lazy<ITableRepository>(() => new TableRepository(repositoryContext));
             _taxRepository = new Lazy<ITaxRepository>(() => new TaxRepository(repositoryContext));
-            _userAuthenticationRepository = new Lazy<IUserAuthenticationRepository>(() => new UserAuthenticationRepository(repositoryContext));
-            _userRepository = new Lazy<IUserRepository>(() => new UserRepository(repositoryContext));
-            _userRoleRepository = new Lazy<IUserRoleRepository>(() => new UserRoleRepository(repositoryContext));
         }
         public ICategoryRepository CategoryRepository => _categoryRepository.Value;
 
@@ -64,11 +58,6 @@ namespace Repository
 
         public ITaxRepository TaxRepository => _taxRepository.Value;
 
-        public IUserAuthenticationRepository UserAuthenticationRepository => _userAuthenticationRepository.Value;
-
-        public IUserRepository UserRepository => _userRepository.Value;
-
-        public IUserRoleRepository UserRoleRepository => _userRoleRepository.Value;
 
 
         public async Task SaveAsync()

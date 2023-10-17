@@ -15,6 +15,16 @@ namespace Repository
         {
         }
 
+        public void CreateSupplier(Supplier supplier)
+        {
+            Create(supplier);
+        }
+
+        public void DeleteSupplier(Supplier supplier)
+        {
+            Delete(supplier);
+        }
+
         public async Task<IEnumerable<Supplier>> GetAllSuppliersAsync(bool trackChanges)
         {
             return await FindAll(trackChanges)

@@ -12,5 +12,9 @@ namespace Contract.Service
         Task<IEnumerable<SupllierDto>> GetAllSuppliersAsync(bool trackChanges);
 
         Task<SupllierDto> GetSupplierAsync(Guid supplierId, bool trackChanges);
+
+        Task<SupllierDto> CreateSupplierAsync(SupplierCreateUpdateDto supplierCreate, bool trackChanges);
+
+        Task DeleteSupplierAsync(Guid supplierId, bool trackChanges);
     }
 }

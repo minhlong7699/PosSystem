@@ -1,5 +1,6 @@
 ﻿using Contract.Service;
 using Microsoft.AspNetCore.Mvc;
+using Shared.DataTransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,11 +27,25 @@ namespace Presentation.Controllers
             return Ok(suppliers);
         }
 
-        [HttpGet("{supplierId:guid}")]
+        [HttpGet("{supplierId:guid}", Name = "getSupplier")]
         public async Task<IActionResult> GetSupplier(Guid supplierId)
         {
-            var supplier = await _service.SupplierService.GetSupplierAsync(supplierId ,trackChanges: false);
+            var supplier = await _service.SupplierService.GetSupplierAsync(supplierId, trackChanges: false);
             return Ok(supplier);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateSupplier(SupplierCreateUpdateDto supplierCreate)
+        {
+            var supplier = await _service.SupplierService.CreateSupplierAsync(supplierCreate, trackChanges: false);
+            return CreatedAtRoute("getSupplier", new { supplier.SupplierId }, supplier);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteSupplier(Guid supplierId)
+        {
+            await _service.SupplierService.DeleteSupplierAsync(supplierId, trackChanges: false);
+            return NoContent();
         }
     }
 }

@@ -4,9 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shared.RequestFeatures
+namespace Shared.DataTransferObjects
 {
-    public class UserParameters : RequestParameters
-    {
-    }
+    public record SupplierCreateUpdateDto();
 }

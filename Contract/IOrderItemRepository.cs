@@ -13,8 +13,12 @@ namespace Contract
     {
         Task<PagedList<OrderItem>> GetAllOrderItemAsync(Guid orderId ,OrderItemsParameters orderItemsParameters, bool trackChanges);
 
+        Task<IEnumerable<OrderItem>> GetOrderItemsForInvoiceAsync(Guid orderId, bool trackChanges);
+
         Task<OrderItem> GetOrderItemAsync(Guid orderId, Guid orderItemsId, bool trackChanges);
 
-        void CreateOrderItemsAsync(Guid orderId ,OrderItem orderItem);
+        void CreateOrderItems(Guid orderId ,OrderItem orderItem);
+
+        void DeleteOrderItems(OrderItem orderItem);
     }
 }

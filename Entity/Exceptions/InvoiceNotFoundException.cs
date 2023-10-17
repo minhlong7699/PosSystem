@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Entity.Exceptions
 {
-    public class UserRoleNotFoundException : NotFoundException
+    public class InvoiceNotFoundException : NotFoundException
     {
-        public UserRoleNotFoundException(Guid userRoleId) : base($"UserRole with id: {userRoleId} doesn't exist in the database.")
+        public InvoiceNotFoundException(Guid invoiceId) : base($"Invoice with id: {invoiceId} doesn't exist in the database.")
         {
         }
     }

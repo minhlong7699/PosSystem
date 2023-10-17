@@ -35,5 +35,10 @@ namespace Repository
         {
             Create(category);
         }
+
+        public void DeleteCategory(Category category)
+        {
+            Delete(category);
+        }
     }
 }

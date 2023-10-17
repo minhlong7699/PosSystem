@@ -73,5 +73,13 @@ namespace Presentation.Controllers
             return NoContent();
         }
 
+
+        [HttpDelete("{productId:guid}")]
+        public async Task<IActionResult> DeleteProduct(Guid categoryId, Guid productId)
+        {
+            await _service.ProductService.DeleteProductAsync(categoryId, productId, trackChanges: false);
+            return NoContent();
+        }
+
     }
 }

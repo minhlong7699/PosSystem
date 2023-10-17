@@ -16,10 +16,15 @@ namespace Repository
         {
         }
 
-        public void CreateOrderItemsAsync(Guid orderId, OrderItem orderItem)
+        public void CreateOrderItems(Guid orderId, OrderItem orderItem)
         {
             orderItem.OrderId = orderId;
             Create(orderItem);
+        }
+
+        public void DeleteOrderItems(OrderItem orderItem)
+        {
+            Delete(orderItem);
         }
 
         public async Task<PagedList<OrderItem>> GetAllOrderItemAsync(Guid orderId, OrderItemsParameters orderItemsParameters, bool trackChanges)
@@ -33,6 +38,12 @@ namespace Repository
         {
             var orderitem = await FindByConditon(x => x.OrderId.Equals(orderId) && x.OrderItemsId.Equals(orderItemsId), trackChanges).SingleOrDefaultAsync();
             return orderitem;
+        }
+
+        public async Task<IEnumerable<OrderItem>> GetOrderItemsForInvoiceAsync(Guid orderId, bool trackChanges)
+        {
+            var orderItems = await FindByConditon(x => x.OrderId.Equals(orderId), trackChanges).ToListAsync();
+            return orderItems;
         }
     }
 }

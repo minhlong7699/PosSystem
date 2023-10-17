@@ -43,7 +43,7 @@ namespace Service
                 orderItemsEntity.Price = product.ProductPrice;
                 if (orderItemsEntity is not null)
                 {
-                    _repository.OrderItemRepository.CreateOrderItemsAsync(orderId, orderItemsEntity);
+                    _repository.OrderItemRepository.CreateOrderItems(orderId, orderItemsEntity);
                 }
             }
                   
@@ -52,6 +52,15 @@ namespace Service
             var orderItemsDto = _mapper.Map<OrderItemsDto>(orderItemsEntity);
 
             return orderItemsDto;
+        }
+
+        public async Task DeleteOrderItemsAsync(Guid orderId, Guid orderItemId, bool trackChanges)
+        {
+            var order = await _repository.OrderRepository.GetOrderAsync(orderId, trackChanges);
+            if(order is null) throw new OrderNotFoundException(orderId);
+            var orderItemEntity = await _repository.OrderItemRepository.GetOrderItemAsync(orderId, orderItemId, trackChanges);
+            _repository.OrderItemRepository.DeleteOrderItems(orderItemEntity);
+            await _repository.SaveAsync();
         }
 
         public async Task<(IEnumerable<OrderItemsDto> orderItems, MetaData metaData)> GetAllOrderItemsAsync(Guid orderId, OrderItemsParameters orderItemsParameters, bool trackChanges)

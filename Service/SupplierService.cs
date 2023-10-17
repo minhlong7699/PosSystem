@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Contract;
 using Contract.Service;
+using Entity.Exceptions;
+using Entity.Models;
 using Serilog;
 using Shared.DataTransferObjects;
 using System;
@@ -22,6 +24,30 @@ namespace Service
             _repository = repository;
             _logger = logger;
             _mapper = mapper;
+        }
+
+        public async Task<SupllierDto> CreateSupplierAsync(SupplierCreateUpdateDto supplierCreate, bool trackChanges)
+        {
+            var supplierEntity = _mapper.Map<Supplier>(supplierCreate);
+            supplierEntity.CreatedAt = DateTime.Now;
+            supplierEntity.CreatedBy = "Admin";
+            supplierEntity.UpdatedAt = DateTime.Now;
+            supplierEntity.UpdatedBy = "Admin";
+            _repository.SupplierRepository.CreateSupplier(supplierEntity);
+            var supplierDto = _mapper.Map<SupllierDto>(supplierEntity);
+            await _repository.SaveAsync();
+            return supplierDto;
+        }
+
+        public async Task DeleteSupplierAsync(Guid supplierId, bool trackChanges)
+        {
+            var supplier = await _repository.SupplierRepository.GetSupplierAsync(supplierId, trackChanges);
+            if (supplier is null)
+            {
+                throw new SupplierNotFoundException(supplierId);
+            }
+            _repository.SupplierRepository.DeleteSupplier(supplier);
+            await _repository.SaveAsync();
         }
 
         public async Task<IEnumerable<SupllierDto>> GetAllSuppliersAsync(bool trackChanges)

@@ -11,5 +11,6 @@ namespace Contract
     {
         Task<IEnumerable<Promotion>> GetAllPromotionsAsync(bool trackChanges);
         Task<Promotion> GetPromotionAsync(Guid? promotionId ,bool trackChanges);
+        void CreatePromotion(Promotion promotion);
     }
 }

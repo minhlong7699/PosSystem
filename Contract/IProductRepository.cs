@@ -12,6 +12,11 @@ namespace Contract
     {
         Task<PagedList<Product>> GetAllProductsAsync(Guid categoryId, ProductParameters productParameters , bool trackChanges);
         Task<Product> GetProductAsync( Guid categoryId ,Guid productId, bool trackChanges);
+
+        Task<Product> GetProductForInvoiceAsync(Guid productId, bool trackChanges);
+
         void CreateProduct(Guid categoryId, Product product);
+
+        void DeleteProduct(Product product);
     }
 }

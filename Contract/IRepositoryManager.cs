@@ -18,9 +18,6 @@ namespace Contract
         ISupplierRepository SupplierRepository { get; }
         ITableRepository TablesRepository { get; }
         ITaxRepository TaxRepository { get; }
-        IUserAuthenticationRepository UserAuthenticationRepository { get; }
-        IUserRepository UserRepository { get; }
-        IUserRoleRepository UserRoleRepository { get; }
         Task SaveAsync();
     }
 }

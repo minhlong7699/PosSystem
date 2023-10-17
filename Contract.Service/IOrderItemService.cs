@@ -17,5 +17,7 @@ namespace Contract.Service
         Task<OrderItemsDto> CreateOrderItemAsync(Guid orderId, OrderItemCreateUpdateDto orderItemCreate, bool trackChanges );
 
         Task UpdateOrderItemAsync(Guid orderId, Guid orderItemId, OrderItemUpdateDto orderItemUpdate, bool trackChanges);
+
+        Task DeleteOrderItemsAsync(Guid orderId, Guid orderItemId, bool trackChanges);
     }
 }

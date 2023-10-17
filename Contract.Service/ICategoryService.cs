@@ -19,5 +19,7 @@ namespace Contract.Service
 
         Task UpdateCategoryAsync(Guid categoryId, CategoryUpdateCreateDto categoryUpdate, bool trackChanges);
 
+        Task DeleteCategoryAsync(Guid categoryId, bool trackChanges);
+
     }
 }

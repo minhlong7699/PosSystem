@@ -24,9 +24,7 @@ namespace Entity.Models
         public virtual ICollection<Invoice>? Invoices { get; set; } = new List<Invoice>();
         public virtual ICollection<OrderItem>? OrderItems { get; set; } = new List<OrderItem>();
 
-        [ForeignKey(nameof(User))]
         public Guid UserId { get; set; }
-        public virtual User? User { get; set; }
 
         [ForeignKey(nameof(Payment))]
         public Guid PaymentId { get; set; }

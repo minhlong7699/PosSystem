@@ -45,5 +45,11 @@ namespace Presentation.Controllers
             return NoContent();
         }
 
+        [HttpDelete]
+        public async Task<IActionResult> DeleteOrderItem(Guid orderId, Guid orderItemId)
+        {
+            await _service.OrderItemService.DeleteOrderItemsAsync(orderId, orderItemId, trackChanges: false);
+            return NoContent();
+        }
     }
 }

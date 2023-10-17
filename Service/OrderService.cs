@@ -3,6 +3,7 @@ using Contract;
 using Contract.Service;
 using Entity.Exceptions;
 using Entity.Models;
+using Microsoft.AspNetCore.Identity;
 using Serilog;
 using Shared.DataTransferObjects;
 using Shared.RequestFeatures;
@@ -19,18 +20,19 @@ namespace Service
         private readonly IRepositoryManager _repository;
         private readonly ILogger _logger;
         private readonly IMapper _mapper;
+        private readonly UserManager<User> _userManager;
 
-        public OrderService(IRepositoryManager repository, ILogger logger, AutoMapper.IMapper mapper)
+        public OrderService(IRepositoryManager repository, ILogger logger, AutoMapper.IMapper mapper, UserManager<User> userManager)
         {
             _repository = repository;
             _logger = logger;
             _mapper = mapper;
+            _userManager = userManager;
         }
 
         public async Task<OrderDto> CreateOrderAsync(OrderCreateUpdateDto orderCreate, bool trackChanges)
         {
-
-            var user = await _repository.UserRepository.GetUserAsync(orderCreate.UserId, trackChanges);
+            var user = _userManager.FindByIdAsync(orderCreate.UserId.ToString());
             if (user is null) throw new UserNotFoundException(orderCreate.UserId);
             var payment = await _repository.PaymentRepository.GetPaymentAsync(orderCreate.PaymentId, trackChanges);
             if (payment is null) throw new PaymentNotFoundException(orderCreate.PaymentId);

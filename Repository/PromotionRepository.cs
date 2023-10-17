@@ -15,6 +15,11 @@ namespace Repository
         {
         }
 
+        public void CreatePromotion(Promotion promotion)
+        {
+            Create(promotion);
+        }
+
         public async Task<IEnumerable<Promotion>> GetAllPromotionsAsync(bool trackChanges)
         {
             return await FindAll(trackChanges).OrderBy(c => c.PromotionName).ToListAsync();

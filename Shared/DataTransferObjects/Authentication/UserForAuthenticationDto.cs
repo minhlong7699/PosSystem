@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Shared.DataTransferObjects.Authentication
 {
@@ -12,6 +7,7 @@ namespace Shared.DataTransferObjects.Authentication
         [Required(ErrorMessage = "User name is required")]
         public string? UserName { get; init; }
         [Required(ErrorMessage = "Password name is required")]
-        public string? UserPassword { get; init; }
-    };
+        public string? Password { get; init; }
+    }
+
 }
