@@ -26,7 +26,7 @@ namespace Service
             _mapper = mapper;
         }
 
-        public async Task<SupllierDto> CreateSupplierAsync(SupplierCreateUpdateDto supplierCreate, bool trackChanges)
+        public async Task<SupllierDto> CreateSupplierAsync(SupplierCreateUpdateDto supplierCreate)
         {
             var supplierEntity = _mapper.Map<Supplier>(supplierCreate);
             supplierEntity.CreatedAt = DateTime.Now;
@@ -62,6 +62,16 @@ namespace Service
             var supplier = await _repository.SupplierRepository.GetSupplierAsync(supplierId, trackChanges);
             var supplerDto = _mapper.Map<SupllierDto>(supplier);
             return supplerDto;
+        }
+
+        public async Task UpdateSupplierAsync(Guid supplierId, SupplierCreateUpdateDto supplierUpdate, bool trackChanges)
+        {
+            var supplierEntity = await _repository.SupplierRepository.GetSupplierAsync(supplierId, trackChanges);
+            if (supplierEntity is null) throw new SupplierNotFoundException(supplierId);
+            supplierEntity.UpdatedAt = DateTime.UtcNow;
+            supplierEntity.UpdatedBy = "Admin";
+            _mapper.Map(supplierUpdate, supplierEntity);
+            await _repository.SaveAsync();
         }
     }
 }

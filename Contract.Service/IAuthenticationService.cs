@@ -13,6 +13,8 @@ namespace Contract.Service
         Task<IdentityResult> RegisterUser(UserForRegistrationDto userForRegistration);
         Task<bool> ValidateUser(UserForAuthenticationDto userForAuth);
         Task<string> CreateToken();
+        Task<UserManagerResponse> ForgotPasswordAsync(string email);
+        Task<UserManagerResponse> ResetUserPasswordAsync(ResetPassworDto resetPassworDto);
 
     }
 }

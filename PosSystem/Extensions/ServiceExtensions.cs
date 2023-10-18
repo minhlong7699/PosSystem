@@ -1,6 +1,8 @@
 ﻿using Contract;
 using Contract.Service;
+using Contract.Service.EmailServices;
 using Entity.Models;
+using Entity.Models.Email;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -94,6 +96,19 @@ namespace PosSystem.Extensions
             .AddDefaultTokenProviders();
         }
 
+        public static void AddEmailServiceConfiguration(this IServiceCollection services, IConfiguration configuration)
+        {
+            var emailConfig = configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>();
+            services.AddSingleton(emailConfig);
+            services.AddTransient<IEmailService, EmailService>();
+        }
+
+        public static void RequiredEmaiConfiguration(this IServiceCollection services)
+        {
+            services.Configure<IdentityOptions>(
+                op => op.SignIn.RequireConfirmedEmail = true);
+            services.Configure<DataProtectionTokenProviderOptions>(op => op.TokenLifespan = TimeSpan.FromHours(1));
+        }
 
     }
 }

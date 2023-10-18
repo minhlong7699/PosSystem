@@ -10,7 +10,10 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Security.Claims;
 using System.Data;
-
+using Entity.Exceptions;
+using Contract.Service.EmailServices;
+using Entity.Models.Email;
+using Microsoft.AspNetCore.WebUtilities;
 
 namespace Service
 {
@@ -18,16 +21,18 @@ namespace Service
     {
         private readonly ILogger _logger;
         private readonly IMapper _mapper;
+        private readonly IEmailService _emailService;
         private readonly UserManager<User> _userManager;
         private readonly IConfiguration _configuration;
 
         private User? _user;
-        public AuthenticationService(ILogger logger, IMapper mapper, UserManager<User> userManager, IConfiguration configuration)
+        public AuthenticationService(ILogger logger, IMapper mapper, UserManager<User> userManager, IConfiguration configuration, IEmailService emailService)
         {
             _userManager = userManager;
             _configuration = configuration;
             _logger = logger;
             _mapper = mapper;
+            _emailService = emailService;
         }
 
 
@@ -94,6 +99,28 @@ namespace Service
             return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
         }
 
+        public async Task<UserManagerResponse> ForgotPasswordAsync(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user is null) throw new UserNotFoundException(email);
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var encodedToken = Encoding.UTF8.GetBytes(token);
+            var validToken = WebEncoders.Base64UrlEncode(encodedToken);
+            string url = $"{_configuration["AppUrl"]}/resetpassword?email={email}&token={validToken}";
+            Message emailmessage = new Message(new string[] { email }, "ResetPassword", url);
+            _emailService.SendEmail(emailmessage);
+            return new UserManagerResponse { IsSuccess = true, ErrorMessage = "Reset Password has been sent to your email address" };
+        }
 
+        public async Task<UserManagerResponse> ResetUserPasswordAsync(ResetPassworDto resetPassworDto)
+        {
+            var user = await _userManager.FindByEmailAsync(resetPassworDto.Email);
+            if (user is null) throw new UserNotFoundException(resetPassworDto.Email);
+            var decodeToken = WebEncoders.Base64UrlDecode(resetPassworDto.Token);
+            string rawToken = Encoding.UTF8.GetString(decodeToken);
+            var result = await _userManager.ResetPasswordAsync(user, rawToken, resetPassworDto.Password);
+            if (result.Succeeded) return new UserManagerResponse { IsSuccess = true, ErrorMessage = "Password has been reset successfully" };
+            return new UserManagerResponse { IsSuccess = false, ErrorMessage = "some thing went wrong" };
+        }
     }
 }

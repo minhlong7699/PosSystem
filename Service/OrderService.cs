@@ -33,7 +33,7 @@ namespace Service
         public async Task<OrderDto> CreateOrderAsync(OrderCreateUpdateDto orderCreate, bool trackChanges)
         {
             var user = _userManager.FindByIdAsync(orderCreate.UserId.ToString());
-            if (user is null) throw new UserNotFoundException(orderCreate.UserId);
+            if (user is null) throw new UserNotFoundException(orderCreate.UserId.ToString());
             var payment = await _repository.PaymentRepository.GetPaymentAsync(orderCreate.PaymentId, trackChanges);
             if (payment is null) throw new PaymentNotFoundException(orderCreate.PaymentId);
             var tax = await _repository.TaxRepository.GetTaxAsync(orderCreate.TaxId, trackChanges);

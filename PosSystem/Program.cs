@@ -1,9 +1,12 @@
+using Contract.Service.EmailServices;
+using Entity.Models.Email;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Options;
 using PosSystem.Extensions;
 using Serilog;
+using Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,11 +28,13 @@ builder.Services.ConfigureServiceManager(); // Service DI
 builder.Services.ConfigureSqlContext(builder.Configuration); // DbContext
 builder.Services.ConfigureUploadImageService(); // ImageUpload
 builder.Services.ConfigureJWT(builder.Configuration); // JWT
-builder.Services.AddAuthentication();
-builder.Services.ConfigureIdentity();
+builder.Services.AddAuthentication();// authen
+builder.Services.ConfigureIdentity();// Identity
+builder.Services.AddEmailServiceConfiguration(builder.Configuration); // Email Service
+builder.Services.RequiredEmaiConfiguration(); // Required Email
 
-
-builder.Services.AddControllers(config => {
+builder.Services.AddControllers(config =>
+{
     config.RespectBrowserAcceptHeader = true;
     config.ReturnHttpNotAcceptable = true;
     config.InputFormatters.Insert(0, GetJsonPatchInputFormatter());

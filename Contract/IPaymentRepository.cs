@@ -14,5 +14,7 @@ namespace Contract
         Task<Payment> GetPaymentAsync(Guid paymentId, bool trackChanges);
 
         void CreatePayment(Payment payment);
+
+        void DeletePayment(Payment payment);
     }
 }

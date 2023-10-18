@@ -22,6 +22,11 @@ namespace Repository
             Create(invoice);
         }
 
+        public void DeleteInvoice(Invoice invoice)
+        {
+            Delete(invoice);
+        }
+
         public async Task<PagedList<Invoice>> GetAllInvoicesAsync(InvoiceParameter invoiceParameter, bool trackChanges)
         {
             var invoices = await FindAll(trackChanges).ToListAsync();

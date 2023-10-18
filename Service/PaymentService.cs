@@ -27,7 +27,7 @@ namespace Service
         }
 
         // Create Payment
-        public async Task<PaymentDto> CreatePaymenAsync(PaymentUpdateCreateDto paymentCreate)
+        public async Task<PaymentDto> CreatePaymentAsync(PaymentUpdateCreateDto paymentCreate)
         {
             var paymentEntity = _mapper.Map<Payment>(paymentCreate);
             paymentEntity.CreatedAt = DateTime.Now;
@@ -39,6 +39,14 @@ namespace Service
 
             var paymentDto = _mapper.Map<PaymentDto>(paymentEntity);
             return paymentDto;
+        }
+
+        public async Task DeletePaymentAsync(Guid paymentId, bool trackChanges)
+        {
+            var payment = await _repository.PaymentRepository.GetPaymentAsync(paymentId, trackChanges);
+            if (payment is null) throw new PaymentNotFoundException(paymentId);
+            _repository.PaymentRepository.DeletePayment(payment);
+            await _repository.SaveAsync();
         }
 
         // GetAllPayment
@@ -59,6 +67,16 @@ namespace Service
             }
             var paymentDto = _mapper.Map<PaymentDto>(payment);
             return paymentDto;
+        }
+
+        public async Task UpdatePaymentAsync(Guid paymentId,PaymentUpdateCreateDto paymentUpdate, bool trackChanges)
+        {
+            var paymentEntity = await _repository.PaymentRepository.GetPaymentAsync(paymentId, trackChanges);
+            if (paymentEntity is null) throw new PaymentNotFoundException(paymentId);
+            paymentEntity.UpdatedAt = DateTime.UtcNow;
+            paymentEntity.UpdatedBy = "Admin";
+            _mapper.Map(paymentUpdate, paymentEntity);
+            await _repository.SaveAsync();
         }
     }
 }

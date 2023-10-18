@@ -20,6 +20,11 @@ namespace Repository
             Create(payment);
         }
 
+        public void DeletePayment(Payment payment)
+        {
+            Delete(payment);
+        }
+
         public async Task<IEnumerable<Payment>> GetAllPaymentsAsync(bool trackChanges)
         {
             var payments = await FindAll(trackChanges).ToListAsync();

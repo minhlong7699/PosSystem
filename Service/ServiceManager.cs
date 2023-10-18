@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Contract;
 using Contract.Service;
+using Contract.Service.EmailServices;
 using Entity.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -21,10 +22,11 @@ namespace Service
         private readonly Lazy<ITableService> _tableService;
         private readonly Lazy<ITaxService> _taxService;
         private readonly Lazy<IAuthenticationService> _authenticationService;
+        private readonly Lazy<IEmailService> _emailService;
 
-        public ServiceManager(IRepositoryManager repositoryManager, ILogger logger, IMapper mapper, IUploadImageService uploadImageService, IConfiguration configuration, UserManager<User> userManager)
+        public ServiceManager(IRepositoryManager repositoryManager, ILogger logger, IMapper mapper, IUploadImageService uploadImageService, IConfiguration configuration, UserManager<User> userManager, IEmailService emailService)
         {
-            _authenticationService = new Lazy<IAuthenticationService>(() => new AuthenticationService(logger, mapper, userManager, configuration));
+            _authenticationService = new Lazy<IAuthenticationService>(() => new AuthenticationService(logger, mapper, userManager, configuration, emailService));
             _categoryService = new Lazy<ICategoryService>(() => new CategoryService(repositoryManager, logger, mapper));
             _invoiceService = new Lazy<IInvoiceService>(() => new InvoiceService(repositoryManager, logger, mapper));
             _orderItemService = new Lazy<IOrderItemService>(() => new OrderItemService(repositoryManager, logger, mapper));
@@ -58,5 +60,6 @@ namespace Service
         public ITableService TablesService => _tableService.Value;
 
         public ITaxService TaxService => _taxService.Value;
+        public IEmailService EmailService => _emailService.Value;
     }
 }

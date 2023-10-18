@@ -13,7 +13,9 @@ namespace Contract.Service
 
         Task<SupllierDto> GetSupplierAsync(Guid supplierId, bool trackChanges);
 
-        Task<SupllierDto> CreateSupplierAsync(SupplierCreateUpdateDto supplierCreate, bool trackChanges);
+        Task<SupllierDto> CreateSupplierAsync(SupplierCreateUpdateDto supplierCreate);
+
+        Task UpdateSupplierAsync(Guid supplierId, SupplierCreateUpdateDto supplierUpdate, bool trackChanges);
 
         Task DeleteSupplierAsync(Guid supplierId, bool trackChanges);
     }

@@ -37,8 +37,23 @@ namespace Presentation.Controllers
         [HttpPost]
         public async Task<IActionResult> CreatePayment([FromBody]PaymentUpdateCreateDto paymentCreate)
         {
-            var payment = await _service.PaymentService.CreatePaymenAsync(paymentCreate);
+            var payment = await _service.PaymentService.CreatePaymentAsync(paymentCreate);
             return CreatedAtRoute("GetPayemnt", new { payment.PaymentId }, payment);
         }
+
+        [HttpPut("paymentId:guid")]
+        public async Task<IActionResult> UpdatePayment(Guid paymentId, PaymentUpdateCreateDto paymentUpdate)
+        {
+            await _service.PaymentService.UpdatePaymentAsync(paymentId, paymentUpdate, trackChanges: true);
+            return NoContent();
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeletePayment(Guid paymentId)
+        {
+            await _service.PaymentService.DeletePaymentAsync(paymentId, trackChanges: false);
+            return NoContent();
+        }
+
     }
 }

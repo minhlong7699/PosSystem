@@ -58,6 +58,15 @@ namespace Service
             invoiceDto.OrderItems = orderItemsOfInvoiceDto;
             return invoiceDto;
         }
+
+        public async Task DelteInvoiceAsync(Guid invoiceId, bool trackChanges)
+        {
+            var invoice = await  _repository.InvoiceRepository.GetInvoiceAsync(invoiceId, trackChanges);
+            if (invoice is null) throw new InvoiceNotFoundException(invoiceId);
+            _repository.InvoiceRepository.DeleteInvoice(invoice);
+            await _repository.SaveAsync();
+        }
+
         public async Task<(IEnumerable<InvoiceDto> invoices, MetaData metadata)> GetAllInvoiceAsync(InvoiceParameter invoiceParameter, bool trackChanges)
         {
             var invoiceMetadata = await _repository.InvoiceRepository.GetAllInvoicesAsync(invoiceParameter, trackChanges);
@@ -72,6 +81,15 @@ namespace Service
             var invoiceDto = _mapper.Map<InvoiceDto>(invoice);
             return invoiceDto;
 
+        }
+
+        public async Task UpdateInvoiceAsync(Guid invoiceId, InvoiceUpdateDto invoiceUpdate, bool trackChanges)
+        {
+            var invoiceEntity = await _repository.InvoiceRepository.GetInvoiceAsync(invoiceId, trackChanges);
+            invoiceEntity.UpdatedAt = DateTime.Now;
+            invoiceEntity.UpdatedBy = "Admin";
+            _mapper.Map(invoiceUpdate, invoiceEntity);
+            await _repository.SaveAsync();          
         }
     }
 }

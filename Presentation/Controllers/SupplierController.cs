@@ -37,8 +37,15 @@ namespace Presentation.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateSupplier(SupplierCreateUpdateDto supplierCreate)
         {
-            var supplier = await _service.SupplierService.CreateSupplierAsync(supplierCreate, trackChanges: false);
+            var supplier = await _service.SupplierService.CreateSupplierAsync(supplierCreate);
             return CreatedAtRoute("getSupplier", new { supplier.SupplierId }, supplier);
+        }
+
+        [HttpPut("{supplierId:guid}")]
+        public async Task<IActionResult> UpdateSupplier(Guid supplierId, SupplierCreateUpdateDto supplierUpdate)
+        {
+            await _service.SupplierService.UpdateSupplierAsync(supplierId, supplierUpdate, trackChanges: true);
+            return NoContent();
         }
 
         [HttpDelete]
@@ -47,5 +54,7 @@ namespace Presentation.Controllers
             await _service.SupplierService.DeleteSupplierAsync(supplierId, trackChanges: false);
             return NoContent();
         }
+
+
     }
 }

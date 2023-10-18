@@ -13,6 +13,10 @@ namespace Contract.Service
 
         Task<PaymentDto> GetPaymentAsync(Guid paymentId, bool trackChanges);
 
-        Task<PaymentDto> CreatePaymenAsync(PaymentUpdateCreateDto paymentCreate);
+        Task<PaymentDto> CreatePaymentAsync(PaymentUpdateCreateDto paymentCreate);
+
+        Task UpdatePaymentAsync(Guid paymentId,PaymentUpdateCreateDto paymentUpdate, bool trackChanges);
+
+        Task DeletePaymentAsync(Guid paymentId, bool trackChanges);
     }
 }

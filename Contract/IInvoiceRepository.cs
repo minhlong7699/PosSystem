@@ -17,5 +17,7 @@ namespace Contract
 
         void CreateInvoice(Invoice invoice, bool trackChanges);
 
+        void DeleteInvoice(Invoice invoice);
+
     }
 }

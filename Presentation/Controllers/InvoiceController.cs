@@ -43,6 +43,19 @@ namespace Presentation.Controllers
             return CreatedAtRoute("getInvoice", new { invoice.InvoiceId }, invoice);
         }
 
+        [HttpPut("{invoiceId:guid}")]
+        public async Task<IActionResult> UpdateInvoice(Guid invoiceId, InvoiceUpdateDto invoiceUpdate)
+        {
+            await _service.InvoiceService.UpdateInvoiceAsync(invoiceId, invoiceUpdate, trackChanges: true);
+            return NoContent();
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteInvoice(Guid invoiceId)
+        {
+            await _service.InvoiceService.DelteInvoiceAsync(invoiceId, trackChanges: false);
+            return NoContent();
+        }
 
     }
 }

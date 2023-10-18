@@ -15,5 +15,9 @@ namespace Contract.Service
         Task<InvoiceDto> GetInvoiceAsync(Guid invoiceId, bool trackChanges);
 
         Task<InvoiceDto> CreateInvoiceAsync(InvoiceCreateUpdateDto invoiceCreate, bool trackChanges);
+
+        Task UpdateInvoiceAsync(Guid invoiceId,InvoiceUpdateDto invoiceUpdate, bool trackChanges);
+
+        Task DelteInvoiceAsync(Guid invoiceId, bool trackChanges);
     }
 }

@@ -7,4 +7,6 @@ using System.Threading.Tasks;
 namespace Shared.DataTransferObjects
 {
     public record InvoiceCreateUpdateDto(Guid OrderId, string CustomerName, string? ShippingAddress);
+
+    public record InvoiceUpdateDto(string? CustomerName, string? ShippingAddress, string? Status);
 }
