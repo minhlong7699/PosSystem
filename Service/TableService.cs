@@ -37,6 +37,14 @@ namespace Service
             return tableDto;
         }
 
+        public async Task DeleteTableAsync(Guid tableId, bool trackChanges)
+        {
+            var tableEntity = await _repository.TablesRepository.GetTableAsync(tableId, trackChanges);
+            if (tableEntity is null) throw new TableNotFoundException(tableId);
+            _repository.TablesRepository.DelteTable(tableEntity);
+            await _repository.SaveAsync();
+        }
+
         public async Task<(IEnumerable<TableDto> tables, MetaData metadata)> GetAllTableAsync(TableParameters tableParameters, bool trackChanges)
         {
             var tablesMetadata = await _repository.TablesRepository.GetAllTablesAsync(tableParameters, trackChanges);
@@ -55,6 +63,16 @@ namespace Service
             var tableDto = _mapper.Map<TableDto>(tableEntity);
 
             return (tableDto);
+        }
+
+        public async Task UpdateTableAsync(Guid tableId,TableUpdateCreateDto tableUpdate, bool trackChanges)
+        {
+            var tableEntity = await _repository.TablesRepository.GetTableAsync(tableId, trackChanges);
+            if (tableEntity is null) throw new TableNotFoundException(tableId);
+            tableEntity.UpdatedAt = DateTime.UtcNow;
+            tableEntity.UpdatedBy = "Admin";
+            _mapper.Map(tableUpdate, tableEntity);
+            await _repository.SaveAsync();
         }
     }
 }

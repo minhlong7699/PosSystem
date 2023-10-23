@@ -15,5 +15,9 @@ namespace Contract.Service
         Task<TableDto> GetTableAsync(Guid tableId, bool trackChanges);
 
         Task<TableDto> CreateTableAsync(TableUpdateCreateDto tableCreate);
+
+        Task UpdateTableAsync(Guid tableId,TableUpdateCreateDto tableUpdate, bool trackChanges);
+
+        Task DeleteTableAsync(Guid tableId, bool trackChanges);
     }
 }

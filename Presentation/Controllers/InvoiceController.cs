@@ -22,7 +22,7 @@ namespace Presentation.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllInvoice(InvoiceParameter invoiceParameter)
+        public async Task<IActionResult> GetAllInvoice([FromQuery]InvoiceParameter invoiceParameter)
         {
             var result = await _service.InvoiceService.GetAllInvoiceAsync(invoiceParameter, trackChanges: false);
             Response.Headers.Add("X-Pagination", System.Text.Json.JsonSerializer.Serialize(result.metadata));

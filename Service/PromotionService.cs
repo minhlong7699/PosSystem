@@ -39,6 +39,14 @@ namespace Service
             return promotionDto;
         }
 
+        public async Task DeletepromotionAsync(Guid promotionId, bool trackChanges)
+        {
+            var promotionEntity = await _repository.PromotionRepository.GetPromotionAsync(promotionId, trackChanges);
+            if (promotionEntity is null) throw new PromotionNotFoundException(promotionId);
+            _repository.PromotionRepository.DeletePromotion(promotionEntity);
+            await _repository.SaveAsync();
+        }
+
         public async Task<IEnumerable<PromotionDto>> GetAllPromotionsAsync(bool trackChanges)
         {
             var promotions = await _repository.PromotionRepository.GetAllPromotionsAsync(trackChanges);
@@ -55,6 +63,16 @@ namespace Service
             }
             var promotionDto = _mapper.Map<PromotionDto>(promotion);
             return promotionDto;
+        }
+
+        public async Task UpdatePromotionAsync(Guid promotionId, PromotionUpdateCreateDto promotionUpdate, bool trackChanges)
+        {
+            var promotionEntity = await _repository.PromotionRepository.GetPromotionAsync(promotionId, trackChanges);
+            if (promotionEntity is null) throw new PromotionNotFoundException(promotionId);
+            promotionEntity.UpdatedAt = DateTime.UtcNow;
+            promotionEntity.UpdatedBy = "Admin";
+            _mapper.Map(promotionUpdate, promotionEntity);
+            await _repository.SaveAsync();
         }
     }
 }

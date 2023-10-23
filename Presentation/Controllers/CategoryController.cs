@@ -1,4 +1,5 @@
 ﻿using Contract.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared.DataTransferObjects;
 using Shared.RequestFeatures;
@@ -15,6 +16,7 @@ namespace Presentation.Controllers
             _service = service;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetCategories([FromQuery]CategoryParameters categoryParamaters)
         {

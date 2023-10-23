@@ -15,5 +15,7 @@ namespace Contract
         Task<Table> GetTableAsync(Guid tableId, bool trackChanges);
 
         void CreateTable(Table table);
+
+        void DelteTable(Table table);
     }
 }

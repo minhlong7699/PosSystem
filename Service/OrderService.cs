@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Contract;
 using Contract.Service;
+using Contract.Service.UserProvider;
 using Entity.Exceptions;
 using Entity.Models;
 using Microsoft.AspNetCore.Identity;
@@ -21,37 +22,40 @@ namespace Service
         private readonly ILogger _logger;
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
+        private readonly IUserProvider _userProvider;
 
-        public OrderService(IRepositoryManager repository, ILogger logger, AutoMapper.IMapper mapper, UserManager<User> userManager)
+        public OrderService(IRepositoryManager repository, ILogger logger, AutoMapper.IMapper mapper, UserManager<User> userManager, IUserProvider userProvider)
         {
             _repository = repository;
             _logger = logger;
             _mapper = mapper;
             _userManager = userManager;
+            _userProvider = userProvider;
         }
 
         public async Task<OrderDto> CreateOrderAsync(OrderCreateUpdateDto orderCreate, bool trackChanges)
         {
-            var user = _userManager.FindByIdAsync(orderCreate.UserId.ToString());
-            if (user is null) throw new UserNotFoundException(orderCreate.UserId.ToString());
+            var userId = await _userProvider.GetUserIdAsync();
             var payment = await _repository.PaymentRepository.GetPaymentAsync(orderCreate.PaymentId, trackChanges);
             if (payment is null) throw new PaymentNotFoundException(orderCreate.PaymentId);
             var tax = await _repository.TaxRepository.GetTaxAsync(orderCreate.TaxId, trackChanges);
             if(tax is null) throw new TaxNotFoundExeception(orderCreate.TaxId);
             var promotion = await _repository.PromotionRepository.GetPromotionAsync(orderCreate.PromotionId, trackChanges);
-            if (promotion is null) throw new PromotionNotFoundException(orderCreate.PromotionId);
-            
-
+            if (promotion is null) throw new PromotionNotFoundException(orderCreate.PromotionId);           
             var orderEntity = _mapper.Map<Order>(orderCreate);
-
-            orderEntity.CreatedAt = DateTime.Now;
-            orderEntity.CreatedBy = "Admin";
-            orderEntity.UpdatedAt = DateTime.Now;
-            orderEntity.UpdatedBy = "Admin";
+            orderEntity.CreateAuditFields(userId);
             _repository.OrderRepository.CreateOrder(orderEntity);
             await _repository.SaveAsync();
             var orderDto = _mapper.Map<OrderDto>(orderEntity);
             return orderDto;
+        }
+
+        public async Task DeleteOrderAsync(Guid orderId, bool trackChanges)
+        {
+            var order = await _repository.OrderRepository.GetOrderAsync(orderId, trackChanges);
+            if (order is null) throw new OrderNotFoundException(orderId);
+            _repository.OrderRepository.DeleteOrder(order);
+            await _repository.SaveAsync();
         }
 
         public async Task<(IEnumerable<OrderDto> orders, MetaData metaData)> GetAllOrderAsync(OrderParameters orderParameters, bool trackChanges)
@@ -73,6 +77,16 @@ namespace Service
             var orderDto = _mapper.Map<OrderDto>(order);
 
             return orderDto;
+        }
+
+        public async Task UpdateOrderAsync(Guid orderId, OrderCreateUpdateDto orderUpdate, bool trackChanges)
+        {
+            var orderEntity = await _repository.OrderRepository.GetOrderAsync(orderId, trackChanges);
+            if (orderEntity is null) throw new OrderNotFoundException(orderId);
+            orderEntity.UpdatedAt = DateTime.UtcNow;
+            orderEntity.UpdatedBy = "Admin";
+            _mapper.Map(orderUpdate, orderEntity);
+            await _repository.SaveAsync();
         }
     }
 }

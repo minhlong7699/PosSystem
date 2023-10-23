@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "+KpC4gGV3lVWISPCfQumXYP5mwVq90R56Ai9qyNh+iqcuhx/Ylww7YAk/ohM4m4DhmDok4go4GZTixrOQE4RyA==",
+  "dgSpecHash": "jtQ75jM/GaKqxGs3aEpQKVWKxAsMRQMLcKyuH5NYPKeX1oYm6S76sWO/WAXeyPBuwiH/Q2FtQb7SOElt/3LvyQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\duong\\OneDrive\\Máy tính\\Project_practice\\PosSystem\\Service\\Service.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,7 @@
     "C:\\Users\\duong\\.nuget\\packages\\mailkit\\4.2.0\\mailkit.4.2.0.nupkg.sha512",
     "C:\\Users\\duong\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\7.0.11\\microsoft.aspnetcore.cryptography.internal.7.0.11.nupkg.sha512",
     "C:\\Users\\duong\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\7.0.11\\microsoft.aspnetcore.cryptography.keyderivation.7.0.11.nupkg.sha512",
+    "C:\\Users\\duong\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\duong\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.2.0\\microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",
     "C:\\Users\\duong\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\7.0.11\\microsoft.aspnetcore.identity.entityframeworkcore.7.0.11.nupkg.sha512",
     "C:\\Users\\duong\\.nuget\\packages\\microsoft.aspnetcore.webutilities\\2.2.0\\microsoft.aspnetcore.webutilities.2.2.0.nupkg.sha512",

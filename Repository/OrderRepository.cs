@@ -23,6 +23,11 @@ namespace Repository
             Create(order);
         }
 
+        public void DeleteOrder(Order order)
+        {
+            Delete(order);
+        }
+
         // Get All Order
         public async Task<PagedList<Order>> GetAllOrderAsync(OrderParameters orderParameters, bool trackChanges)
         {

@@ -16,5 +16,7 @@ namespace Contract
 
         void CreateOrder(Order order);
 
+        void DeleteOrder(Order order);
+
     }
 }

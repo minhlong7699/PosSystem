@@ -40,6 +40,14 @@ namespace Service
             return taxDto;
         }
 
+        public async Task DeleteTaxAsync(Guid taxId, bool trackChanges)
+        {
+            var TaxEntity = await _repository.TaxRepository.GetTaxAsync(taxId, trackChanges);
+            if (TaxEntity is null) throw new TaxNotFoundExeception(taxId);
+            _repository.TaxRepository.DeleteTax(TaxEntity);
+            await _repository.SaveAsync();
+        }
+
         public async Task<(IEnumerable<TaxDto> taxes, MetaData metadata)> GetAllTaxesAsync(TaxParameters taxParameters, bool trackChanges)
         {
             var taxMetadata = await _repository.TaxRepository.GetAllTaxesAsync(taxParameters, trackChanges);
@@ -56,6 +64,16 @@ namespace Service
             }
             var taxDto = _mapper.Map<TaxDto>(tax);
             return taxDto;
+        }
+
+        public async Task UpdateTaxAsync(Guid taxId, TaxCreateUpdateDto taxUpdate, bool trackChanges)
+        {
+            var TaxEntity = await _repository.TaxRepository.GetTaxAsync(taxId, trackChanges);
+            if (TaxEntity is null) throw new TaxNotFoundExeception(taxId);
+            TaxEntity.UpdatedAt = DateTime.UtcNow;
+            TaxEntity.UpdatedBy = "Admin";
+            _mapper.Map(taxUpdate, TaxEntity);
+            await _repository.SaveAsync();
         }
     }
 }

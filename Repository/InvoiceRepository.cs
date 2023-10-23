@@ -1,6 +1,7 @@
 ﻿using Contract;
 using Entity.Models;
 using Microsoft.EntityFrameworkCore;
+using Repository.Extensions;
 using Shared.DataTransferObjects;
 using Shared.RequestFeatures;
 using System;
@@ -29,7 +30,9 @@ namespace Repository
 
         public async Task<PagedList<Invoice>> GetAllInvoicesAsync(InvoiceParameter invoiceParameter, bool trackChanges)
         {
-            var invoices = await FindAll(trackChanges).ToListAsync();
+            var invoices = await FindAll(trackChanges)
+                .FilterInvoice(invoiceParameter.StartDate, invoiceParameter.EndDate)
+                .ToListAsync();
             return PagedList<Invoice>.ToPagedList(invoices, invoiceParameter.pageNumber, invoiceParameter.pageSize);          
         }
 

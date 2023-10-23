@@ -54,6 +54,8 @@ namespace PosSystem
             CreateMap<UserForRegistrationDto, User>();
             // InvoiceUpdateDto -> Invoice
             CreateMap<InvoiceUpdateDto, Invoice>();
+            // PromotionCreateUpdateDto -> Promotion
+            CreateMap<PromotionUpdateCreateDto, Promotion>();
 
 
         }

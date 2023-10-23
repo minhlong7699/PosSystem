@@ -39,5 +39,19 @@ namespace Presentation.Controllers
             var promotion = await _services.PromotionService.CreatepromotionAsync(updateCreateDto);
             return CreatedAtRoute("getPromotion", new { promotion.PromotionId }, promotion);
         }
+
+        [HttpPut("{promotionId:guid}")]
+        public async Task<IActionResult> UpdatePromotion(Guid promotionId, PromotionUpdateCreateDto promotionUpdate)
+        {
+            await _services.PromotionService.UpdatePromotionAsync(promotionId, promotionUpdate, trackChanges: true);
+            return NoContent();
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeletePromotion(Guid promotionId)
+        {
+            await _services.PromotionService.DeletepromotionAsync(promotionId, trackChanges: false);
+            return NoContent();
+        }
     }
 }

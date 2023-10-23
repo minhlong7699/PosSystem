@@ -39,5 +39,19 @@ namespace Presentation.Controllers
             return CreatedAtRoute("getTax", new {tax.TaxId}, tax);
         }
 
+
+        [HttpPut("{taxId:guid}")]
+        public async Task<IActionResult> UpdateTax(Guid taxId, TaxCreateUpdateDto taxUpdate)
+        {
+            await _service.TaxService.UpdateTaxAsync(taxId, taxUpdate, trackChanges: true);
+            return NoContent();
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteTax(Guid taxId)
+        {
+            await _service.TaxService.DeleteTaxAsync(taxId, trackChanges: true);
+            return NoContent();
+        }
     }
 }

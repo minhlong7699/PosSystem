@@ -22,6 +22,11 @@ namespace Repository
             Create(tax);
         }
 
+        public void DeleteTax(Tax tax)
+        {
+            Delete(tax);
+        }
+
         public async Task<PagedList<Tax>> GetAllTaxesAsync(TaxParameters taxParameters, bool trackChanges)
         {
             var taxes = await FindAll(trackChanges).ToListAsync();

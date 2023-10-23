@@ -12,5 +12,7 @@ namespace Contract.Service
         Task<IEnumerable<PromotionDto>> GetAllPromotionsAsync(bool trackChanges);
         Task<PromotionDto> GetPromotionAsync(Guid promotionId,bool trackChanges);
         Task<PromotionDto> CreatepromotionAsync(PromotionUpdateCreateDto promotionCreate);
+        Task UpdatePromotionAsync(Guid promotionId, PromotionUpdateCreateDto promotionUpdate, bool trackChanges);
+        Task DeletepromotionAsync(Guid promotionId, bool trackChanges);       
     }
 }

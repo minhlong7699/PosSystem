@@ -17,5 +17,19 @@ namespace Entity.Aggregate
         public DateTime? UpdatedAt { get; set; }
 
         public string? UpdatedBy { get; set; }
+
+        public void CreateAuditFields(string userId)
+        {
+            CreatedAt = DateTime.Now;
+            CreatedBy = userId;
+            UpdatedAt = DateTime.Now;
+            UpdatedBy = userId;
+        }
+
+        public void UpdateAuditFields(string userId)
+        {
+            UpdatedAt = DateTime.Now;
+            UpdatedBy = userId;
+        }
     }
 }

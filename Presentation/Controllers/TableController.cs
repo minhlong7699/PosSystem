@@ -42,5 +42,19 @@ namespace Presentation.Controllers
             var table = await _service.TablesService.CreateTableAsync(tableCreate);
             return CreatedAtRoute("GetTable", new {table.TableID}, table);
         }
+
+        [HttpPut("{tableId:guid}")]
+        public async Task<IActionResult> UpdateTable(Guid tableId,TableUpdateCreateDto tableUpdate)
+        {
+            await _service.TablesService.UpdateTableAsync(tableId, tableUpdate, trackChanges: true);
+            return NoContent();
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteTable(Guid tableId)
+        {
+            await _service.TablesService.DeleteTableAsync(tableId, trackChanges: true);
+            return NoContent();
+        }
     }
 }

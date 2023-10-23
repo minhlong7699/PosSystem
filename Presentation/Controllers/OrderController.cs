@@ -1,4 +1,5 @@
 ﻿using Contract.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared.DataTransferObjects;
 using Shared.RequestFeatures;
@@ -35,6 +36,7 @@ namespace Presentation.Controllers
             return Ok(order);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreateOrder([FromForm]OrderCreateUpdateDto orderCreate)
         {

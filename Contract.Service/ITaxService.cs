@@ -16,5 +16,9 @@ namespace Contract.Service
         Task<TaxDto> GetTaxAsync(Guid taxId, bool trackChanges);
 
         Task<TaxDto> CreateTax(TaxCreateUpdateDto taxCreate);
+
+        Task UpdateTaxAsync(Guid taxId, TaxCreateUpdateDto taxUpdate, bool trackChanges);
+
+        Task DeleteTaxAsync(Guid taxId, bool trackChanges);
     }
 }

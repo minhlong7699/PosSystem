@@ -21,6 +21,11 @@ namespace Repository
             Create(table);
         }
 
+        public void DelteTable(Table table)
+        {
+            Delete(table);
+        }
+
         public async Task<PagedList<Table>> GetAllTablesAsync(TableParameters tableParameters, bool trackChanges)
         {
             var table = await FindAll(trackChanges: false).ToListAsync();

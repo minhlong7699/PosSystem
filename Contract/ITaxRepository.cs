@@ -15,5 +15,7 @@ namespace Contract
         Task<Tax> GetTaxAsync(Guid taxId, bool trackChanges);
 
         void CreateTax(Tax tax);
+
+        void DeleteTax(Tax tax);
     }
 }

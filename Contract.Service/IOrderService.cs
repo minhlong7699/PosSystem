@@ -10,10 +10,14 @@ namespace Contract.Service
 {
     public interface IOrderService
     {
-        Task<(IEnumerable<OrderDto> orders , MetaData metaData)> GetAllOrderAsync(OrderParameters orderParameters, bool trackChanges);
+        Task<(IEnumerable<OrderDto> orders, MetaData metaData)> GetAllOrderAsync(OrderParameters orderParameters, bool trackChanges);
 
         Task<OrderDto> GetOrderAsync(Guid orderId, bool trackChanges);
 
         Task<OrderDto> CreateOrderAsync(OrderCreateUpdateDto orderCreate, bool trackChanges);
+
+        Task UpdateOrderAsync(Guid orderId, OrderCreateUpdateDto orderUpdate, bool trackChanges);
+
+        Task DeleteOrderAsync(Guid orderId, bool trackChanges);
     }
 }

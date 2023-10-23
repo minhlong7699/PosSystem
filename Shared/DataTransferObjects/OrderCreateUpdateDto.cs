@@ -19,5 +19,5 @@ namespace Shared.DataTransferObjects
         Canceled
     }
 
-    public record OrderCreateUpdateDto(string? OrderType, OrderStatus Status, Guid UserId, Guid PaymentId, Guid? TableId, Guid TaxId, Guid? PromotionId);
+    public record OrderCreateUpdateDto(string? OrderType, OrderStatus Status, Guid PaymentId, Guid? TableId, Guid TaxId, Guid? PromotionId);
 }

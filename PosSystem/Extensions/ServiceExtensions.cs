@@ -1,11 +1,13 @@
 ﻿using Contract;
 using Contract.Service;
 using Contract.Service.EmailServices;
+using Contract.Service.UserProvider;
 using Entity.Models;
 using Entity.Models.Email;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Repository;
 using Service;
@@ -51,10 +53,10 @@ namespace PosSystem.Extensions
         // UploadImage Configuration
         public static void ConfigureUploadImageService(this IServiceCollection services) =>
             services.AddScoped<IUploadImageService, UploadImageService>();
-
-
+        // UserProvider Configuration
+        public static void ConfigureUserProvider(this IServiceCollection services) =>
+            services.AddScoped<IUserProvider, UserProvider>();
         // JWT Configuration
-
         public static void ConfigureJWT(this IServiceCollection services, IConfiguration configuration)
         {
             var jwtSettings = configuration.GetSection("JwtSettings");
@@ -64,6 +66,7 @@ namespace PosSystem.Extensions
             {
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             })
             .AddJwtBearer(options =>
                 {

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 using PosSystem.Extensions;
 using Serilog;
 using Service;
@@ -27,11 +28,12 @@ builder.Services.ConfigureRepositoryManager(); // Repository DI
 builder.Services.ConfigureServiceManager(); // Service DI
 builder.Services.ConfigureSqlContext(builder.Configuration); // DbContext
 builder.Services.ConfigureUploadImageService(); // ImageUpload
-builder.Services.ConfigureJWT(builder.Configuration); // JWT
 builder.Services.AddAuthentication();// authen
 builder.Services.ConfigureIdentity();// Identity
+builder.Services.ConfigureJWT(builder.Configuration); // JWT
 builder.Services.AddEmailServiceConfiguration(builder.Configuration); // Email Service
 builder.Services.RequiredEmaiConfiguration(); // Required Email
+builder.Services.ConfigureUserProvider(); // User Provider
 
 builder.Services.AddControllers(config =>
 {
@@ -43,8 +45,35 @@ builder.Services.AddControllers(config =>
 .AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly); // Config Controller Assembly
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(Program)); // AutoMapper Configuration
+builder.Services.AddSwaggerGen(option =>
+{
+    option.SwaggerDoc("v1", new OpenApiInfo { Title = "Pos System Api", Version = "v1" });
+    option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Please enter a valid token",
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        BearerFormat = "JWT",
+        Scheme = "Bearer"
+    });
+    option.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type=ReferenceType.SecurityScheme,
+                    Id="Bearer"
+                }
+            },
+            new string[]{}
+        }
+    });
+});
+
 
 var app = builder.Build();
 

@@ -20,6 +20,11 @@ namespace Repository
             Create(promotion);
         }
 
+        public void DeletePromotion(Promotion promotion)
+        {
+            Delete(promotion);
+        }
+
         public async Task<IEnumerable<Promotion>> GetAllPromotionsAsync(bool trackChanges)
         {
             return await FindAll(trackChanges).OrderBy(c => c.PromotionName).ToListAsync();
