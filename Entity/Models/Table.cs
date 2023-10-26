@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 
 namespace Entity.Models
 {
-    public class Table : AuditableEntity
+    [Table("Table")]
+    public partial class Table : AuditableEntity
     {
 
         [Key]
@@ -17,12 +18,12 @@ namespace Entity.Models
         public Guid TableID { get; set; }
 
         [Required(ErrorMessage = "Name is a required field.")]
-        public string? Name { get; set; }
+        public string Name { get; set; }
 
         public string? TableDescription { get; set; }
 
-        public bool? IsOccupied { get; set; }
+        public bool? IsOccupied { get; set; } = false;
 
-        public ICollection<Order>? Orders { get; set; } = new List<Order>();
+        public virtual ICollection<Order>? Orders { get; set; } = new List<Order>();
     }
 }

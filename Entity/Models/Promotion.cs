@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 
 namespace Entity.Models
 {
-    public class Promotion : AuditableEntity
+    [Table("Promotion")]
+    public partial class Promotion : AuditableEntity
     {
 
         [Key]
@@ -28,5 +29,10 @@ namespace Entity.Models
 
         [Required(ErrorMessage = "DisCount Percent is a required field.")]
         public float? DisCountPercent { get; set; }
+
+        public virtual ICollection<Order>? Orders { get; set; } = new List<Order>();
+
+        public virtual ICollection<Product>? Products { get; set; } = new List<Product>();
+
     }
 }

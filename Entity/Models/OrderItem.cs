@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 
 namespace Entity.Models
 {
-    public class OrderItem : AuditableEntity
+    [Table("OrderItem")]
+    public partial class OrderItem : AuditableEntity
     {
 
         [Key]
@@ -20,6 +21,14 @@ namespace Entity.Models
 
         public decimal? Price { get; set;}
 
+
+        [ForeignKey(nameof(Product))]
+        public Guid ProductId { get; set; }
+        public virtual Product? Product { get; set; }
+
+        [ForeignKey(nameof(Order))]
+        public Guid OrderId { get; set; }
+        public virtual Order? Order { get; set; }
 
     }
 }

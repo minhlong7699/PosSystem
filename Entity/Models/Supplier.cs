@@ -1,15 +1,11 @@
 ﻿using Entity.Aggregate;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Entity.Models
 {
-    public class Supplier : AuditableEntity
+    [Table("Supplier")]
+    public partial class Supplier : AuditableEntity
     {
 
         [Key]
@@ -27,6 +23,8 @@ namespace Entity.Models
 
         [Required(ErrorMessage = "Address  is a required field.")]
         public string? Address { get; set; }
+
+        public virtual ICollection<Product>? Products { get; set; } = new List<Product>();
 
 
     }

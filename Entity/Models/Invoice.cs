@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 
 namespace Entity.Models
 {
-    public class Invoice : AuditableEntity
+    [Table("Invoice")]
+    public partial class Invoice : AuditableEntity
     {
 
         [Key]
@@ -18,9 +19,18 @@ namespace Entity.Models
 
         public DateTime InvoiceDate { get; set; }
 
-        public float? TotalAmount { get; set; }
+        public decimal? TotalAmount { get; set; }
+
+        public string? CustomerName { get; set; }
 
         public string? ShippingAddress {get; set; }
+
+        public string? Status { get; set; }
+
+        [ForeignKey(nameof(Order))]
+        public virtual Guid OrderId { get; set; }
+        public virtual Order? Order { get; set; }
+
         
     }
 }

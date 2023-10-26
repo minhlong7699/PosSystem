@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 
 namespace Entity.Models
 {
-    public class Category : AuditableEntity
+    [Table("Category")]
+    public partial class Category : AuditableEntity
     {
         [Key]
         [Column("CategoryId")]
@@ -19,5 +20,7 @@ namespace Entity.Models
         public string? CategoryName { get; set; }
 
         public string? CategoryDescription { get; set; }
+
+        public virtual ICollection<Product>? Products { get; set; } = new List<Product>();
     }
 }
