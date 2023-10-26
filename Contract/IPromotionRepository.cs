@@ -1,4 +1,5 @@
 ﻿using Entity.Models;
+using Shared.RequestFeatures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Contract
 {
     public interface IPromotionRepository
     {
-        Task<IEnumerable<Promotion>> GetAllPromotionsAsync(bool trackChanges);
+        Task<PagedList<Promotion>> GetAllPromotionsAsync(PromotionParamaters promotionParamaters , bool trackChanges);
         Task<Promotion> GetPromotionAsync(Guid? promotionId ,bool trackChanges);
         void CreatePromotion(Promotion promotion);
         void DeletePromotion(Promotion promotion);

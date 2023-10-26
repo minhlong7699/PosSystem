@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
 using Contract;
 using Contract.Service;
+using Contract.Service.UserProvider;
 using Entity.Exceptions;
 using Entity.Models;
 using Serilog;
-using Shared.DataTransferObjects;
+using Shared.DataTransferObjects.Category;
 using Shared.RequestFeatures;
 
 namespace Service
@@ -14,12 +15,14 @@ namespace Service
         private readonly IRepositoryManager _repository;
         private readonly ILogger _logger;
         private readonly IMapper _mapper;
+        private readonly IUserProvider _userProvider;
 
-        public CategoryService(IRepositoryManager repository, ILogger logger, IMapper mapper)
+        public CategoryService(IRepositoryManager repository, ILogger logger, IMapper mapper, IUserProvider userProvider)
         {
             _repository = repository;
             _logger = logger;
             _mapper = mapper;
+            _userProvider = userProvider;
         }
 
 
@@ -49,29 +52,27 @@ namespace Service
         // Create new category
         public async Task<CategoryDto> CreateCategoryAsync(CategoryUpdateCreateDto category)
         {
+            var userId = await _userProvider.GetUserIdAsync();
             var categoryEntity = _mapper.Map<Category>(category);
-            categoryEntity.CreatedAt = DateTime.Now;
-            categoryEntity.CreatedBy = "Admin";
-            categoryEntity.UpdatedAt = DateTime.Now;
-            categoryEntity.UpdatedBy = "Admin";
+            categoryEntity.CreateAuditFields(userId);
             _repository.CategoryRepository.CreateCategory(categoryEntity);
             await _repository.SaveAsync();
 
             var CategoryToReturn = _mapper.Map<CategoryDto>(categoryEntity);
-            return CategoryToReturn;
-            
+            return CategoryToReturn;          
         }
 
 
         // Update category
         public async Task UpdateCategoryAsync(Guid categoryId, CategoryUpdateCreateDto categoryUpdate, bool trackChanges)
         {
+            var userId = await _userProvider.GetUserIdAsync();
             var categoryEntity = await _repository.CategoryRepository.GetCategoryAsync(categoryId, trackChanges);
             if(categoryEntity is null)
             {
                 throw new CategoryNotFoundException(categoryId);
             }
-
+            categoryEntity.UpdateAuditFields(userId);
             _mapper.Map(categoryUpdate, categoryEntity);
             await _repository.SaveAsync();
         }

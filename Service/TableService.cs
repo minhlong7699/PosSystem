@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
 using Contract;
 using Contract.Service;
+using Contract.Service.UserProvider;
 using Entity.Exceptions;
 using Entity.Models;
 using Serilog;
-using Shared.DataTransferObjects;
+using Shared.DataTransferObjects.Table;
 using Shared.RequestFeatures;
 
 namespace Service
@@ -14,25 +15,23 @@ namespace Service
         private readonly IRepositoryManager _repository;
         private readonly ILogger _logger;
         private readonly IMapper _mapper;
-
-        public TableService(IRepositoryManager repository, ILogger logger, AutoMapper.IMapper mapper)
+        private readonly IUserProvider _userProvider;
+        public TableService(IRepositoryManager repository, ILogger logger, AutoMapper.IMapper mapper, IUserProvider userProvider)
         {
             _repository = repository;
             _logger = logger;
             _mapper = mapper;
+            _userProvider = userProvider;
         }
 
         public async Task<TableDto> CreateTableAsync(TableUpdateCreateDto tableCreate)
         {
+            var userId = await _userProvider.GetUserIdAsync();
             var tableEntity = _mapper.Map<Table>(tableCreate);
-            tableEntity.CreatedAt = DateTime.Now;
-            tableEntity.CreatedBy = "Admin";
-            tableEntity.UpdatedAt = DateTime.Now;
-            tableEntity.UpdatedBy = "Admin";
             tableEntity.IsOccupied = false;
+            tableEntity.CreateAuditFields(userId);
             _repository.TablesRepository.CreateTable(tableEntity);
             await _repository.SaveAsync();
-
             var tableDto = _mapper.Map<TableDto>(tableEntity);
             return tableDto;
         }
@@ -67,10 +66,10 @@ namespace Service
 
         public async Task UpdateTableAsync(Guid tableId,TableUpdateCreateDto tableUpdate, bool trackChanges)
         {
+            var userId = await _userProvider.GetUserIdAsync();
             var tableEntity = await _repository.TablesRepository.GetTableAsync(tableId, trackChanges);
             if (tableEntity is null) throw new TableNotFoundException(tableId);
-            tableEntity.UpdatedAt = DateTime.UtcNow;
-            tableEntity.UpdatedBy = "Admin";
+            tableEntity.UpdateAuditFields(userId);
             _mapper.Map(tableUpdate, tableEntity);
             await _repository.SaveAsync();
         }

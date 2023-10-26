@@ -31,7 +31,7 @@ namespace Entity.Models
         public virtual Payment? Payment { get; set; }
 
         [ForeignKey(nameof(Table))]
-        public Guid? TableId { get; set; }
+        public Guid TableId { get; set; }
         public virtual Table? Table { get; set; }
 
         [ForeignKey(nameof(Tax))]

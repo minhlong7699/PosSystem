@@ -1,6 +1,8 @@
 ﻿using Contract;
 using Entity.Models;
 using Microsoft.EntityFrameworkCore;
+using Repository.Extensions;
+using Shared.RequestFeatures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,9 +27,14 @@ namespace Repository
             Delete(promotion);
         }
 
-        public async Task<IEnumerable<Promotion>> GetAllPromotionsAsync(bool trackChanges)
+        public async Task<PagedList<Promotion>> GetAllPromotionsAsync(PromotionParamaters promotionParamaters,bool trackChanges)
         {
-            return await FindAll(trackChanges).OrderBy(c => c.PromotionName).ToListAsync();
+            var product = await FindAll(trackChanges)
+                .FilterPromotion(promotionParamaters.StartDate, promotionParamaters.EndDate)
+                .SearchPromotion(promotionParamaters.SearchTerm)
+                .SortPromotion(promotionParamaters.orderBy)
+                .ToListAsync();
+            return PagedList<Promotion>.ToPagedList(product, promotionParamaters.pageNumber, promotionParamaters.pageSize);
         }
 
         public async Task<Promotion> GetPromotionAsync(Guid? promotionId, bool trackChanges)

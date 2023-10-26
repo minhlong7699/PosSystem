@@ -29,16 +29,16 @@ namespace Service
         public ServiceManager(IRepositoryManager repositoryManager, ILogger logger, IMapper mapper, IUploadImageService uploadImageService, IConfiguration configuration, UserManager<User> userManager, IEmailService emailService, IUserProvider userProvider )
         {
             _authenticationService = new Lazy<IAuthenticationService>(() => new AuthenticationService(logger, mapper, userManager, configuration, emailService));
-            _categoryService = new Lazy<ICategoryService>(() => new CategoryService(repositoryManager, logger, mapper));
-            _invoiceService = new Lazy<IInvoiceService>(() => new InvoiceService(repositoryManager, logger, mapper));
-            _orderItemService = new Lazy<IOrderItemService>(() => new OrderItemService(repositoryManager, logger, mapper));
+            _categoryService = new Lazy<ICategoryService>(() => new CategoryService(repositoryManager, logger, mapper, userProvider));
+            _invoiceService = new Lazy<IInvoiceService>(() => new InvoiceService(repositoryManager, logger, mapper, userProvider));
+            _orderItemService = new Lazy<IOrderItemService>(() => new OrderItemService(repositoryManager, logger, mapper, userProvider));
             _orderService = new Lazy<IOrderService>(() => new OrderService(repositoryManager, logger, mapper, userManager, userProvider));
-            _paymentService = new Lazy<IPaymentService>(() => new PaymentService(repositoryManager, logger, mapper));
+            _paymentService = new Lazy<IPaymentService>(() => new PaymentService(repositoryManager, logger, mapper, userProvider));
             _productService = new Lazy<IProductService>(() => new ProductService(repositoryManager, logger, mapper, uploadImageService, userProvider));
-            _promotionService = new Lazy<IPromotionService>(() => new PromotionService(repositoryManager, logger, mapper));
-            _supplierService = new Lazy<ISupplierService>(() => new SupplierService(repositoryManager, logger, mapper));
-            _tableService = new Lazy<ITableService>(() => new TableService(repositoryManager, logger, mapper));
-            _taxService = new Lazy<ITaxService>(() => new TaxService(repositoryManager, logger, mapper));
+            _promotionService = new Lazy<IPromotionService>(() => new PromotionService(repositoryManager, logger, mapper, userProvider));
+            _supplierService = new Lazy<ISupplierService>(() => new SupplierService(repositoryManager, logger, mapper, userProvider));
+            _tableService = new Lazy<ITableService>(() => new TableService(repositoryManager, logger, mapper, userProvider));
+            _taxService = new Lazy<ITaxService>(() => new TaxService(repositoryManager, logger, mapper, userProvider));
         }
 
         public IAuthenticationService AuthenticationService => _authenticationService.Value;
@@ -62,7 +62,9 @@ namespace Service
         public ITableService TablesService => _tableService.Value;
 
         public ITaxService TaxService => _taxService.Value;
+
         public IEmailService EmailService => _emailService.Value;
+
         public IUserProvider UserProvider => _userProvider.Value;
     }
 }

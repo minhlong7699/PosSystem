@@ -5,7 +5,7 @@ using Contract.Service.UserProvider;
 using Entity.Exceptions;
 using Entity.Models;
 using Serilog;
-using Shared.DataTransferObjects;
+using Shared.DataTransferObjects.Product;
 using Shared.RequestFeatures;
 
 namespace Service
@@ -32,17 +32,11 @@ namespace Service
         {
 
             var userId = await _userProvider.GetUserIdAsync();
-            // Check category is exist
-            ValidCategoryExist(categoryId, trackChanges);
-            // check suppiler is exist
-            ValidSupplierExist(productCreate.SupplierId, trackChanges);
-            // mapping from productCreateDto to Product Entity
+            await ValidCategoryExist(categoryId, trackChanges);
+            await ValidSupplierExist(productCreate.SupplierId, trackChanges);
             var productEntity = _mapper.Map<Product>(productCreate);
-            // Save Img to Server and get String to return
             productEntity.Image = _uploadImageService.GetImageUrl(productCreate.Image, "ProductImages");
-            // get value of Promotionid from Dto if existed
             Guid actualPromotionId = productCreate.PromotionId ?? Guid.Empty;
-            // Check promotion of product is exist
             var promotionOfProduct = await _repository.PromotionRepository.GetPromotionAsync(actualPromotionId, trackChanges: false);
             if (promotionOfProduct is null)
             {
@@ -52,21 +46,17 @@ namespace Service
             {
                 productEntity.ProductPriceAfterDiscount = productEntity.ProductPrice * (decimal)promotionOfProduct.DisCountPercent / 100;
             }
-            // Add value to some private field
             productEntity.CreateAuditFields(userId);
+            _repository.ProductRepository.CreateProduct(categoryId, productEntity);
+            await _repository.SaveAsync();
             var ProductToReturn = _mapper.Map<ProductDto>(productEntity);
-
             return ProductToReturn;
         }
 
         public async Task DeleteProductAsync(Guid categoryId, Guid productId, bool trackChanges)
         {
-            ValidCategoryExist(categoryId, trackChanges);
-            var product = await _repository.ProductRepository.GetProductAsync(categoryId, productId, trackChanges);
-            if (product is null)
-            {
-                throw new ProductNotFoundException(productId);
-            }
+            await ValidCategoryExist(categoryId, trackChanges);
+            var product = await ValidProductExist(categoryId, productId, trackChanges);
             _repository.ProductRepository.DeleteProduct(product);
             await _repository.SaveAsync();
         }
@@ -74,7 +64,7 @@ namespace Service
         // Get All 
         public async Task<(IEnumerable<ProductDto> products, MetaData metaData)> GetAllProductsAsync(Guid categoryId, ProductParameters productParameters, bool trackChanges)
         {
-            ValidCategoryExist(categoryId, trackChanges);      
+            await ValidCategoryExist(categoryId, trackChanges);      
             var productMetadata = await _repository.ProductRepository.GetAllProductsAsync(categoryId, productParameters, trackChanges);
             var productsDto = _mapper.Map<IEnumerable<ProductDto>>(productMetadata);
             return (products: productsDto, metaData: productMetadata.MetaData);
@@ -83,12 +73,8 @@ namespace Service
         // Get By Id
         public async Task<ProductDto> GetProductAsync(Guid categoryId, Guid productId, bool trackChanges)
         {
-            ValidCategoryExist(categoryId, trackChanges);
-            var product = await _repository.ProductRepository.GetProductAsync(categoryId, productId, trackChanges);
-            if (product is null)
-            {
-                throw new ProductNotFoundException(productId);
-            }
+            await ValidCategoryExist(categoryId, trackChanges);
+            var product = await ValidProductExist(categoryId, productId, trackChanges);
             var productDto = _mapper.Map<ProductDto>(product);
             return productDto;
         }
@@ -96,12 +82,8 @@ namespace Service
         // Update using Patch
         public async Task<(ProductUpdateCreateDto productToPatch, Product productEntity)> GetProductForPatchAsync(Guid categoryId, Guid productId, bool categoryTrackChanges, bool productTrackChages)
         {
-            ValidCategoryExist(categoryId, categoryTrackChanges);
-            var product = await _repository.ProductRepository.GetProductAsync(categoryId, productId, productTrackChages);
-            if(product is null)
-            {
-                throw new ProductNotFoundException(productId);
-            }
+            await ValidCategoryExist(categoryId, categoryTrackChanges);
+            var product = await ValidProductExist(categoryId, productId, productTrackChages);
             var productToPatch = _mapper.Map<ProductUpdateCreateDto>(product);
             return (productToPatch, product);
 
@@ -113,22 +95,19 @@ namespace Service
             await _repository.SaveAsync();
         }
 
-
-
-
         // Update Product
         public async Task UpdateProductAsync(Guid categoryId, Guid productId, ProductUpdateCreateDto productUpdate, bool categoryTrackChanges, bool productTrackChages)
         {
-            ValidCategoryExist(categoryId, categoryTrackChanges);
+            var userId = await _userProvider.GetUserIdAsync();
+            await ValidCategoryExist(categoryId, categoryTrackChanges);
             var productEntity = await _repository.ProductRepository.GetProductAsync(categoryId, productId, productTrackChages);
-
+            productEntity.UpdateAuditFields(userId);
+            _mapper.Map(productUpdate, productEntity);
             var image = productEntity.Image;
-
             if (productEntity is null)
             {
                 throw new ProductNotFoundException(productId);
             }
-            // Set the values for private fields
             if (productUpdate.Image is not null)
             {
                 productEntity.Image = _uploadImageService.GetImageUrl(productUpdate.Image, "ProductImages");
@@ -137,16 +116,10 @@ namespace Service
             {
                 productEntity.Image = image;
             }
-            productEntity.UpdatedAt = DateTime.Now;
-            productEntity.UpdatedBy = "Admin";
-            _mapper.Map(productUpdate, productEntity);
             await _repository.SaveAsync();
         }
 
-
-
-
-        private async void ValidCategoryExist(Guid categoryId, bool trackChanges )
+        private async Task ValidCategoryExist(Guid categoryId, bool trackChanges )
         {
             var category = await _repository.CategoryRepository.GetCategoryAsync(categoryId, trackChanges);
             if (category is null)
@@ -155,8 +128,7 @@ namespace Service
             }
         }
 
-
-        private async void ValidSupplierExist(Guid? supplierId, bool trackChanges)
+        private async Task ValidSupplierExist(Guid? supplierId, bool trackChanges)
         {
             var supplier = await _repository.SupplierRepository.GetSupplierAsync(supplierId, trackChanges);
             if (supplier is null)
@@ -165,13 +137,14 @@ namespace Service
             }
         }
 
-        private async void ValidProductExist(Guid categoryId, Guid productId, bool trackChanges)
+        private async Task<Product> ValidProductExist(Guid categoryId, Guid productId, bool trackChanges)
         {
             var product = await _repository.ProductRepository.GetProductAsync(categoryId, productId, trackChanges);
             if (product is null)
             {
                 throw new ProductNotFoundException(productId);
             }
+            return product;
         }
     }
 }

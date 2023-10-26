@@ -1,4 +1,5 @@
 ﻿using Entity.Models;
+using Shared.RequestFeatures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Contract
 {
     public interface ISupplierRepository
     {
-        Task<IEnumerable<Supplier>> GetAllSuppliersAsync(bool trackChanges);
+        Task<PagedList<Supplier>> GetAllSuppliersAsync(SupplierParameter supplierParameter ,bool trackChanges);
 
         Task<Supplier> GetSupplierAsync(Guid? supplierId, bool trackChanges);
 

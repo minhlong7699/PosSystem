@@ -14,6 +14,7 @@ using Entity.Exceptions;
 using Contract.Service.EmailServices;
 using Entity.Models.Email;
 using Microsoft.AspNetCore.WebUtilities;
+using Contract.Service.UserProvider;
 
 namespace Service
 {
@@ -24,6 +25,7 @@ namespace Service
         private readonly IEmailService _emailService;
         private readonly UserManager<User> _userManager;
         private readonly IConfiguration _configuration;
+        private readonly IUserProvider _userProvider;
 
         private User? _user;
         public AuthenticationService(ILogger logger, IMapper mapper, UserManager<User> userManager, IConfiguration configuration, IEmailService emailService)
@@ -121,7 +123,7 @@ namespace Service
             string rawToken = Encoding.UTF8.GetString(decodeToken);
             var result = await _userManager.ResetPasswordAsync(user, rawToken, resetPassworDto.Password);
             if (result.Succeeded) return new UserManagerResponse { IsSuccess = true, ErrorMessage = "Password has been reset successfully" };
-            return new UserManagerResponse { IsSuccess = false, ErrorMessage = "some thing went wrong" };
+            return new UserManagerResponse { IsSuccess = false, ErrorMessage = "something went wrong" };
         }
     }
 }

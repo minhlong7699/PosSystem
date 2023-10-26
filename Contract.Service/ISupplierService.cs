@@ -1,4 +1,5 @@
-﻿using Shared.DataTransferObjects;
+﻿using Shared.DataTransferObjects.Supplier;
+using Shared.RequestFeatures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Contract.Service
 {
     public interface ISupplierService
     {
-        Task<IEnumerable<SupllierDto>> GetAllSuppliersAsync(bool trackChanges);
+        Task<(IEnumerable<SupllierDto> suppliers, MetaData metadata)> GetAllSuppliersAsync(SupplierParameter supplierParameter,bool trackChanges);
 
         Task<SupllierDto> GetSupplierAsync(Guid supplierId, bool trackChanges);
 

@@ -117,3 +117,6 @@ C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\PosSystem\bin\Debu
 C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\PosSystem\bin\Debug\net7.0\BouncyCastle.Cryptography.dll
 C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\PosSystem\bin\Debug\net7.0\System.Security.Cryptography.Pkcs.dll
 C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\PosSystem\bin\Debug\net7.0\runtimes\win\lib\net7.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\PosSystem\bin\Debug\net7.0\PosSystem.xml
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\PosSystem\obj\Debug\net7.0\PosSystem.xml
+C:\Users\duong\OneDrive\Máy tính\Project_practice\PosSystem\PosSystem\bin\Debug\net7.0\Presentation.xml

@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
 using Contract;
 using Contract.Service;
+using Contract.Service.UserProvider;
 using Entity.Exceptions;
 using Entity.Models;
 using Serilog;
-using Shared.DataTransferObjects;
+using Shared.DataTransferObjects.Tax;
 using Shared.RequestFeatures;
 using System;
 using System.Collections.Generic;
@@ -19,21 +20,20 @@ namespace Service
         private readonly IRepositoryManager _repository;
         private readonly ILogger _logger;
         private readonly IMapper _mapper;
-
-        public TaxService(IRepositoryManager repository, ILogger logger, AutoMapper.IMapper mapper)
+        private readonly IUserProvider _userProvider;
+        public TaxService(IRepositoryManager repository, ILogger logger, AutoMapper.IMapper mapper, IUserProvider userProvider)
         {
             _repository = repository;
             _logger = logger;
             _mapper = mapper;
+            _userProvider = userProvider;
         }
 
         public async Task<TaxDto> CreateTax(TaxCreateUpdateDto taxCreate)
         {
+            var userId = await _userProvider.GetUserIdAsync();
             var taxEntity = _mapper.Map<Tax>(taxCreate);
-            taxEntity.CreatedAt = DateTime.Now;
-            taxEntity.CreatedBy = "Admin";
-            taxEntity.UpdatedAt = DateTime.Now;
-            taxEntity.UpdatedBy = "Admin";
+            taxEntity.CreateAuditFields(userId);
             _repository.TaxRepository.CreateTax(taxEntity);
             await _repository.SaveAsync();
             var taxDto = _mapper.Map<TaxDto>(taxEntity);
@@ -68,10 +68,10 @@ namespace Service
 
         public async Task UpdateTaxAsync(Guid taxId, TaxCreateUpdateDto taxUpdate, bool trackChanges)
         {
+            var userId = await _userProvider.GetUserIdAsync();
             var TaxEntity = await _repository.TaxRepository.GetTaxAsync(taxId, trackChanges);
             if (TaxEntity is null) throw new TaxNotFoundExeception(taxId);
-            TaxEntity.UpdatedAt = DateTime.UtcNow;
-            TaxEntity.UpdatedBy = "Admin";
+            TaxEntity.UpdateAuditFields(userId);
             _mapper.Map(taxUpdate, TaxEntity);
             await _repository.SaveAsync();
         }

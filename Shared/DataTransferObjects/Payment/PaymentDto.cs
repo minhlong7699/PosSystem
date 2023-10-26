@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shared.DataTransferObjects
+namespace Shared.DataTransferObjects.Payment
 {
     public record PaymentDto(Guid PaymentId, string PaymentType);
 }

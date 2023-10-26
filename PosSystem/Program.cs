@@ -8,6 +8,7 @@ using Microsoft.OpenApi.Models;
 using PosSystem.Extensions;
 using Serilog;
 using Service;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,6 +50,10 @@ builder.Services.AddAutoMapper(typeof(Program)); // AutoMapper Configuration
 builder.Services.AddSwaggerGen(option =>
 {
     option.SwaggerDoc("v1", new OpenApiInfo { Title = "Pos System Api", Version = "v1" });
+
+    var filepath = Path.Combine(AppContext.BaseDirectory, "Presentation.xml");
+    option.IncludeXmlComments(filepath);
+
     option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         In = ParameterLocation.Header,

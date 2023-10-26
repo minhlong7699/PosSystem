@@ -8,5 +8,9 @@ namespace Shared.RequestFeatures
 {
     public class TableParameters : RequestParameters
     {
+        public  bool IsOccupied { get; set; }
+        public bool IsActive { get; set; } = true;
+
+        public string? SearchTerm { get; set; }
     }
 }

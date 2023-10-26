@@ -1,4 +1,4 @@
-﻿using Shared.DataTransferObjects;
+﻿using Shared.DataTransferObjects.Order;
 using Shared.RequestFeatures;
 using System;
 using System.Collections.Generic;

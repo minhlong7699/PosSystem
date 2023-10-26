@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
 using Contract;
 using Contract.Service;
+using Contract.Service.UserProvider;
 using Entity.Exceptions;
 using Entity.Models;
 using Serilog;
-using Shared.DataTransferObjects;
+using Shared.DataTransferObjects.OrderItem;
 using Shared.RequestFeatures;
 
 namespace Service
@@ -14,16 +15,19 @@ namespace Service
         private readonly IRepositoryManager _repository;
         private readonly ILogger _logger;
         private readonly IMapper _mapper;
+        private readonly IUserProvider _userProvider;
 
-        public OrderItemService(IRepositoryManager repository, ILogger logger, AutoMapper.IMapper mapper)
+        public OrderItemService(IRepositoryManager repository, ILogger logger, AutoMapper.IMapper mapper, IUserProvider userProvider)
         {
             _repository = repository;
             _logger = logger;
             _mapper = mapper;
+            _userProvider = userProvider;
         }
 
         public async Task<OrderItemsDto> CreateOrderItemAsync(Guid orderId, OrderItemCreateUpdateDto orderItemCreate, bool trackChanges)
         {
+            var userId = await _userProvider.GetUserIdAsync();
             var orderEntity = await _repository.OrderRepository.GetOrderAsync(orderId, trackChanges);
             if (orderEntity is null) throw new OrderNotFoundException(orderId);
 
@@ -31,6 +35,7 @@ namespace Service
             if (product is null) throw new ProductNotFoundException(orderItemCreate.ProductId);
 
             var orderItemsEntity = _mapper.Map<OrderItem>(orderItemCreate);
+            orderItemsEntity.CreateAuditFields(userId);
             var existingOrderItem = OrderitemsExisted(orderEntity, orderItemCreate);
             if (existingOrderItem is not null)
             {
@@ -45,8 +50,7 @@ namespace Service
                 {
                     _repository.OrderItemRepository.CreateOrderItems(orderId, orderItemsEntity);
                 }
-            }
-                  
+            }                 
             await _repository.SaveAsync();
 
             var orderItemsDto = _mapper.Map<OrderItemsDto>(orderItemsEntity);
@@ -94,11 +98,11 @@ namespace Service
 
         public async Task UpdateOrderItemAsync(Guid orderId, Guid orderItemId, OrderItemUpdateDto orderItemUpdate, bool trackChanges)
         {
+            var userId = await _userProvider.GetUserIdAsync();
             var orderEntity = await _repository.OrderRepository.GetOrderAsync(orderId, trackChanges);
             if (orderEntity is null) throw new OrderNotFoundException(orderId);
             var orderItemsEntity = await _repository.OrderItemRepository.GetOrderItemAsync(orderId, orderItemId, trackChanges);
-            orderItemsEntity.UpdatedAt = DateTime.Now;
-            orderItemsEntity.UpdatedBy = "Admin";
+            orderItemsEntity.UpdateAuditFields(userId);
             _mapper.Map(orderItemUpdate, orderItemsEntity);
             await _repository.SaveAsync();
         }

@@ -1,4 +1,6 @@
-﻿namespace Shared.DataTransferObjects
+﻿using Shared.DataTransferObjects.OrderItem;
+
+namespace Shared.DataTransferObjects.Invoice
 {
     public class InvoiceDto
     {

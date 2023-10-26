@@ -1,7 +1,16 @@
 ﻿using AutoMapper;
 using Entity.Models;
-using Shared.DataTransferObjects;
 using Shared.DataTransferObjects.Authentication;
+using Shared.DataTransferObjects.Category;
+using Shared.DataTransferObjects.Invoice;
+using Shared.DataTransferObjects.Order;
+using Shared.DataTransferObjects.OrderItem;
+using Shared.DataTransferObjects.Payment;
+using Shared.DataTransferObjects.Product;
+using Shared.DataTransferObjects.Promotion;
+using Shared.DataTransferObjects.Supplier;
+using Shared.DataTransferObjects.Table;
+using Shared.DataTransferObjects.Tax;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace PosSystem

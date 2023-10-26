@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shared.DataTransferObjects
+namespace Shared.DataTransferObjects.Order
 {
     public enum OrderStatus
     {
@@ -19,5 +19,5 @@ namespace Shared.DataTransferObjects
         Canceled
     }
 
-    public record OrderCreateUpdateDto(string? OrderType, OrderStatus Status, Guid PaymentId, Guid? TableId, Guid TaxId, Guid? PromotionId);
+    public record OrderCreateUpdateDto(string? OrderType, OrderStatus Status, Guid PaymentId, Guid TableId, Guid TaxId, Guid? PromotionId);
 }

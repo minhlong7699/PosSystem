@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Entity.Models;
+using Microsoft.AspNetCore.Identity;
 using Shared.DataTransferObjects.Authentication;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,5 @@ namespace Contract.Service
         Task<string> CreateToken();
         Task<UserManagerResponse> ForgotPasswordAsync(string email);
         Task<UserManagerResponse> ResetUserPasswordAsync(ResetPassworDto resetPassworDto);
-
     }
 }

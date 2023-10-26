@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shared.DataTransferObjects
+namespace Shared.DataTransferObjects.Category
 {
     public record CategoryUpdateCreateDto(
         [Required(ErrorMessage = "Category Name is required field")]

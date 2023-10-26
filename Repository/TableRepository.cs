@@ -1,6 +1,7 @@
 ﻿using Contract;
 using Entity.Models;
 using Microsoft.EntityFrameworkCore;
+using Repository.Extensions;
 using Shared.RequestFeatures;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,10 @@ namespace Repository
 
         public async Task<PagedList<Table>> GetAllTablesAsync(TableParameters tableParameters, bool trackChanges)
         {
-            var table = await FindAll(trackChanges: false).ToListAsync();
+            var table = await FindAll(trackChanges: false)
+                .FilterTable(tableParameters.IsOccupied, tableParameters.IsActive)
+                .SearchTable(tableParameters.SearchTerm)
+                .ToListAsync();
             return PagedList<Table>.ToPagedList(table, tableParameters.pageNumber, tableParameters.pageSize);
         }
 

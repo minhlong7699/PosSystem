@@ -1,6 +1,8 @@
 ﻿using Contract;
 using Entity.Models;
 using Microsoft.EntityFrameworkCore;
+using Repository.Extensions;
+using Shared.RequestFeatures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,11 +27,13 @@ namespace Repository
             Delete(supplier);
         }
 
-        public async Task<IEnumerable<Supplier>> GetAllSuppliersAsync(bool trackChanges)
+        public async Task<PagedList<Supplier>> GetAllSuppliersAsync(SupplierParameter supplierParameter ,bool trackChanges)
         {
-            return await FindAll(trackChanges)
-                .OrderBy(x => x.SupplierName)
+            var supplier = await FindAll(trackChanges)
+                .SearchSupplier(supplierParameter.SearchTerm)
+                .SortSupplier(supplierParameter.orderBy)
                 .ToListAsync();
+            return PagedList<Supplier>.ToPagedList(supplier, supplierParameter.pageNumber, supplierParameter.pageSize);
         }
 
         public async Task<Supplier> GetSupplierAsync(Guid? supplierId, bool trackChanges)

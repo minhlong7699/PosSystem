@@ -6,7 +6,7 @@ using Entity.Exceptions;
 using Entity.Models;
 using Microsoft.AspNetCore.Identity;
 using Serilog;
-using Shared.DataTransferObjects;
+using Shared.DataTransferObjects.Order;
 using Shared.RequestFeatures;
 using System;
 using System.Collections.Generic;
@@ -41,7 +41,10 @@ namespace Service
             var tax = await _repository.TaxRepository.GetTaxAsync(orderCreate.TaxId, trackChanges);
             if(tax is null) throw new TaxNotFoundExeception(orderCreate.TaxId);
             var promotion = await _repository.PromotionRepository.GetPromotionAsync(orderCreate.PromotionId, trackChanges);
-            if (promotion is null) throw new PromotionNotFoundException(orderCreate.PromotionId);           
+            if (promotion is null) throw new PromotionNotFoundException(orderCreate.PromotionId);
+            var table = await _repository.TablesRepository.GetTableAsync(orderCreate.TableId, trackChanges);
+            if (table is null) throw new TableNotFoundException(orderCreate.TableId);
+            table.IsOccupied = true;
             var orderEntity = _mapper.Map<Order>(orderCreate);
             orderEntity.CreateAuditFields(userId);
             _repository.OrderRepository.CreateOrder(orderEntity);
@@ -73,18 +76,16 @@ namespace Service
             {
                 throw new OrderNotFoundException(orderId);
             }
-
             var orderDto = _mapper.Map<OrderDto>(order);
-
             return orderDto;
         }
 
         public async Task UpdateOrderAsync(Guid orderId, OrderCreateUpdateDto orderUpdate, bool trackChanges)
         {
+            var userId = await _userProvider.GetUserIdAsync();
             var orderEntity = await _repository.OrderRepository.GetOrderAsync(orderId, trackChanges);
             if (orderEntity is null) throw new OrderNotFoundException(orderId);
-            orderEntity.UpdatedAt = DateTime.UtcNow;
-            orderEntity.UpdatedBy = "Admin";
+            orderEntity.UpdateAuditFields(userId);
             _mapper.Map(orderUpdate, orderEntity);
             await _repository.SaveAsync();
         }

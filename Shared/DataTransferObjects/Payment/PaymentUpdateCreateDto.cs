@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shared.DataTransferObjects
+namespace Shared.DataTransferObjects.Payment
 {
-    public record TaxCreateUpdateDto(string TaxName, float TaxRate, bool IsActive);
+    public record PaymentUpdateCreateDto(string PaymentType, bool IsActive);
 }

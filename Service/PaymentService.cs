@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
 using Contract;
 using Contract.Service;
+using Contract.Service.UserProvider;
 using Entity.Exceptions;
 using Entity.Models;
 using Serilog;
-using Shared.DataTransferObjects;
+using Shared.DataTransferObjects.Payment;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,22 +19,22 @@ namespace Service
         private readonly IRepositoryManager _repository;
         private readonly ILogger _logger;
         private readonly IMapper _mapper;
+        private readonly IUserProvider _userProvider;
 
-        public PaymentService(IRepositoryManager repository, ILogger logger, AutoMapper.IMapper mapper)
+        public PaymentService(IRepositoryManager repository, ILogger logger, AutoMapper.IMapper mapper, IUserProvider userProvider)
         {
             _repository = repository;
             _logger = logger;
             _mapper = mapper;
+            _userProvider = userProvider;
         }
 
         // Create Payment
         public async Task<PaymentDto> CreatePaymentAsync(PaymentUpdateCreateDto paymentCreate)
         {
+            var userId = await _userProvider.GetUserIdAsync();
             var paymentEntity = _mapper.Map<Payment>(paymentCreate);
-            paymentEntity.CreatedAt = DateTime.Now;
-            paymentEntity.CreatedBy = "Admin";
-            paymentEntity.UpdatedAt = DateTime.Now;
-            paymentEntity.UpdatedBy = "Admin";
+            paymentEntity.CreateAuditFields(userId);
             _repository.PaymentRepository.CreatePayment(paymentEntity);
             await _repository.SaveAsync();
 
@@ -71,10 +72,10 @@ namespace Service
 
         public async Task UpdatePaymentAsync(Guid paymentId,PaymentUpdateCreateDto paymentUpdate, bool trackChanges)
         {
+            var userId = await _userProvider.GetUserIdAsync();
             var paymentEntity = await _repository.PaymentRepository.GetPaymentAsync(paymentId, trackChanges);
             if (paymentEntity is null) throw new PaymentNotFoundException(paymentId);
-            paymentEntity.UpdatedAt = DateTime.UtcNow;
-            paymentEntity.UpdatedBy = "Admin";
+            paymentEntity.UpdateAuditFields(userId);
             _mapper.Map(paymentUpdate, paymentEntity);
             await _repository.SaveAsync();
         }

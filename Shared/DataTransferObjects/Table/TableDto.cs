@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shared.DataTransferObjects
+namespace Shared.DataTransferObjects.Table
 {
     public record TableDto(Guid TableID, string Name, string TableDescription, bool IsOccupied, bool IsActive);
 }

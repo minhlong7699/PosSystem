@@ -18,7 +18,7 @@ namespace Entity.Models
         public Guid TableID { get; set; }
 
         [Required(ErrorMessage = "Name is a required field.")]
-        public string? Name { get; set; }
+        public string Name { get; set; }
 
         public string? TableDescription { get; set; }
 
