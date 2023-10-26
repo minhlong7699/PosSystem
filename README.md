@@ -39,7 +39,7 @@ Shared: The Shared layer contains objects and logic that are shared throughout t
   git clone https://github.com/bugM4ker/PosSystem.git
 
 2. Navigate to the project directory:
-  cd pos-system
+  cd PosSystem
 
 3. Restore packages and build the project:
   dotnet restore
