@@ -4,7 +4,10 @@
 Welcome to the Point of Sale (POS) System project developed in C# with ASP.NET 7 and following the Onion Architecture pattern.
 
 ## Overview
-For Testing : http://possystemtest.somee.com/swagger/index.html /n
+
+For Testing : http://possystemtest.somee.com/swagger/index.html.
+
+
 The POS System is designed to streamline the sales and inventory management process for businesses. It provides a user-friendly interface for managing products, orders, and customer data. This project is structured following the Onion Architecture pattern, which promotes a clean and maintainable codebase.
 
 ## Introduction
