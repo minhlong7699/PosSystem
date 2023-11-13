@@ -49,9 +49,10 @@ namespace Presentation.Controllers
         }
 
         /// <summary>
-        /// Authenticate a user to obtain an access token.
+        /// Authenticate a user to obtain an access token. for testing "userName": "admintest", "password": "admin123456789
         /// </summary>
-        /// <param name="user">User authentication data.</param>
+        /// <param name="user">User authentication data. for testing "userName": "admintest", "password": "admin123456789"
+        ///</param>
         /// <returns>
         /// Returns an access token if authentication is successful.
         /// Returns status code 401 (Unauthorized) if authentication fails.

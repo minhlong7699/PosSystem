@@ -85,15 +85,11 @@ var app = builder.Build();
 var logger = app.Services.GetRequiredService<Serilog.ILogger>();
 app.ConfigureExceptionHandler(logger);
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
+
     app.UseSwagger();
     app.UseSwaggerUI();
-}
-else
-{
     app.UseHsts();
-}
+
 
 
 app.UseHttpsRedirection();
